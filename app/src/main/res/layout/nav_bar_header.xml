@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:background="@drawable/ic_header_background"
+    android:layout_height="160dp">
+    <ImageView
+        android:layout_width="85dp"
+        android:layout_height="85dp"
+        android:paddingTop="16dp"
+        android:paddingLeft="16dp"
+        android:src="@drawable/ic_profile"/>
+    <TextView
+        android:textColor="#EEEE"
+        android:layout_marginLeft="16dp"
+        android:id="@+id/txt_name"
+        android:layout_above="@+id/txt_email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Vuthy Vathna"/>
+    <TextView
+        android:textColor="#EEEE"
+        android:layout_marginBottom="16dp"
+        android:layout_marginLeft="16dp"
+        android:id="@+id/txt_email"
+        android:layout_alignParentBottom="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="vuthyvathna123@gmail.com"/>
+    <TextView
+        android:layout_marginRight="16dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="16dp"
+        android:textColor="#EEEE"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:text="Logout"/>
+</RelativeLayout>
