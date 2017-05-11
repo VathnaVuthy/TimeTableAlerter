@@ -5,11 +5,28 @@
     android:background="@drawable/ic_header_background"
     android:layout_height="160dp">
     <ImageView
+        android:layout_marginTop="10dp"
+        android:layout_toLeftOf="@+id/tv_language"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:src="@drawable/khmer"/>
+    <TextView
+        android:layout_marginTop="10dp"
+        android:id="@+id/tv_language"
+        android:layout_marginRight="10dp"
+        android:layout_alignParentRight="true"
+        android:layout_width="30dp"
+        android:textColor="@color/colorWhite"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:layout_height="30dp"
+        android:text="KH"/>
+    <ImageView
         android:layout_width="85dp"
         android:layout_height="85dp"
         android:paddingTop="16dp"
         android:paddingLeft="16dp"
-        android:src="@drawable/ic_profile"/>
+        android:src="@drawable/profile_larrypage"/>
     <TextView
         android:textColor="#EEEE"
         android:layout_marginLeft="16dp"
@@ -17,7 +34,7 @@
         android:layout_above="@+id/txt_email"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Vuthy Vathna"/>
+        android:text="Larry Page"/>
     <TextView
         android:textColor="#EEEE"
         android:layout_marginBottom="16dp"
@@ -26,14 +43,5 @@
         android:layout_alignParentBottom="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="vuthyvathna123@gmail.com"/>
-    <TextView
-        android:layout_marginRight="16dp"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="16dp"
-        android:textColor="#EEEE"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:text="Logout"/>
+        android:text="larrypage@gmail.com"/>
 </RelativeLayout>
