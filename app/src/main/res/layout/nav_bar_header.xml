@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:background="@drawable/ic_header_background"
+    android:background="@drawable/nav_header_pic"
     android:layout_height="160dp">
     <ImageView
         android:layout_marginTop="10dp"
