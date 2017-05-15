@@ -15,10 +15,10 @@
                     android:id="@+id/nav_schedule"
                     android:icon="@drawable/ic_schedule"
                     android:title="School Schedule" />
-                <item
-                    android:id="@+id/nav_meeting"
-                    android:icon="@drawable/ic_meeting"
-                    android:title="Meeting" />
+                <!--<item-->
+                    <!--android:id="@+id/nav_meeting"-->
+                    <!--android:icon="@drawable/ic_meeting"-->
+                    <!--android:title="Meeting" />-->
                 <item
                     android:id="@+id/nav_task"
                     android:icon="@drawable/ic_task"

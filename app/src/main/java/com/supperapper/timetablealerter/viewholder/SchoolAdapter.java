@@ -1,6 +1,11 @@
 package com.supperapper.timetablealerter.viewholder;
 
+import android.app.Activity;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.supperapper.timetablealerter.R;
+import com.supperapper.timetablealerter.activity.SchoolDetailActivity;
 import com.supperapper.timetablealerter.dataset.Schedule;
 
 /**
@@ -43,7 +49,7 @@ public class SchoolAdapter extends RecyclerView.Adapter<SchoolAdapter.SchoolView
         return schedules.length;
     }
 
-    public class SchoolViewHolder extends RecyclerView.ViewHolder{
+    public class SchoolViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         TextView tv_subject,tv_teacher,tv_st_et,tv_date,tv_room;
         public SchoolViewHolder(View itemView) {
             super(itemView);
@@ -52,6 +58,25 @@ public class SchoolAdapter extends RecyclerView.Adapter<SchoolAdapter.SchoolView
             tv_st_et = (TextView)itemView.findViewById(R.id.tv_school_st_et);
             tv_date = (TextView)itemView.findViewById(R.id.tv_school_date);
             tv_room = (TextView)itemView.findViewById(R.id.tv_school_room);
+            itemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View v) {
+            int position = getAdapterPosition();
+            Schedule schedule = schedules[position];
+            Intent intent = new Intent(context,SchoolDetailActivity.class);
+
+            intent.putExtra("subject",schedule.getmSubject());
+            intent.putExtra("abb",schedule.getmAbbreviation());
+            intent.putExtra("school",schedule.getmSchool());
+            intent.putExtra("room",schedule.getmRoom());
+            intent.putExtra("teacher",schedule.getmTeacher());
+            intent.putExtra("contact",schedule.getmContact());
+            String time  = schedule.getmStartTime() + " - " + schedule.getmEndTime();
+            intent.putExtra("time",time);
+
+            context.startActivity(intent);
         }
     }
 }
