@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     DrawerLayout drawerLayout;
     FragmentManager fragmentManager;
     FragmentTransaction fragmentTransaction;
-
+    NavigationView navigationView;
     SchoolPagerAdapter pagerAdapter;
     TaskPagerAdapter taskPagerAdapter;
 
@@ -55,9 +55,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.navigation_view);
-        navigationView.setCheckedItem(0);
+        navigationView = (NavigationView) findViewById(R.id.navigation_view);
         navigationView.setNavigationItemSelectedListener(this);
+        navigationView.getMenu().getItem(0).getSubMenu().getItem(0).setChecked(true);
+
 
         ViewPager viewPager = (ViewPager) findViewById(R.id.lyt_super);
         pagerAdapter = new SchoolPagerAdapter(getSupportFragmentManager(), MainActivity.this);
@@ -278,6 +279,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
         DrawerLayout drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawerLayout.closeDrawer(GravityCompat.START);
+        if(item.getItemId() != R.id.nav_dayView) {
+            navigationView.getMenu().getItem(0).getSubMenu().getItem(0).setChecked(false);
+        }
         return true;
     }
 
