@@ -1,53 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:title="Menu">
-        <menu>
-            <group android:checkableBehavior="single">
-                <item
-                    android:id="@+id/nav_dayView"
-                    android:icon="@drawable/ic_dayview"
-                    android:title="Day View" />
-                <item
-                    android:id="@+id/nav_weekView"
-                    android:icon="@drawable/ic_weekview"
-                    android:title="Week View" />
-                <item
-                    android:id="@+id/nav_schedule"
-                    android:icon="@drawable/ic_schedule"
-                    android:title="School Schedule" />
-                <!--<item-->
+    <group android:checkableBehavior="single">
+        <item android:title="Menu" android:id="@+id/abc">
+            <menu>
+                <group android:checkableBehavior="single">
+                    <item
+                        android:id="@+id/nav_dayView"
+                        android:icon="@drawable/ic_dayview"
+                        android:title="Day View" />
+                    <item
+                        android:id="@+id/nav_weekView"
+                        android:icon="@drawable/ic_weekview"
+                        android:title="Week View" />
+                    <item
+                        android:id="@+id/nav_schedule"
+                        android:icon="@drawable/ic_schedule"
+                        android:title="School Schedule" />
+                    <!--<item-->
                     <!--android:id="@+id/nav_meeting"-->
                     <!--android:icon="@drawable/ic_meeting"-->
                     <!--android:title="Meeting" />-->
-                <item
-                    android:id="@+id/nav_task"
-                    android:icon="@drawable/ic_task"
-                    android:title="Task" />
-            </group>
-        </menu>
-    </item>
-    <item android:title="Other">
-        <menu>
-            <group android:checkableBehavior="single">
-                <item
-                    android:id="@+id/nav_setting"
-                    android:icon="@drawable/ic_setting"
-                    android:title="Setting" />
-                <item
-                    android:id="@+id/nav_rate_us"
-                    android:icon="@drawable/ic_rate"
-                    android:title="Rate Us" />
-                <item
-                    android:id="@+id/nav_share"
-                    android:icon="@drawable/ic_menu_share"
-                    android:title="Share" />
-                <item
-                android:id="@+id/nav_about_us"
-                android:icon="@drawable/ic_about"
-                android:title="About Us" />
+                    <item
+                        android:id="@+id/nav_task"
+                        android:icon="@drawable/ic_task"
+                        android:title="Task" />
+                </group>
+            </menu>
+        </item>
+        <item android:title="Other" android:id="@+id/xyz">
+            <menu>
+                <group android:checkableBehavior="single">
+                    <item
+                        android:id="@+id/nav_setting"
+                        android:icon="@drawable/ic_setting"
+                        android:title="Setting" />
+                    <item
+                        android:id="@+id/nav_rate_us"
+                        android:icon="@drawable/ic_rate"
+                        android:title="Rate Us" />
+                    <item
+                        android:id="@+id/nav_share"
+                        android:icon="@drawable/ic_menu_share"
+                        android:title="Share" />
+                    <item
+                        android:id="@+id/nav_about_us"
+                        android:icon="@drawable/ic_about"
+                        android:title="About Us" />
 
-            </group>
-        </menu>
-    </item>
+                </group>
+            </menu>
+        </item>
+    </group>
 
 </menu>
