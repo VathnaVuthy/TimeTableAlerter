@@ -22,10 +22,12 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.supperapper.timetablealerter.R;
+import com.supperapper.timetablealerter.dataset.DynamicPagerAdapter;
 import com.supperapper.timetablealerter.dataset.SchoolPagerAdapter;
 import com.supperapper.timetablealerter.dataset.TaskPagerAdapter;
 import com.supperapper.timetablealerter.fragment.AboutUsFragment;
 import com.supperapper.timetablealerter.fragment.SettingFragment;
+import com.supperapper.timetablealerter.viewholder.DynamicAdapter;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     DrawerLayout drawerLayout;
@@ -34,7 +36,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     NavigationView navigationView;
     SchoolPagerAdapter pagerAdapter;
     TaskPagerAdapter taskPagerAdapter;
-
+    DynamicPagerAdapter dynamicPagerAdapter;
     Toolbar toolbar;
     Menu copyMenu;
     boolean hasAddBtn;
@@ -61,15 +63,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
         ViewPager viewPager = (ViewPager) findViewById(R.id.lyt_super);
-        pagerAdapter = new SchoolPagerAdapter(getSupportFragmentManager(), MainActivity.this);
-        viewPager.setAdapter(pagerAdapter);
+        dynamicPagerAdapter = new DynamicPagerAdapter(getSupportFragmentManager(), MainActivity.this);
+        viewPager.setAdapter(dynamicPagerAdapter);
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
         tabLayout.setupWithViewPager(viewPager);
 
         for(int i = 0; i < tabLayout.getTabCount(); i++){
             TabLayout.Tab tab = tabLayout.getTabAt(i);
-            tab.setCustomView(getSchoolTabView(i));
+            tab.setCustomView(getDynamicTabVIew(i));
         }
 
 //        ViewPager viewPager = (ViewPager) findViewById(R.id.lyt_super);
@@ -201,21 +203,23 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     }
     public void onSettingClicked(){
-        toolbar.setTitle("Setting");
-        fragmentManager = getSupportFragmentManager();
-        fragmentTransaction = fragmentManager.beginTransaction();
-        SettingFragment settingFragment = new SettingFragment();
-        fragmentTransaction.replace(R.id.lyt_super,settingFragment);
-        fragmentTransaction.commit();
-
-        if(hasAddBtn==true){
-            copyMenu.removeItem(R.id.add_new_task);
-            hasAddBtn = false;
-        }
-        if(hasScheduleBtn==true){
-            copyMenu.removeItem(R.id.add_schedule);
-            hasScheduleBtn = false;
-        }
+//        toolbar.setTitle("Setting");
+//        fragmentManager = getSupportFragmentManager();
+//        fragmentTransaction = fragmentManager.beginTransaction();
+//        SettingFragment settingFragment = new SettingFragment();
+//        fragmentTransaction.replace(R.id.lyt_super,settingFragment);
+//        fragmentTransaction.commit();
+//
+//        if(hasAddBtn==true){
+//            copyMenu.removeItem(R.id.add_new_task);
+//            hasAddBtn = false;
+//        }
+//        if(hasScheduleBtn==true){
+//            copyMenu.removeItem(R.id.add_schedule);
+//            hasScheduleBtn = false;
+//        }
+        Intent intent = new Intent(this,SettingActivity.class);
+        startActivity(intent);
     }
     public void onAboutUsClicked(){
         toolbar.setTitle("About Us");
@@ -355,5 +359,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         tv.setText(taskPagerAdapter.getPageTitle(position));
         return tab;
         }
+
+    public View getDynamicTabVIew(int position){
+        View tab = LayoutInflater.from(MainActivity.this).inflate(R.layout.custom_tab,null);
+        TextView tv = (TextView) tab.findViewById(R.id.custom_text);
+        tv.setText(dynamicPagerAdapter.getPageTitle(position));
+        return tab;
+    }
 }
 

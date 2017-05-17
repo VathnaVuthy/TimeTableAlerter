@@ -5,6 +5,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
+import com.supperapper.timetablealerter.fragment.DayViewFragment;
 import com.supperapper.timetablealerter.fragment.school.FridayFragment;
 import com.supperapper.timetablealerter.fragment.school.MondayFragment;
 import com.supperapper.timetablealerter.fragment.school.SaturdayFragment;

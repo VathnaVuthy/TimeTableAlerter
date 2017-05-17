@@ -21,6 +21,7 @@
         <activity android:name=".activity.MainActivity" />
         <activity android:name=".activity.AddScheduleActivity" />
         <activity android:name=".activity.SchoolDetailActivity" />
+        <activity android:name=".activity.SettingActivity"></activity>
         <activity android:name=".activity.TaskDetailActivity"></activity>
     </application>
 

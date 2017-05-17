@@ -6,7 +6,7 @@ package com.supperapper.timetablealerter.dataset;
 
 public class Schedule {
     private String mSubject,mAbbreviation,mSchool,mRoom,mContact,mDay,mStartTime,mEndTime,mTeacher;
-
+    private final String mType = "Schedule";
     public Schedule(String mSubject, String mRoom, String mDay, String mStartTime, String mEndTime, String mTeacher) {
         this.mSubject = mSubject;
         this.mRoom = mRoom;
@@ -99,4 +99,6 @@ public class Schedule {
     public void setmEndTime(String mEndTime) {
         this.mEndTime = mEndTime;
     }
+
+    public String getmType(){ return this.mType; }
 }
