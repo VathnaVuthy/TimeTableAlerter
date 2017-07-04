@@ -73,6 +73,7 @@ public class DynamicAdapter extends RecyclerView.Adapter<DynamicAdapter.DynamicV
             date = (TextView)itemView.findViewById(R.id.dynamic_date);
             location_or_room = (TextView)itemView.findViewById(R.id.dynamic_room_or_location);
         }
+
     }
 
 }
