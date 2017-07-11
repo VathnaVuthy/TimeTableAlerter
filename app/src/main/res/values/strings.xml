@@ -8,7 +8,11 @@
         <item>EXAM</item>
         <item>MEETING</item>
         <item>WEDDING</item>
+        <item>R.ACTIVITY</item>
+        <item>OTHERS</item>
     </string-array>
+
+    <string name="gooleApiKey">AIzaSyA-bNdfTN_oy7co-egopFuXzcWZC8YnY7U</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

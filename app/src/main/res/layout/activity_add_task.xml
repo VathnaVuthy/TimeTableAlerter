@@ -46,12 +46,14 @@
         android:paddingTop="16dp">
 
         <EditText
+            android:id="@+id/etx_topic"
             style="@style/Widget.AppCompat.EditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Name/Topic" />
 
         <EditText
+            android:id="@+id/etx_subject"
             style="@style/Widget.AppCompat.EditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -159,6 +161,7 @@
         </View>
 
         <EditText
+            android:id="@+id/etx_note"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="top"

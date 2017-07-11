@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.supperapper.timetablealerter.R;
+import com.supperapper.timetablealerter.database.dbManager;
 import com.supperapper.timetablealerter.dataset.Schedule;
 import com.supperapper.timetablealerter.dataset.Task;
 import com.supperapper.timetablealerter.viewholder.SchoolAdapter;
@@ -32,9 +33,8 @@ public class MeetingFragment extends Fragment {
         mLayoutManager = new LinearLayoutManager(getActivity());
         mRecyclerView.setLayoutManager(mLayoutManager);
 
-        Task[] tasks = new Task[2];
-        tasks[0] = new Task("Backup Database","Lacking of Skilled Staff","Meeting","12-02-2017","Google Inc","Bring Document From Robert");
-        tasks[1] = new Task("Andorid App Project","Publishing to Google Play","Meeting","12-02-2017","Pizza Company","Ask Director For deposit");
+        dbManager Manager = new dbManager(getContext());
+        Task[] tasks = Manager.getAlltasks(new String[]{"MEETING"});
 
         mTaskAdapter = new TaskAdapter(tasks);
         mRecyclerView.setAdapter(mTaskAdapter);
