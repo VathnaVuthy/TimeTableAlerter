@@ -1,11 +1,14 @@
 package com.supperapper.timetablealerter.dataset;
 
+import android.text.method.DateTimeKeyListener;
+
 /**
  * Created by User on 5/15/2017.
  */
 
 public class Task {
     String mTopic,mSubject,mTaskType,mDate,mLocation,mNote;
+    Double Lat, Lng;
 
     public Task(String mTopic, String mSubject, String mTaskType, String mDate, String mLocation, String mNote) {
         this.mTopic = mTopic;
@@ -14,6 +17,15 @@ public class Task {
         this.mDate = mDate;
         this.mLocation = mLocation;
         this.mNote = mNote;
+    }
+    public Task(String Topic, String Subject, String TaskType, String Date,String Note){
+
+        this.mTopic = Topic;
+        this.mSubject = Subject;
+        this.mTaskType = TaskType;
+        this.mDate = Date;
+        this.mNote = Note;
+     //   this.Lat = Lat;
     }
 
     public String getmTopic() {
