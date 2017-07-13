@@ -7,9 +7,13 @@ import android.database.sqlite.SQLiteDatabase;
 import android.widget.TextView;
 
 import com.readystatesoftware.sqliteasset.SQLiteAssetHelper;
+import com.supperapper.timetablealerter.R;
 import com.supperapper.timetablealerter.activity.MapViewActivity;
+import com.supperapper.timetablealerter.dataset.Schedule;
 import com.supperapper.timetablealerter.dataset.Task;
 import com.supperapper.timetablealerter.viewholder.TaskAdapter;
+
+import java.sql.Time;
 
 /**
  * Created by dell on 7/4/2017.
@@ -71,6 +75,50 @@ public class dbManager extends SQLiteAssetHelper {
         }
 
         return tasks;
+    }
+
+    public void insertSchedule(String TableName, String Subject, String Abbreviation, String School, String Room, String Teacher, String Contact, String Start, String End){
+
+        SQLiteDatabase write = getWritableDatabase();
+        ContentValues row = new ContentValues();
+        row.put("subject", Subject);
+        row.put("abbrev", Abbreviation);
+        row.put("school", School);
+        row.put("room", Room);
+        row.put("teacher", Teacher);
+        row.put("contact", Contact);
+        row.put("start", Start);
+        row.put("end", End);
+
+        write.insert(TableName, null, row);
+    }
+
+    public Schedule[] getAllSchdule(String TableName){
+
+        SQLiteDatabase read = getReadableDatabase();
+        Cursor cursor = read.query(TableName, null, null, null, null, null, null);
+        Schedule[] schedules = new Schedule[cursor.getCount()];
+        int index = 0;
+
+        while (cursor.moveToNext()){
+
+            int id = cursor.getInt(0);
+            String Subject = cursor.getString(1);
+            String Abbreviation = cursor.getString(2);
+            String School = cursor.getString(3);
+            String Room = cursor.getString(4);
+            String Teacher = cursor.getString(5);
+            String Contact = cursor.getString(6);
+            String Start = (cursor.getString(7));
+            String End = (cursor.getString(8));
+
+          //  Schedule schedule = new Schedule(Subject, Abbreviation, School, Room, Teacher, Contact, Start, End);
+            Schedule schedule = new Schedule(Subject, Abbreviation, School, Room, Contact, null, Start, End, Teacher);
+            schedules[index] = schedule;
+            index++;
+        }
+
+        return schedules;
     }
 
 }

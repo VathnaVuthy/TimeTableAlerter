@@ -1,13 +1,18 @@
 package com.supperapper.timetablealerter.dataset;
 
+import java.sql.Time;
+
 /**
  * Created by User on 4/30/2017.
  */
 
 public class Schedule {
-    private String mSubject,mAbbreviation,mSchool,mRoom,mContact,mDay,mStartTime,mEndTime,mTeacher;
+    private String mSubject,mAbbreviation,mSchool,mDay,mStartTime,mEndTime,mTeacher, mRoom, mContact;
+
+
     private final String mType = "Schedule";
-    public Schedule(String mSubject, String mRoom, String mDay, String mStartTime, String mEndTime, String mTeacher) {
+
+    public Schedule(String subject, String mSubject, String mRoom, String mDay, String mStartTime, String mEndTime, Time start, Time end, String mTeacher) {
         this.mSubject = mSubject;
         this.mRoom = mRoom;
         this.mDay = mDay;
@@ -26,6 +31,22 @@ public class Schedule {
         this.mStartTime = mStartTime;
         this.mEndTime = mEndTime;
         this.mTeacher = mTeacher;
+    }
+
+    public String getmRoom() {
+        return mRoom;
+    }
+
+    public void setmRoom(String mRoom) {
+        this.mRoom = mRoom;
+    }
+
+    public String getmContact() {
+        return mContact;
+    }
+
+    public void setmContact(String mContact) {
+        this.mContact = mContact;
     }
 
     public String getmTeacher() {
@@ -60,21 +81,6 @@ public class Schedule {
         this.mSchool = mSchool;
     }
 
-    public String getmRoom() {
-        return mRoom;
-    }
-
-    public void setmRoom(String mRoom) {
-        this.mRoom = mRoom;
-    }
-
-    public String getmContact() {
-        return mContact;
-    }
-
-    public void setmContact(String mContact) {
-        this.mContact = mContact;
-    }
 
     public String getmDay() {
         return mDay;

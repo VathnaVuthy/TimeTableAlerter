@@ -96,14 +96,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 //        fragmentTransaction.commit();
         toolbar.setTitle("Dayview");
 
-        if(hasAddBtn==true){
-            copyMenu.removeItem(R.id.add_new_task);
-            hasAddBtn = false;
-        }
-        if(hasScheduleBtn==true){
-            copyMenu.removeItem(R.id.add_schedule);
-            hasScheduleBtn = false;
-        }
+//        if(hasAddBtn==true){
+//            copyMenu.removeItem(R.id.add_new_task);
+//            hasAddBtn = false;
+//        }
+//        if(hasScheduleBtn==true){
+//            copyMenu.removeItem(R.id.add_schedule);
+//            hasScheduleBtn = false;
+//        }
 
 
     }

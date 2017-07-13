@@ -52,31 +52,37 @@
                 android:padding="16dp">
 
                 <EditText
+                    android:id="@+id/etx_subject"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Subject" />
 
                 <EditText
+                    android:id="@+id/etx_abbreviation"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Abbreviation" />
 
                 <EditText
+                    android:id="@+id/etx_school"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="School" />
 
                 <EditText
+                    android:id="@+id/etx_room"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Room" />
 
                 <EditText
+                    android:id="@+id/etx_teacher"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Teacher" />
 
                 <EditText
+                    android:id="@+id/etx_contact"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Contact" />\
@@ -98,39 +104,47 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
                     <ToggleButton
+                        android:id="@+id/tgl_btn_mon"
                         android:textOn="MON"
                         android:textOff="MON"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
                     <TextView
+                        android:enabled="false"
+                        android:id="@+id/txt_mon_start"
                         android:gravity="center"
                         android:layout_width="0dp"
                         android:text="START TIME"
                         android:layout_weight="1"
                         android:layout_height="match_parent" />
                     <TextView
+                        android:id="@+id/txt_mon_end"
                         android:gravity="center"
                         android:text="END TIME"
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:layout_height="match_parent" />
+
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
                     <ToggleButton
+                        android:id="@+id/tgl_btn_tue"
                         android:textOn="TUE"
                         android:textOff="TUE"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
                     <TextView
+                        android:id="@+id/txt_tue_start"
                         android:gravity="center"
                         android:layout_width="0dp"
                         android:text="START TIME"
                         android:layout_weight="1"
                         android:layout_height="match_parent" />
                     <TextView
+                        android:id="@+id/txt_tue_end"
                         android:gravity="center"
                         android:text="END TIME"
                         android:layout_width="0dp"
@@ -142,17 +156,20 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
                     <ToggleButton
+                        android:id="@+id/tgl_btn_wed"
                         android:textOn="WED"
                         android:textOff="WED"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
                     <TextView
+                        android:id="@+id/txt_wed_start"
                         android:gravity="center"
                         android:layout_width="0dp"
                         android:text="START TIME"
                         android:layout_weight="1"
                         android:layout_height="match_parent" />
                     <TextView
+                        android:id="@+id/txt_wed_end"
                         android:gravity="center"
                         android:text="END TIME"
                         android:layout_width="0dp"
@@ -164,17 +181,20 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
                     <ToggleButton
+                        android:id="@+id/tgl_btn_thu"
                         android:textOn="THU"
                         android:textOff="THU"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
                     <TextView
+                        android:id="@+id/txt_thu_start"
                         android:gravity="center"
                         android:layout_width="0dp"
                         android:text="START TIME"
                         android:layout_weight="1"
                         android:layout_height="match_parent" />
                     <TextView
+                        android:id="@+id/txt_thu_end"
                         android:gravity="center"
                         android:text="END TIME"
                         android:layout_width="0dp"
@@ -186,17 +206,20 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
                     <ToggleButton
+                        android:id="@+id/tgl_btn_fri"
                         android:textOn="FRI"
                         android:textOff="FRI"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
                     <TextView
+                        android:id="@+id/txt_fri_start"
                         android:gravity="center"
                         android:layout_width="0dp"
                         android:text="START TIME"
                         android:layout_weight="1"
                         android:layout_height="match_parent" />
                     <TextView
+                        android:id="@+id/txt_fri_end"
                         android:gravity="center"
                         android:text="END TIME"
                         android:layout_width="0dp"
@@ -208,17 +231,20 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
                     <ToggleButton
+                        android:id="@+id/tgl_btn_sat"
                         android:textOn="SAT"
                         android:textOff="SAT"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
                     <TextView
+                        android:id="@+id/txt_sat_start"
                         android:gravity="center"
                         android:layout_width="0dp"
                         android:text="START TIME"
                         android:layout_weight="1"
                         android:layout_height="match_parent" />
                     <TextView
+                        android:id="@+id/txt_sat_end"
                         android:gravity="center"
                         android:text="END TIME"
                         android:layout_width="0dp"
@@ -230,17 +256,20 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
                     <ToggleButton
+                        android:id="@+id/tgl_btn_sun"
                         android:textOn="SUN"
                         android:textOff="SUN"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
                     <TextView
+                        android:id="@+id/txt_sun_start"
                         android:gravity="center"
                         android:layout_width="0dp"
                         android:text="START TIME"
                         android:layout_weight="1"
                         android:layout_height="match_parent" />
                     <TextView
+                        android:id="@+id/txt_sun_end"
                         android:gravity="center"
                         android:text="END TIME"
                         android:layout_width="0dp"

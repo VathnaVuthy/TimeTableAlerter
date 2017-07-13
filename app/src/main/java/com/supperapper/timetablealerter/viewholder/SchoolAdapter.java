@@ -40,7 +40,7 @@ public class SchoolAdapter extends RecyclerView.Adapter<SchoolAdapter.SchoolView
         holder.tv_subject.setText(schedule.getmSubject().toString());
         holder.tv_teacher.setText(schedule.getmTeacher());
         holder.tv_st_et.setText(schedule.getmStartTime() + " To " + schedule.getmEndTime());
-        holder.tv_date.setText(schedule.getmDay());
+   //     holder.tv_date.setText(schedule.getmDay());
         holder.tv_room.setText(schedule.getmRoom());
     }
 

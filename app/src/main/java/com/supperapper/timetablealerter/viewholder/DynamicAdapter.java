@@ -50,7 +50,7 @@ public class DynamicAdapter extends RecyclerView.Adapter<DynamicAdapter.DynamicV
             holder.teacher.setText(schedule.getmTeacher().toString());
             holder.note_or_st_et.setText(schedule.getmStartTime() + "-" + schedule.getmEndTime());
             holder.type.setText(schedule.getmType().toString());
-            holder.date.setText(schedule.getmDay().toString());
+        //    holder.date.setText(schedule.getmDay().toString());
             holder.location_or_room.setText(schedule.getmRoom().toString());
         }
     }
