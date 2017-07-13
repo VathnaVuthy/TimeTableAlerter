@@ -27,6 +27,7 @@ import com.supperapper.timetablealerter.dataset.SchoolPagerAdapter;
 import com.supperapper.timetablealerter.dataset.TaskPagerAdapter;
 import com.supperapper.timetablealerter.fragment.AboutUsFragment;
 import com.supperapper.timetablealerter.fragment.SettingFragment;
+import com.supperapper.timetablealerter.service.NotificationChecker;
 import com.supperapper.timetablealerter.viewholder.DynamicAdapter;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -45,6 +46,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //Start Service
+//        Intent startservice = new Intent(this, NotificationChecker.class);
+//        startService(startservice);
+
         hasAddBtn = false;
         hasScheduleBtn = false;
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);

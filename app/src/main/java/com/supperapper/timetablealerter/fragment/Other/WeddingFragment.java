@@ -9,7 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.supperapper.timetablealerter.R;
-import com.supperapper.timetablealerter.database.dbManager;
+import com.supperapper.timetablealerter.database.DbManager;
 import com.supperapper.timetablealerter.dataset.Task;
 import com.supperapper.timetablealerter.viewholder.TaskAdapter;
 
@@ -33,7 +33,7 @@ public class WeddingFragment extends Fragment {
         mRecyclerView.setLayoutManager(mLayoutManager);
 
 
-        dbManager Manager = new dbManager(getContext());
+        DbManager Manager = new DbManager(getContext());
         Task[] tasks = Manager.getAlltasks(new String[]{"WEDDING"});
 
         mTaskAdapter = new TaskAdapter(tasks);

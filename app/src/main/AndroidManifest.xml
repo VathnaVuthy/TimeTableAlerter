@@ -36,6 +36,7 @@
         <activity android:name=".activity.SettingActivity" />
         <activity android:name=".activity.TaskDetailActivity" />
         <activity android:name=".activity.MapViewActivity"></activity>
+        <service android:name=".service.NotificationChecker"></service>
     </application>
 
 </manifest>

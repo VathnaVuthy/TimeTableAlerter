@@ -5,7 +5,6 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -17,14 +16,11 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.supperapper.timetablealerter.R;
-import com.supperapper.timetablealerter.database.dbManager;
-import com.supperapper.timetablealerter.dataset.Task;
-import com.supperapper.timetablealerter.fragment.Other.ExamFragment;
+import com.supperapper.timetablealerter.database.DbManager;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.Locale;
 
 /**
  * Created by User on 4/21/2017.
@@ -88,7 +84,7 @@ public class AddNewTaskActivity extends AppCompatActivity{
             @Override
             public void onClick(View v) {
           //      MapViewActivity mapViewActivity = new MapViewActivity();
-                dbManager Manager = new dbManager(AddNewTaskActivity.this);
+                DbManager Manager = new DbManager(AddNewTaskActivity.this);
                 String Topic = etxTopic.getText().toString();
                 String Subject = etxSubject.getText().toString();
                 String TaskType = spinner.getSelectedItem().toString();

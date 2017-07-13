@@ -9,10 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.supperapper.timetablealerter.R;
-import com.supperapper.timetablealerter.database.dbManager;
-import com.supperapper.timetablealerter.dataset.Schedule;
+import com.supperapper.timetablealerter.database.DbManager;
 import com.supperapper.timetablealerter.dataset.Task;
-import com.supperapper.timetablealerter.viewholder.SchoolAdapter;
 import com.supperapper.timetablealerter.viewholder.TaskAdapter;
 
 /**
@@ -37,7 +35,7 @@ public class ExamFragment extends Fragment {
 
 
 
-        dbManager Manager = new dbManager(getContext());
+        DbManager Manager = new DbManager(getContext());
         Task[] tasks = Manager.getAlltasks(new String[]{"EXAM"});
 
         mTaskAdapter = new TaskAdapter(tasks);

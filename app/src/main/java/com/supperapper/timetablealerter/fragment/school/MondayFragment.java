@@ -10,7 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.supperapper.timetablealerter.R;
-import com.supperapper.timetablealerter.database.dbManager;
+import com.supperapper.timetablealerter.database.DbManager;
 import com.supperapper.timetablealerter.dataset.Schedule;
 import com.supperapper.timetablealerter.viewholder.SchoolAdapter;
 
@@ -39,7 +39,7 @@ public class MondayFragment extends Fragment {
         mLayoutManager = new LinearLayoutManager(getActivity());
         mRecyclerView.setLayoutManager(mLayoutManager);
 
-        dbManager dbManager = new dbManager(getContext());
+        DbManager dbManager = new DbManager(getContext());
         Schedule[] schedules = dbManager.getAllSchdule("tblmondayschedule");
 
         schoolAdapter = new SchoolAdapter(schedules);

@@ -3,11 +3,9 @@ package com.supperapper.timetablealerter.activity;
 import android.app.TimePickerDialog;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.text.Editable;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.TimePicker;
@@ -15,9 +13,8 @@ import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import com.supperapper.timetablealerter.R;
-import com.supperapper.timetablealerter.database.dbManager;
+import com.supperapper.timetablealerter.database.DbManager;
 
-import java.sql.Time;
 import java.util.Calendar;
 
 public class AddScheduleActivity extends AppCompatActivity{
@@ -501,7 +498,7 @@ public class AddScheduleActivity extends AppCompatActivity{
 
     private void storeScheduletoDB(TextView txtStart, TextView txtEnd, String TableName){
 
-        dbManager Manager = new dbManager(AddScheduleActivity.this);
+        DbManager Manager = new DbManager(AddScheduleActivity.this);
         String Subject = etxSubject.getText().toString();
         String Abbreviation = etxAbbreviation.getText().toString();
         String School = etxSchool.getText().toString();

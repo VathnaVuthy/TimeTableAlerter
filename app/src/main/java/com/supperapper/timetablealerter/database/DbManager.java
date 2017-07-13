@@ -14,19 +14,20 @@ import com.supperapper.timetablealerter.dataset.Task;
 import com.supperapper.timetablealerter.viewholder.TaskAdapter;
 
 import java.sql.Time;
+import java.util.ArrayList;
 
 /**
  * Created by dell on 7/4/2017.
  */
 
-public class dbManager extends SQLiteAssetHelper {
+public class DbManager extends SQLiteAssetHelper {
 
     TaskAdapter.TaskViewHolder taskViewHolder;
 
     MapViewActivity mapViewActivity;
 
    // Task task;
-    public dbManager(Context context) {
+    public DbManager(Context context) {
         super(context, "TimeTable.db.sqlite", null, null, 1);
     }
 
@@ -112,7 +113,7 @@ public class dbManager extends SQLiteAssetHelper {
             String Start = (cursor.getString(7));
             String End = (cursor.getString(8));
 
-          //  Schedule schedule = new Schedule(Subject, Abbreviation, School, Room, Teacher, Contact, Start, End);
+            //  Schedule schedule = new Schedule(Subject, Abbreviation, School, Room, Teacher, Contact, Start, End);
             Schedule schedule = new Schedule(Subject, Abbreviation, School, Room, Contact, null, Start, End, Teacher);
             schedules[index] = schedule;
             index++;
@@ -121,4 +122,28 @@ public class dbManager extends SQLiteAssetHelper {
         return schedules;
     }
 
+    public ArrayList<Schedule> getListSchdule(String TableName){
+
+        SQLiteDatabase read = getReadableDatabase();
+        Cursor cursor = read.query(TableName, null, null, null, null, null, null);
+        ArrayList<Schedule> schedules = new ArrayList<Schedule>();
+
+        while (cursor.moveToNext()){
+
+            int id = cursor.getInt(0);
+            String Subject = cursor.getString(1);
+            String Abbreviation = cursor.getString(2);
+            String School = cursor.getString(3);
+            String Room = cursor.getString(4);
+            String Teacher = cursor.getString(5);
+            String Contact = cursor.getString(6);
+            String Start = (cursor.getString(7));
+            String End = (cursor.getString(8));
+
+            //  Schedule schedule = new Schedule(Subject, Abbreviation, School, Room, Teacher, Contact, Start, End);
+            Schedule schedule = new Schedule(Subject, Abbreviation, School, Room, Contact, null, Start, End, Teacher);
+            schedules.add(schedule);
+        }
+        return schedules;
+    }
 }
