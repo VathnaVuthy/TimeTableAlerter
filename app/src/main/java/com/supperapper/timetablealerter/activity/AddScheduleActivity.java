@@ -1,6 +1,7 @@
 package com.supperapper.timetablealerter.activity;
 
 import android.app.TimePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -14,6 +15,7 @@ import android.widget.ToggleButton;
 
 import com.supperapper.timetablealerter.R;
 import com.supperapper.timetablealerter.database.DbManager;
+import com.supperapper.timetablealerter.service.NotificationChecker;
 
 import java.util.Calendar;
 
@@ -509,7 +511,9 @@ public class AddScheduleActivity extends AppCompatActivity{
         String End = txtEnd.getText().toString();
 
         Manager.insertSchedule(TableName, Subject, Abbreviation, School, Room, Teacher, Contact, Start, End);
-
+        Intent startservice = new Intent(this, NotificationChecker.class);
+        stopService(startservice);
+        startService(startservice);
     }
 
 

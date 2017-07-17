@@ -10,6 +10,7 @@ import com.readystatesoftware.sqliteasset.SQLiteAssetHelper;
 import com.supperapper.timetablealerter.R;
 import com.supperapper.timetablealerter.activity.MapViewActivity;
 import com.supperapper.timetablealerter.dataset.Schedule;
+import com.supperapper.timetablealerter.dataset.ScheduleNotify;
 import com.supperapper.timetablealerter.dataset.Task;
 import com.supperapper.timetablealerter.viewholder.TaskAdapter;
 
@@ -122,11 +123,11 @@ public class DbManager extends SQLiteAssetHelper {
         return schedules;
     }
 
-    public ArrayList<Schedule> getListSchdule(String TableName){
+    public ArrayList<ScheduleNotify> getListSchdule(String TableName){
 
         SQLiteDatabase read = getReadableDatabase();
         Cursor cursor = read.query(TableName, null, null, null, null, null, null);
-        ArrayList<Schedule> schedules = new ArrayList<Schedule>();
+        ArrayList<ScheduleNotify> schedules = new ArrayList<ScheduleNotify>();
 
         while (cursor.moveToNext()){
 
@@ -139,9 +140,9 @@ public class DbManager extends SQLiteAssetHelper {
             String Contact = cursor.getString(6);
             String Start = (cursor.getString(7));
             String End = (cursor.getString(8));
+            String Day = TableName.replace("tbl","").replace("schedule","").toUpperCase();
 
-            //  Schedule schedule = new Schedule(Subject, Abbreviation, School, Room, Teacher, Contact, Start, End);
-            Schedule schedule = new Schedule(Subject, Abbreviation, School, Room, Contact, null, Start, End, Teacher);
+            ScheduleNotify schedule = new ScheduleNotify(id,Subject,Abbreviation,School,Day,Start,End,Teacher,Room,Contact);
             schedules.add(schedule);
         }
         return schedules;

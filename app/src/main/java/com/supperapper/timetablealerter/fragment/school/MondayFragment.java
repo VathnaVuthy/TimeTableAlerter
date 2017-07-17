@@ -1,10 +1,12 @@
 package com.supperapper.timetablealerter.fragment.school;
 
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +14,7 @@ import android.view.ViewGroup;
 import com.supperapper.timetablealerter.R;
 import com.supperapper.timetablealerter.database.DbManager;
 import com.supperapper.timetablealerter.dataset.Schedule;
+import com.supperapper.timetablealerter.service.NotificationChecker;
 import com.supperapper.timetablealerter.viewholder.SchoolAdapter;
 
 /**
@@ -22,7 +25,6 @@ public class MondayFragment extends Fragment {
     RecyclerView mRecyclerView ;
     RecyclerView.LayoutManager mLayoutManager;
     SchoolAdapter schoolAdapter;
-
     public MondayFragment() {
         // Required empty public constructor
     }
@@ -46,6 +48,5 @@ public class MondayFragment extends Fragment {
         mRecyclerView.setAdapter(schoolAdapter);
         return view;
     }
-
 
 }

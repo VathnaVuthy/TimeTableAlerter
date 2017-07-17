@@ -1,60 +1,32 @@
 package com.supperapper.timetablealerter.dataset;
 
-import java.sql.Time;
-
 /**
- * Created by User on 4/30/2017.
+ * Created by User on 7/16/2017.
  */
 
-public class Schedule {
+public class ScheduleNotify {
+    private int id;
     private String mSubject,mAbbreviation,mSchool,mDay,mStartTime,mEndTime,mTeacher, mRoom, mContact;
 
-
-    private final String mType = "Schedule";
-
-    public Schedule( String mSubject, String mRoom, String mDay, String mStartTime, String mEndTime, Time start, Time end, String mTeacher) {
-        this.mSubject = mSubject;
-        this.mRoom = mRoom;
-        this.mDay = mDay;
-        this.mStartTime = mStartTime;
-        this.mEndTime = mEndTime;
-        this.mTeacher = mTeacher;
-    }
-
-    public Schedule(String mSubject, String mAbbreviation, String mSchool, String mRoom, String mContact, String mDay, String mStartTime, String mEndTime, String mTeacher) {
+    public ScheduleNotify(int id, String mSubject, String mAbbreviation, String mSchool, String mDay, String mStartTime, String mEndTime, String mTeacher, String mRoom, String mContact) {
+        this.id = id;
         this.mSubject = mSubject;
         this.mAbbreviation = mAbbreviation;
         this.mSchool = mSchool;
-        this.mRoom = mRoom;
-        this.mContact = mContact;
         this.mDay = mDay;
         this.mStartTime = mStartTime;
         this.mEndTime = mEndTime;
         this.mTeacher = mTeacher;
-    }
-
-    public String getmRoom() {
-        return mRoom;
-    }
-
-    public void setmRoom(String mRoom) {
         this.mRoom = mRoom;
-    }
-
-    public String getmContact() {
-        return mContact;
-    }
-
-    public void setmContact(String mContact) {
         this.mContact = mContact;
     }
 
-    public String getmTeacher() {
-        return mTeacher;
+    public int getId() {
+        return id;
     }
 
-    public void setmTeacher(String mTeacher) {
-        this.mTeacher = mTeacher;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getmSubject() {
@@ -81,7 +53,6 @@ public class Schedule {
         this.mSchool = mSchool;
     }
 
-
     public String getmDay() {
         return mDay;
     }
@@ -106,5 +77,27 @@ public class Schedule {
         this.mEndTime = mEndTime;
     }
 
-    public String getmType(){ return this.mType; }
+    public String getmTeacher() {
+        return mTeacher;
+    }
+
+    public void setmTeacher(String mTeacher) {
+        this.mTeacher = mTeacher;
+    }
+
+    public String getmRoom() {
+        return mRoom;
+    }
+
+    public void setmRoom(String mRoom) {
+        this.mRoom = mRoom;
+    }
+
+    public String getmContact() {
+        return mContact;
+    }
+
+    public void setmContact(String mContact) {
+        this.mContact = mContact;
+    }
 }

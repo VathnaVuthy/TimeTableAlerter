@@ -4,6 +4,7 @@ import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentStatePagerAdapter;
+import android.util.Log;
 
 import com.supperapper.timetablealerter.fragment.DayViewFragment;
 import com.supperapper.timetablealerter.fragment.school.FridayFragment;
@@ -59,4 +60,5 @@ public class SchoolPagerAdapter extends FragmentStatePagerAdapter {
         public CharSequence getPageTitle(int position){
             return tabTitles[position];
         }
+
     }
