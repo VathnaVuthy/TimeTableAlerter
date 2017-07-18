@@ -32,7 +32,7 @@ public class RegularActivityFragment extends Fragment {
         mLayoutManager = new LinearLayoutManager(getActivity());
         mRecyclerView.setLayoutManager(mLayoutManager);
 
-        DbManager Manager = new DbManager(getContext());
+        DbManager Manager = DbManager.getInstance(getContext());
         Task[] tasks = Manager.getAlltasks(new String[] {"R.ACTIVITY"});
 
         mTaskAdapter = new TaskAdapter(tasks);

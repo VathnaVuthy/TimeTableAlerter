@@ -500,7 +500,7 @@ public class AddScheduleActivity extends AppCompatActivity{
 
     private void storeScheduletoDB(TextView txtStart, TextView txtEnd, String TableName){
 
-        DbManager Manager = new DbManager(AddScheduleActivity.this);
+        DbManager Manager = DbManager.getInstance(AddScheduleActivity.this);
         String Subject = etxSubject.getText().toString();
         String Abbreviation = etxAbbreviation.getText().toString();
         String School = etxSchool.getText().toString();

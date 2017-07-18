@@ -32,7 +32,7 @@ public class OtherFragment extends Fragment {
         mLayoutManager = new LinearLayoutManager(getActivity());
         mRecyclerView.setLayoutManager(mLayoutManager);
 
-        DbManager Manager = new DbManager(getContext());
+        DbManager Manager = DbManager.getInstance(getContext());
         Task[] tasks = Manager.getAlltasks(new String[] {"OTHERS"});
 
         mTaskAdapter = new TaskAdapter(tasks);

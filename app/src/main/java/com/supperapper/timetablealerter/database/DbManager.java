@@ -25,9 +25,16 @@ public class DbManager extends SQLiteAssetHelper {
     TaskAdapter.TaskViewHolder taskViewHolder;
 
     MapViewActivity mapViewActivity;
+    public static DbManager instance;
+
+    public static DbManager getInstance(Context context){
+        if(instance==null)
+            instance = new DbManager(context);
+        return instance;
+    }
 
    // Task task;
-    public DbManager(Context context) {
+    private DbManager(Context context) {
         super(context, "TimeTable.db.sqlite", null, null, 1);
     }
 

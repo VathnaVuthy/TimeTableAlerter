@@ -38,8 +38,9 @@ public class SundayFragment extends Fragment {
         mLayoutManager = new LinearLayoutManager(getActivity());
         mRecyclerView.setLayoutManager(mLayoutManager);
 
-        DbManager Manager = new DbManager(getContext());
-        Schedule[] schedules = Manager.getAllSchdule("tblsundayschedule");
+        DbManager dbManager = DbManager.getInstance(getContext());
+
+        Schedule[] schedules = dbManager.getAllSchdule("tblsundayschedule");
 
         schoolAdapter = new SchoolAdapter(schedules);
         mRecyclerView.setAdapter(schoolAdapter);

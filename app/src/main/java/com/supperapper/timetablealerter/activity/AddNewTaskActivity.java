@@ -84,7 +84,7 @@ public class AddNewTaskActivity extends AppCompatActivity{
             @Override
             public void onClick(View v) {
           //      MapViewActivity mapViewActivity = new MapViewActivity();
-                DbManager Manager = new DbManager(AddNewTaskActivity.this);
+                DbManager Manager = DbManager.getInstance(AddNewTaskActivity.this);
                 String Topic = etxTopic.getText().toString();
                 String Subject = etxSubject.getText().toString();
                 String TaskType = spinner.getSelectedItem().toString();

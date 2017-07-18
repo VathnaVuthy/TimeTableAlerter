@@ -33,7 +33,7 @@ public class WeddingFragment extends Fragment {
         mRecyclerView.setLayoutManager(mLayoutManager);
 
 
-        DbManager Manager = new DbManager(getContext());
+        DbManager Manager = DbManager.getInstance(getContext());
         Task[] tasks = Manager.getAlltasks(new String[]{"WEDDING"});
 
         mTaskAdapter = new TaskAdapter(tasks);

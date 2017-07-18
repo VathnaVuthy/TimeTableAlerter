@@ -35,7 +35,7 @@ public class ExamFragment extends Fragment {
 
 
 
-        DbManager Manager = new DbManager(getContext());
+        DbManager Manager = DbManager.getInstance(getContext());
         Task[] tasks = Manager.getAlltasks(new String[]{"EXAM"});
 
         mTaskAdapter = new TaskAdapter(tasks);

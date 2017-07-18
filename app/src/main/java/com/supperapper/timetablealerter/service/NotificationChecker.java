@@ -78,7 +78,7 @@ public class NotificationChecker extends Service {
 
     private void checkSchdeduleAlert(){
         Log.d("TTA","CheckForSchedule");
-        dbManager = new DbManager(context);
+        dbManager = DbManager.getInstance(context);
         ArrayList<ScheduleNotify> schedules = dbManager.getListSchdule("tblmondayschedule");
         schedules.addAll(dbManager.getListSchdule("tbltuedayschedule"));
         schedules.addAll(dbManager.getListSchdule("tblwednesdayschedule"));
@@ -120,7 +120,7 @@ public class NotificationChecker extends Service {
     private void showNotification(int id, String title, String detail){
         NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this);
         mBuilder.setContentTitle(title);
-        mBuilder.setSmallIcon(R.mipmap.logo);
+        mBuilder.setSmallIcon(R.drawable.notifi);
         mBuilder.setContentText(detail);
         mBuilder.setVibrate(new long[]{1000,1000,1000,1000});
         mBuilder.setLights(Color.RED,3000,3000);
