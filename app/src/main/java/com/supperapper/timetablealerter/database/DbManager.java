@@ -103,7 +103,7 @@ public class DbManager extends SQLiteAssetHelper {
 
         while (cursor.moveToNext()){
 
-            int id = cursor.getInt(0);
+            String id = cursor.getString(0);
             String Subject = cursor.getString(1);
             String Abbreviation = cursor.getString(2);
             String School = cursor.getString(3);
@@ -114,7 +114,7 @@ public class DbManager extends SQLiteAssetHelper {
             String End = (cursor.getString(8));
 
             //  Schedule schedule = new Schedule(Subject, Abbreviation, School, Room, Teacher, Contact, Start, End);
-            Schedule schedule = new Schedule(Subject, Abbreviation, School, Room, Contact, null, Start, End, Teacher);
+            Schedule schedule = new Schedule(Subject, Abbreviation, School, Room, Contact, id, Start, End, Teacher);
             schedules[index] = schedule;
             index++;
         }
@@ -142,8 +142,26 @@ public class DbManager extends SQLiteAssetHelper {
 
             //  Schedule schedule = new Schedule(Subject, Abbreviation, School, Room, Teacher, Contact, Start, End);
             Schedule schedule = new Schedule(Subject, Abbreviation, School, Room, Contact, null, Start, End, Teacher);
+
             schedules.add(schedule);
         }
         return schedules;
+    }
+
+    public void updateSchedule(String TableName, String ColumnID, String[] ID, String Subject, String Abbreviation, String School, String Room, String Teacher, String Contact, String Start, String End){
+
+        SQLiteDatabase update = this.getWritableDatabase();
+        ContentValues row = new ContentValues();
+
+        row.put("subject", Subject);
+        row.put("abbrev", Abbreviation);
+        row.put("school", School);
+        row.put("room", Room);
+        row.put("teacher", Teacher);
+        row.put("contact", Contact);
+        row.put("start", Start);
+        row.put("end", End);
+
+        update.update(TableName, row, ColumnID, ID);
     }
 }

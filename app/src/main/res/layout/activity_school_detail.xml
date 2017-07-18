@@ -87,6 +87,7 @@
                 android:layout_height="wrap_content"
                 android:text=":"/>
             <TextView
+
                 android:id="@+id/tv_subject_detail"
                 android:paddingLeft="16dp"
                 android:layout_width="0dp"
@@ -223,13 +224,36 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text=":"/>
-            <TextView
-                android:id="@+id/tv_time_detail"
-                android:paddingLeft="16dp"
-                android:text="14:00 - 15:30"
+
+            <LinearLayout
                 android:layout_width="0dp"
-                android:layout_weight="3"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:layout_weight="3">
+
+                <TextView
+                    android:id="@+id/tv_time_start"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:paddingLeft="16dp"
+                    android:layout_weight="1"
+                    android:text="14:00" />
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.3"
+                    android:text="To"/>
+
+                <TextView
+                    android:id="@+id/tv_time_end"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="3"
+                    android:text="15:00"/>
+
+            </LinearLayout>
+
+
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>
