@@ -21,7 +21,7 @@ public class Schedule {
         this.mTeacher = mTeacher;
     }
 
-    public Schedule(String mSubject, String mAbbreviation, String mSchool, String mRoom, String mContact, String mDay, String mStartTime, String mEndTime, String mTeacher) {
+    public Schedule(String mSubject, String mAbbreviation, String mSchool, String mRoom, String mContact, String mDay, String mStartTime, String mEndTime, String mTeacher, String mID) {
         this.mSubject = mSubject;
         this.mAbbreviation = mAbbreviation;
         this.mSchool = mSchool;
@@ -31,6 +31,7 @@ public class Schedule {
         this.mStartTime = mStartTime;
         this.mEndTime = mEndTime;
         this.mTeacher = mTeacher;
+        this.mID = mID;
     }
 
     public String getmID() {

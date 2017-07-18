@@ -48,7 +48,7 @@ public class SchoolAdapter extends RecyclerView.Adapter<SchoolAdapter.SchoolView
         holder.tv_st_et.setText(schedule.getmStartTime() + " To " + schedule.getmEndTime());
         holder.tv_date.setText(schedule.getmDay());
         holder.tv_room.setText(schedule.getmRoom());
-       // holder.tv_id.setText(schedule.get);
+        holder.tv_id.setText(schedule.getmID());
     }
 
     @Override
@@ -65,6 +65,7 @@ public class SchoolAdapter extends RecyclerView.Adapter<SchoolAdapter.SchoolView
             tv_st_et = (TextView)itemView.findViewById(R.id.tv_school_st_et);
             tv_date = (TextView)itemView.findViewById(R.id.tv_school_date);
             tv_room = (TextView)itemView.findViewById(R.id.tv_school_room);
+            tv_id = (TextView)itemView.findViewById(R.id.tv_id);
             itemView.setOnClickListener(this);
         }
 
