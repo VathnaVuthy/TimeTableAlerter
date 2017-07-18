@@ -10,6 +10,7 @@ import com.readystatesoftware.sqliteasset.SQLiteAssetHelper;
 import com.supperapper.timetablealerter.R;
 import com.supperapper.timetablealerter.activity.MapViewActivity;
 import com.supperapper.timetablealerter.dataset.Schedule;
+import com.supperapper.timetablealerter.dataset.ScheduleNotify;
 import com.supperapper.timetablealerter.dataset.Task;
 import com.supperapper.timetablealerter.viewholder.TaskAdapter;
 
@@ -103,33 +104,6 @@ public class DbManager extends SQLiteAssetHelper {
 
         while (cursor.moveToNext()){
 
-            String id = cursor.getString(0);
-            String Subject = cursor.getString(1);
-            String Abbreviation = cursor.getString(2);
-            String School = cursor.getString(3);
-            String Room = cursor.getString(4);
-            String Teacher = cursor.getString(5);
-            String Contact = cursor.getString(6);
-            String Start = (cursor.getString(7));
-            String End = (cursor.getString(8));
-
-            //  Schedule schedule = new Schedule(Subject, Abbreviation, School, Room, Teacher, Contact, Start, End);
-            Schedule schedule = new Schedule(Subject, Abbreviation, School, Room, Contact, id, Start, End, Teacher);
-            schedules[index] = schedule;
-            index++;
-        }
-
-        return schedules;
-    }
-
-    public ArrayList<Schedule> getListSchdule(String TableName){
-
-        SQLiteDatabase read = getReadableDatabase();
-        Cursor cursor = read.query(TableName, null, null, null, null, null, null);
-        ArrayList<Schedule> schedules = new ArrayList<Schedule>();
-
-        while (cursor.moveToNext()){
-
             int id = cursor.getInt(0);
             String Subject = cursor.getString(1);
             String Abbreviation = cursor.getString(2);
@@ -142,26 +116,35 @@ public class DbManager extends SQLiteAssetHelper {
 
             //  Schedule schedule = new Schedule(Subject, Abbreviation, School, Room, Teacher, Contact, Start, End);
             Schedule schedule = new Schedule(Subject, Abbreviation, School, Room, Contact, null, Start, End, Teacher);
-
-            schedules.add(schedule);
+            schedules[index] = schedule;
+            index++;
         }
+
         return schedules;
     }
 
-    public void updateSchedule(String TableName, String ColumnID, String[] ID, String Subject, String Abbreviation, String School, String Room, String Teacher, String Contact, String Start, String End){
+    public ArrayList<ScheduleNotify> getListSchdule(String TableName){
 
-        SQLiteDatabase update = this.getWritableDatabase();
-        ContentValues row = new ContentValues();
+        SQLiteDatabase read = getReadableDatabase();
+        Cursor cursor = read.query(TableName, null, null, null, null, null, null);
+        ArrayList<ScheduleNotify> schedules = new ArrayList<ScheduleNotify>();
 
-        row.put("subject", Subject);
-        row.put("abbrev", Abbreviation);
-        row.put("school", School);
-        row.put("room", Room);
-        row.put("teacher", Teacher);
-        row.put("contact", Contact);
-        row.put("start", Start);
-        row.put("end", End);
+        while (cursor.moveToNext()){
 
-        update.update(TableName, row, ColumnID, ID);
+            int id = cursor.getInt(0);
+            String Subject = cursor.getString(1);
+            String Abbreviation = cursor.getString(2);
+            String School = cursor.getString(3);
+            String Room = cursor.getString(4);
+            String Teacher = cursor.getString(5);
+            String Contact = cursor.getString(6);
+            String Start = (cursor.getString(7));
+            String End = (cursor.getString(8));
+            String Day = TableName.replace("tbl","").replace("schedule","").toUpperCase();
+
+            ScheduleNotify schedule = new ScheduleNotify(id,Subject,Abbreviation,School,Day,Start,End,Teacher,Room,Contact);
+            schedules.add(schedule);
+        }
+        return schedules;
     }
 }

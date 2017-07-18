@@ -12,7 +12,7 @@ public class Schedule {
 
     private final String mType = "Schedule";
 
-    public Schedule(String subject, String mSubject, String mRoom, String mDay, String mStartTime, String mEndTime, Time start, Time end, String mTeacher) {
+    public Schedule( String mSubject, String mRoom, String mDay, String mStartTime, String mEndTime, Time start, Time end, String mTeacher) {
         this.mSubject = mSubject;
         this.mRoom = mRoom;
         this.mDay = mDay;

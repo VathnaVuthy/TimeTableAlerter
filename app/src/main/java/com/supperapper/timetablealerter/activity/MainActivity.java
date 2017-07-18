@@ -47,9 +47,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //Start Service
-//        Intent startservice = new Intent(this, NotificationChecker.class);
-//        startService(startservice);
+//        Start Service
+        Intent startservice = new Intent(this, NotificationChecker.class);
+        startService(startservice);
 
         hasAddBtn = false;
         hasScheduleBtn = false;
