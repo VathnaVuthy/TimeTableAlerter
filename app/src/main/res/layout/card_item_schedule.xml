@@ -71,7 +71,7 @@
                         android:layout_weight="0.6"/>
 
                     <TextView
-                        android:id="@+id/tv_school_date"
+
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="0.4"
@@ -95,8 +95,8 @@
                         android:text="Room" />
 
                     <TextView
-                        android:id="@+id/tv_id"
-                        android:layout_width="0dp"
+                        android:visibility="invisible"
+                        android:id="@+id/tv_school_date"                        android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="3"
                         android:gravity="center_vertical"

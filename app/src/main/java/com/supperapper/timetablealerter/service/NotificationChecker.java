@@ -23,6 +23,7 @@ import com.supperapper.timetablealerter.R;
 import com.supperapper.timetablealerter.database.DbManager;
 import com.supperapper.timetablealerter.dataset.Schedule;
 import com.supperapper.timetablealerter.dataset.ScheduleNotify;
+import com.supperapper.timetablealerter.dataset.Task;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -69,10 +70,6 @@ public class NotificationChecker extends Service {
         }
 
     }
-    private void CheckTaskAlert(){
-
-
-    }
 
 
 
@@ -86,6 +83,8 @@ public class NotificationChecker extends Service {
         schedules.addAll(dbManager.getListSchdule("tblfridayschedule"));
         schedules.addAll(dbManager.getListSchdule("tblsaturdayschedule"));
         schedules.addAll(dbManager.getListSchdule("tblsundayschedule"));
+
+
 
         Log.d("TTA","Schedule Size"+schedules.size());
 

@@ -38,18 +38,18 @@ public class SchoolFragment extends Fragment {
         mRecyclerView.setLayoutManager(mLayoutManager);
 
         Schedule[] schedules = new Schedule[12];
-        schedules[0] = new Schedule("Data Structure","DS","Royal University Of Phnom Penh","201","012 65 85 85","Mon","7:30","8:30","Chor Chandara", "1");
-        schedules[1] = new Schedule("C++","CPP","Royal University Of Phnom Penh","201","012 65 85 85","Mon","7:30","8:30","Thap Boung", "1");
-        schedules[2] = new Schedule("Database","DB","Royal University Of Phnom Penh","201","012 65 85 85","Mon","7:30","8:30","Var Sovanndara", "1");
-        schedules[3] = new Schedule("Data Communication","DC","Royal University Of Phnom Penh","201","012 65 85 85","Mon","7:30","8:30","Peng Kun", "1");
-        schedules[4] = new Schedule("Computer Architecture","CA","Royal University Of Phnom Penh","201","012 65 85 85","Mon","7:30","8:30","Svoeuy Sivuthary", "1");
-        schedules[5] = new Schedule("English","ENG","Royal University Of Phnom Penh","201","012 65 85 85","Mon","7:30","8:30","Chan Saramphong", "1");
-        schedules[6] = new Schedule("Data Structure","DS","Royal University Of Phnom Penh","201","012 65 85 85","Mon","7:30","8:30","Chor Chandara", "1");
-        schedules[7] = new Schedule("C++","CPP","Royal University Of Phnom Penh","201","012 65 85 85","Mon","7:30","8:30","Thap Boung", "1");
-        schedules[8] = new Schedule("Database","DB","Royal University Of Phnom Penh","201","012 65 85 85","Mon","7:30","8:30","Var Sovanndara", "1");
-        schedules[9] = new Schedule("Data Communication","DC","Royal University Of Phnom Penh","201","012 65 85 85","Mon","7:30","8:30","Peng Kun", "1");
-        schedules[10] = new Schedule("Computer Architecture","CA","Royal University Of Phnom Penh","201","012 65 85 85","Mon","7:30","8:30","Svoeuy Sivuthary", "1");
-        schedules[11] = new Schedule("English","ENG","Royal University Of Phnom Penh","201","012 65 85 85","Mon","7:30","8:30","Chan Saramphong", "1");
+        schedules[0] = new Schedule("Data Structure","DS","Royal University Of Phnom Penh","201","012 65 85 85","Mon","7:30","8:30","Chor Chandara");
+        schedules[1] = new Schedule("C++","CPP","Royal University Of Phnom Penh","201","012 65 85 85","Mon","7:30","8:30","Thap Boung");
+        schedules[2] = new Schedule("Database","DB","Royal University Of Phnom Penh","201","012 65 85 85","Mon","7:30","8:30","Var Sovanndara");
+        schedules[3] = new Schedule("Data Communication","DC","Royal University Of Phnom Penh","201","012 65 85 85","Mon","7:30","8:30","Peng Kun");
+        schedules[4] = new Schedule("Computer Architecture","CA","Royal University Of Phnom Penh","201","012 65 85 85","Mon","7:30","8:30","Svoeuy Sivuthary");
+        schedules[5] = new Schedule("English","ENG","Royal University Of Phnom Penh","201","012 65 85 85","Mon","7:30","8:30","Chan Saramphong");
+        schedules[6] = new Schedule("Data Structure","DS","Royal University Of Phnom Penh","201","012 65 85 85","Mon","7:30","8:30","Chor Chandara");
+        schedules[7] = new Schedule("C++","CPP","Royal University Of Phnom Penh","201","012 65 85 85","Mon","7:30","8:30","Thap Boung");
+        schedules[8] = new Schedule("Database","DB","Royal University Of Phnom Penh","201","012 65 85 85","Mon","7:30","8:30","Var Sovanndara");
+        schedules[9] = new Schedule("Data Communication","DC","Royal University Of Phnom Penh","201","012 65 85 85","Mon","7:30","8:30","Peng Kun");
+        schedules[10] = new Schedule("Computer Architecture","CA","Royal University Of Phnom Penh","201","012 65 85 85","Mon","7:30","8:30","Svoeuy Sivuthary");
+        schedules[11] = new Schedule("English","ENG","Royal University Of Phnom Penh","201","012 65 85 85","Mon","7:30","8:30","Chan Saramphong");
 
         schoolAdapter = new SchoolAdapter(schedules);
         mRecyclerView.setAdapter(schoolAdapter);

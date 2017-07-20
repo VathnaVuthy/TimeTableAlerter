@@ -28,9 +28,8 @@ public class SchoolDetailActivity extends AppCompatActivity  {
     TextView tv_subject, tv_abb, tv_school, tv_room, tv_teacher, tv_contact, tv_timeStart, tv_timeEnd;
     private int hour, min;
     MenuItem itemEdit, itemDelete;
-    String id, subject, abb, school, room, teacher, contact, timestart, timeend, day;
-    private boolean isEdit = false;
-    private boolean onClick = false;
+    String id, subject, abb, school, room, teacher, contact, timestart, timeend;
+    private int OnClick = 1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,7 +49,6 @@ public class SchoolDetailActivity extends AppCompatActivity  {
          tv_timeStart = (TextView) findViewById(R.id.tv_time_start);
          tv_timeEnd  = (TextView) findViewById(R.id.tv_time_end);
 
-
          id = getIntent().getStringExtra("id");
          subject = getIntent().getStringExtra("subject");
          abb = getIntent().getStringExtra("abb");
@@ -60,7 +58,6 @@ public class SchoolDetailActivity extends AppCompatActivity  {
          contact = getIntent().getStringExtra("contact");
          timestart = getIntent().getStringExtra("timestart");
          timeend = getIntent().getStringExtra("timeend");
-         day = getIntent().getStringExtra("date");
 
         tv_subject.setText(subject);
         tv_abb.setText(abb);
@@ -71,7 +68,6 @@ public class SchoolDetailActivity extends AppCompatActivity  {
         tv_timeStart.setText(timestart);
         tv_timeEnd.setText(timeend);
         Log.d("ID: ", id);
-        Log.d("Day: ", day);
     }
 
     @Override
@@ -93,12 +89,11 @@ public class SchoolDetailActivity extends AppCompatActivity  {
         if(item.getItemId()==R.id.edit){
           //  button.setText("Done");
            // item.setTitle("Done");
-            if(isEdit == false){
-                isEdit = true;
+            if(OnClick == 1){
+                OnClick = 2;
                 itemDelete.setTitle("Cancel");
                 itemEdit.setIcon(null);
                 itemDelete.setIcon(null);
-                onClick = false;
                 Log.d("CLICK", String.valueOf(itemEdit));
                 EnableTextViewEdit(tv_subject);
                 EnableTextViewEdit(tv_abb);
@@ -106,33 +101,30 @@ public class SchoolDetailActivity extends AppCompatActivity  {
                 EnableTextViewEdit(tv_room);
                 EnableTextViewEdit(tv_teacher);
                 EnableTextViewEdit(tv_contact);
-           //     onClick = false;
+
                 tv_timeStart.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
 
-                        if(onClick==false){
+                        TimePickerDialog timePickerDialog = new TimePickerDialog(SchoolDetailActivity.this, new TimePickerDialog.OnTimeSetListener() {
+                            @Override
+                            public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
 
-                            TimePickerDialog timePickerDialog = new TimePickerDialog(SchoolDetailActivity.this, new TimePickerDialog.OnTimeSetListener() {
-                                @Override
-                                public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                                hour = hourOfDay;
+                                min = minute;
 
-                                    hour = hourOfDay;
-                                    min = minute;
+                                if(min == 00){
 
-                                    if(min == 00){
-
-                                        Log.d("Minute", "00");
-                                        tv_timeStart.setText(hour + ":" + min + "0");
-                                        return;
-                                    }
-
-                                    tv_timeStart.setText(hour  + ":" + min);
+                                    Log.d("Minute", "00");
+                                    tv_timeStart.setText(hour + ":" + min + "0");
+                                    return;
                                 }
-                            }, hour, min, false);
-                            timePickerDialog.show();
-                        }
 
+                                tv_timeStart.setText(hour  + ":" + min);
+                            }
+                        }, hour, min, false);
+
+                        timePickerDialog.show();
                     }
                 });
 
@@ -140,74 +132,33 @@ public class SchoolDetailActivity extends AppCompatActivity  {
                     @Override
                     public void onClick(View v) {
 
-                        if(onClick == false){
+                        TimePickerDialog timePickerDialog = new TimePickerDialog(SchoolDetailActivity.this, new TimePickerDialog.OnTimeSetListener() {
+                            @Override
+                            public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
 
-                            TimePickerDialog timePickerDialog = new TimePickerDialog(SchoolDetailActivity.this, new TimePickerDialog.OnTimeSetListener() {
-                                @Override
-                                public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                                hour =hourOfDay;
+                                min = minute;
 
-                                    hour =hourOfDay;
-                                    min = minute;
+                                if(min == 0){
 
-                                    if(min == 0){
+                                    tv_timeEnd.setText(hour + ":" + min + "0");
+                                    return;
 
-                                        tv_timeEnd.setText(hour + ":" + min + "0");
-                                        return;
-
-                                    }
-
-                                    tv_timeEnd.setText(hour + ":" + min);
                                 }
-                            }, hour, min, false);
 
-                            timePickerDialog.show();
-                        }
+                                tv_timeEnd.setText(hour + ":" + min);
+                            }
+                        }, hour, min, false);
 
+                        timePickerDialog.show();
                     }
                 });
 
-            } else if(isEdit == true){
-                isEdit = false;
-                onClick = true;
-                DbManager dbManager = DbManager.getInstance(SchoolDetailActivity.this);
+            } else if(OnClick == 2){
+                OnClick = 1;
 
-                String Subject = tv_subject.getText().toString();
-                String Abb = tv_abb.getText().toString();
-                String School = tv_school.getText().toString();
-                String Room = tv_room.getText().toString();
-                String Teacher = tv_teacher.getText().toString();
-                String Contact = tv_contact.getText().toString();
-                String StartTime = tv_timeStart.getText().toString();
-                String EndTime = tv_timeEnd.getText().toString();
-                if(day.equals("Monday")){
-
-                    dbManager.updateSchedule("tblmondayschedule", "idmonday = ?", new String[]{id}, Subject, Abb, School, Room, Teacher, Contact, StartTime, EndTime);
-                } else if(day.equals("Tuesday")){
-
-                    dbManager.updateSchedule("tbltuedayschedule", "idmonday = ?", new String[]{id}, Subject, Abb, School, Room, Teacher, Contact, StartTime, EndTime);
-
-                } else if(day.equals("Wednesday")){
-
-                    dbManager.updateSchedule("tblwednesdayschedule", "idmonday = ?", new String[]{id}, Subject, Abb, School, Room, Teacher, Contact, StartTime, EndTime);
-
-                } else if(day.equals("Thursday")){
-
-                    dbManager.updateSchedule("tblthursdayschedule", "idmonday = ?", new String[]{id}, Subject, Abb, School, Room, Teacher, Contact, StartTime, EndTime);
-
-                } else if(day.equals("Friday")){
-
-                    dbManager.updateSchedule("tblfridayschedule", "idmonday = ?", new String[]{id}, Subject, Abb, School, Room, Teacher, Contact, StartTime, EndTime);
-
-                } else if(day.equals("Saturday")){
-
-                    dbManager.updateSchedule("tblsaturdayschedule", "idmonday = ?", new String[]{id}, Subject, Abb, School, Room, Teacher, Contact, StartTime, EndTime);
-
-                } else {
-
-                    dbManager.updateSchedule("tblsundayschedule", "idmonday = ?", new String[]{id}, Subject, Abb, School, Room, Teacher, Contact, StartTime, EndTime);
-
-                }
-
+//                DbManager dbManager = new DbManager(SchoolDetailActivity.this);
+//                dbManager.updateSchedule();
                 itemEdit.setIcon(getResources().getDrawable(R.drawable.ic_edit));
                 itemDelete.setIcon(getResources().getDrawable(R.drawable.ic_delete));
                 DisableTextViewEdit(tv_subject);
@@ -228,26 +179,18 @@ public class SchoolDetailActivity extends AppCompatActivity  {
                  Log.d("CC", "true");
 
               } else {
-                        isEdit = false;
-                        onClick = true;
-                        tv_subject.setText(subject);
-                        tv_abb.setText(abb);
-                        tv_school.setText(school);
-                        tv_room.setText(room);
-                        tv_teacher.setText(teacher);
-                        tv_contact.setText(contact);
-                        tv_timeStart.setText(timestart);
-                        tv_timeEnd.setText(timeend);
-                        Log.d("ID: ", id);
-                        itemEdit.setIcon(getResources().getDrawable(R.drawable.ic_edit));
-                        itemDelete.setIcon(getResources().getDrawable(R.drawable.ic_delete));
-                        DisableTextViewEdit(tv_subject);
-                        DisableTextViewEdit(tv_abb);
-                        DisableTextViewEdit(tv_school);
-                        DisableTextViewEdit(tv_room);
-                        DisableTextViewEdit(tv_teacher);
-                        DisableTextViewEdit(tv_contact);
-                        Log.d("CC", "false");
+                tv_subject.setText(subject);
+                tv_abb.setText(abb);
+                tv_school.setText(school);
+                tv_room.setText(room);
+                tv_teacher.setText(teacher);
+                tv_contact.setText(contact);
+                tv_timeStart.setText(timestart);
+                tv_timeEnd.setText(timeend);
+                Log.d("ID: ", id);
+                itemEdit.setIcon(getResources().getDrawable(R.drawable.ic_edit));
+                itemDelete.setIcon(getResources().getDrawable(R.drawable.ic_delete));
+                Log.d("CC", "false");
             }
 
             Log.d("Edited", tv_subject.getText().toString());

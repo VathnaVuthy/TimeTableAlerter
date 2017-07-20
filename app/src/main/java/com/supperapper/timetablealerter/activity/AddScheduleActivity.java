@@ -431,27 +431,27 @@ public class AddScheduleActivity extends AppCompatActivity{
 
                     Flag = 1;
                     Log.d("Button Monday", "Checked");
-                    storeScheduletoDB(txtMonStart, txtMonEnd, "tblmondayschedule", "Monday");
+                    storeScheduletoDB(txtMonStart, txtMonEnd, "tblmondayschedule");
 
                 }
                 if(tgl_btnTue.isChecked()){
 
                     Flag = 1;
-                    storeScheduletoDB(txtTueStart, txtTueEnd, "tbltuedayschedule", "Tuesday");
+                    storeScheduletoDB(txtTueStart, txtTueEnd, "tbltuedayschedule");
                     Log.d("Button Tuesday", "Checked");
                 }
 
                 if(tgl_btnWed.isChecked()){
 
                     Flag = 1;
-                    storeScheduletoDB(txtWedStart, txtWedEnd, "tblwednesdayschedule", "Wednesday");
+                    storeScheduletoDB(txtWedStart, txtWedEnd, "tblwednesdayschedule");
                     Log.d("Button Wednesday", "Checked");
                 }
 
                 if(tgl_btnThu.isChecked()){
 
                     Flag = 1;
-                    storeScheduletoDB(txtThuEnd, txtThuEnd, "tblthursdayschedule", "Thursday");
+                    storeScheduletoDB(txtThuEnd, txtThuEnd, "tblthursdayschedule");
                     Log.d("Button Thursday", "Checked");
 
                 }
@@ -459,7 +459,7 @@ public class AddScheduleActivity extends AppCompatActivity{
                 if(tgl_btnFri.isChecked()){
 
                     Flag = 1;
-                    storeScheduletoDB(txtFriStart, txtFriEnd, "tblfridayschedule", "Friday");
+                    storeScheduletoDB(txtFriStart, txtFriEnd, "tblfridayschedule");
                     Log.d("Button Friday", "Checked");
 
                 }
@@ -467,7 +467,7 @@ public class AddScheduleActivity extends AppCompatActivity{
                 if(tgl_btnSat.isChecked()){
 
                     Flag = 1;
-                    storeScheduletoDB(txtSatStart, txtSatEnd, "tblsaturdayschedule", "Saturday");
+                    storeScheduletoDB(txtSatStart, txtSatEnd, "tblsaturdayschedule");
                     Log.d("Button Saturday", "Checked");
 
                 }
@@ -475,7 +475,7 @@ public class AddScheduleActivity extends AppCompatActivity{
                 if(tgl_btnSun.isChecked()){
 
                     Flag = 1;
-                    storeScheduletoDB(txtSunStart, txtSunEnd, "tblsundayschedule", "Sunday");
+                    storeScheduletoDB(txtSunStart, txtSunEnd, "tblsundayschedule");
 
                 }
 
@@ -498,7 +498,7 @@ public class AddScheduleActivity extends AppCompatActivity{
         });
     }
 
-    private void storeScheduletoDB(TextView txtStart, TextView txtEnd, String TableName, String Date){
+    private void storeScheduletoDB(TextView txtStart, TextView txtEnd, String TableName){
 
         DbManager Manager = DbManager.getInstance(AddScheduleActivity.this);
         String Subject = etxSubject.getText().toString();
@@ -510,7 +510,7 @@ public class AddScheduleActivity extends AppCompatActivity{
         String Start = txtStart.getText().toString();
         String End = txtEnd.getText().toString();
 
-        Manager.insertSchedule(TableName, Subject, Abbreviation, School, Room, Teacher, Contact, Start, End, Date);
+        Manager.insertSchedule(TableName, Subject, Abbreviation, School, Room, Teacher, Contact, Start, End);
         Intent startservice = new Intent(this, NotificationChecker.class);
         stopService(startservice);
         startService(startservice);

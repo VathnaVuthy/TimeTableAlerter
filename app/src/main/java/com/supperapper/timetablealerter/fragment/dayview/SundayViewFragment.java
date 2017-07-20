@@ -40,10 +40,10 @@ public class SundayViewFragment extends Fragment {
         mRecyclerView.setLayoutManager(mLayoutManager);
 
         Schedule[] schedules = new Schedule[4];
-        schedules[0] = new Schedule("Java Programming J2SE","Java","Korea Software HRD","BTB","012 123 123","Sunday","7:00","11:00","Voy Ratana", "1");
-        schedules[1] = new Schedule("Computer Architecture","CA","Royal University Of Phnom Penh","201","012 123 123","Sunday","14:00","15:30","Svoeuy Sivuthary", "1");
-        schedules[2] = new Schedule("C++","CPP","Royal University Of Phnom Penh","201","012 123 123","Sunday","15:45","17:15","Thap Boung", "1");
-        schedules[3] = new Schedule("Thai Language","TH","Bangkok Thai School","201","012 123 123","Sunday","17:30","18:30","Keng", "1");
+        schedules[0] = new Schedule("Java Programming J2SE","Java","Korea Software HRD","BTB","012 123 123","Sunday","7:00","11:00","Voy Ratana");
+        schedules[1] = new Schedule("Computer Architecture","CA","Royal University Of Phnom Penh","201","012 123 123","Sunday","14:00","15:30","Svoeuy Sivuthary");
+        schedules[2] = new Schedule("C++","CPP","Royal University Of Phnom Penh","201","012 123 123","Sunday","15:45","17:15","Thap Boung");
+        schedules[3] = new Schedule("Thai Language","TH","Bangkok Thai School","201","012 123 123","Sunday","17:30","18:30","Keng");
 
         Task[] tasks = new Task[3];
         tasks[0] = new Task("Delete Binary Search Tree","Data Structure","Exam","12-02-2017","RUPP","Be On Time");
@@ -51,7 +51,6 @@ public class SundayViewFragment extends Fragment {
         tasks[2] = new Task("Memo","English","Exam","12-02-2017","CamAsean" ,"Be On Time");
 
         dynamicAdapter = new DynamicAdapter(tasks,schedules);
-     //   dynamicAdapter = new DynamicAdapter(tasks, null);
         mRecyclerView.setAdapter(dynamicAdapter);
         return view;
     }
