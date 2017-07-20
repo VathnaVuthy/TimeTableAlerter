@@ -75,7 +75,7 @@ public class SchoolAdapter extends RecyclerView.Adapter<SchoolAdapter.SchoolView
             Schedule schedule = schedules[position];
 //           Log.d("ID: ", schedule.getmID());
             Intent intent = new Intent(context,SchoolDetailActivity.class);
-
+//
             intent.putExtra("id", schedule.getmID());
             intent.putExtra("subject",schedule.getmSubject());
             intent.putExtra("abb",schedule.getmAbbreviation());
