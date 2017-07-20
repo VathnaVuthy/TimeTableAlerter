@@ -26,9 +26,11 @@ import com.supperapper.timetablealerter.dataset.ScheduleNotify;
 import com.supperapper.timetablealerter.dataset.Task;
 
 import java.lang.reflect.Type;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -42,6 +44,7 @@ public class NotificationChecker extends Service {
     private EventCheckerRunnable eventCheckerRunnable;
     private Context context;
     int id =0;
+    int currentTime;
     DbManager dbManager ;
 
     @Override
@@ -84,12 +87,9 @@ public class NotificationChecker extends Service {
         schedules.addAll(dbManager.getListSchdule("tblsaturdayschedule"));
         schedules.addAll(dbManager.getListSchdule("tblsundayschedule"));
 
-
-
-        Log.d("TTA","Schedule Size"+schedules.size());
-
+        Log.d("TTA","Schedule Checked");
         Calendar c = Calendar.getInstance();
-        int currentTime = c.get(Calendar.HOUR_OF_DAY);
+        currentTime = c.get(Calendar.HOUR_OF_DAY);
         for(final ScheduleNotify schedule : schedules){
             Log.d("TTA","Final: " + schedule.getmStartTime());
             final String[] time = schedule.getmStartTime().split(":");
@@ -114,6 +114,36 @@ public class NotificationChecker extends Service {
                 }
             }
         }
+
+        Log.d("TTA","TASK Checked");
+        ArrayList<Task> tasks = dbManager.getListTask(new String[]{"EXAM"});
+        tasks.addAll(dbManager.getListTask(new String[]{"MEETING"}));
+        tasks.addAll(dbManager.getListTask(new String[]{"OTHERS"}));
+        tasks.addAll(dbManager.getListTask(new String[]{"R.ACTIVITY"}));
+        tasks.addAll(dbManager.getListTask(new String[]{"WEDDING"}));
+
+        SimpleDateFormat df = new SimpleDateFormat("EEEE-d-M-yyyy");
+        Date currentDate = new Date();
+
+        for(final Task task : tasks){
+            final String taskDate = task.getmDate();
+            if(taskDate.equals(df.format(currentDate))){
+                eventCheckerHandler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        String title = task.getmTaskType();
+                        String detail = task.getmTopic() + " - " + task.getmDate();
+                        showNotification(id,title,detail);
+                        id++;
+                    }
+                });
+            }
+
+        }
+
+
+
+
     }
 
     private void showNotification(int id, String title, String detail){

@@ -157,4 +157,32 @@ public class DbManager extends SQLiteAssetHelper {
         }
         return schedules;
     }
+
+
+
+    public ArrayList<Task> getListTask(String[] TaskType){
+
+        SQLiteDatabase read = getReadableDatabase();
+//        Cursor cursor = read.query("tblTask", null, null, null, null, null, null);
+//        String sql = "select * from tblTask Where type = EXAM";
+        Cursor cursor = read.query("tblTask", null, "type = ?", TaskType, null, null, null);
+        ArrayList<Task> taskArrayList = new ArrayList<>();
+
+        while(cursor.moveToNext()){
+
+            int id = cursor.getInt(0);
+            String topic = cursor.getString(1);
+            String subject = cursor.getString(2);
+            String type = cursor.getString(3);
+            String date = cursor.getString(4);
+//            String lat = cursor.getString(5);
+//            String lng = cursor.getString(6);
+            String note = cursor.getString(7);
+
+            Task task = new Task(topic, subject, type, date, note);
+            taskArrayList.add(task);
+        }
+
+        return taskArrayList;
+    }
 }

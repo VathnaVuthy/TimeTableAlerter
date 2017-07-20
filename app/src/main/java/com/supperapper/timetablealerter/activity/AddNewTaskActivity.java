@@ -2,6 +2,7 @@ package com.supperapper.timetablealerter.activity;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -14,6 +15,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.supperapper.timetablealerter.R;
 import com.supperapper.timetablealerter.database.DbManager;
@@ -35,11 +37,12 @@ public class AddNewTaskActivity extends AppCompatActivity{
     Spinner spinner;
 
     MainActivity mainActivity;
-
+    Context context;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_task);
+        context=this;
 
          spinner = (Spinner) findViewById(R.id.sp_taskType);
         // Create an ArrayAdapter using the string array and a default spinner layout
@@ -84,20 +87,24 @@ public class AddNewTaskActivity extends AppCompatActivity{
             @Override
             public void onClick(View v) {
           //      MapViewActivity mapViewActivity = new MapViewActivity();
-                DbManager Manager = DbManager.getInstance(AddNewTaskActivity.this);
-                String Topic = etxTopic.getText().toString();
-                String Subject = etxSubject.getText().toString();
-                String TaskType = spinner.getSelectedItem().toString();
-                String Date = textView.getText().toString();
-                String Note = etxNote.getText().toString();
-          //      Double Lat = mapViewActivity.Lat;
+               if(spinner.getSelectedItem().toString().toLowerCase().equals("task")){
+                   Toast.makeText(context,"Please Select One Task", Toast.LENGTH_LONG).show();
+               }else{
+                   DbManager Manager = DbManager.getInstance(AddNewTaskActivity.this);
+                   String Topic = etxTopic.getText().toString();
+                   String Subject = etxSubject.getText().toString();
+                   String TaskType = spinner.getSelectedItem().toString();
+                   String Date = textView.getText().toString();
+                   String Note = etxNote.getText().toString();
+                   //      Double Lat = mapViewActivity.Lat;
 
-                Log.d("ckcc", String.valueOf(etxTopic.getText()));
-           //     Log.d("", String.valueOf(Lat));
+                   Log.d("ckcc", String.valueOf(etxTopic.getText()));
+                   //     Log.d("", String.valueOf(Lat));
 //                Log.d("ckcc", task.getmTopic());
 
-                Manager.insertTask(Topic, Subject, TaskType, Date, Note);
-                onBackPressed();
+                   Manager.insertTask(Topic, Subject, TaskType, Date, Note);
+                   onBackPressed();
+               }
 
             }
         });
