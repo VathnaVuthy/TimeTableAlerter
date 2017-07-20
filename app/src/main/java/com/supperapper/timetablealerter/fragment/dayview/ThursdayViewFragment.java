@@ -39,11 +39,11 @@ public class ThursdayViewFragment extends Fragment {
         mLayoutManager = new LinearLayoutManager(getActivity());
         mRecyclerView.setLayoutManager(mLayoutManager);
 
-        Schedule[] schedules = new Schedule[4];
-        schedules[0] = new Schedule("Web Development","WD","STEP","214","012 123 123","Thursday","7:00","11:00","Alex");
-        schedules[1] = new Schedule("Data Structure And Algorithms","DS","Royal University Of Phnom Penh","201","012 123 123","Thursday","14:00","15:30","Chor Chandara");
-        schedules[2] = new Schedule("C++","CPP","Royal University Of Phnom Penh","201","012 123 123","Thursday","15:45","17:15","Thap Boung");
-        schedules[3] = new Schedule("Thai Language","TH","Bangkok Thai School","201","012 123 123","Thursday","17:30","18:30","Keng");
+       Schedule[] schedules = new Schedule[4];
+        schedules[0] = new Schedule("Web Development","WD","STEP","214","012 123 123","Thursday","7:00","11:00","Alex", "1");
+        schedules[1] = new Schedule("Data Structure And Algorithms","DS","Royal University Of Phnom Penh","201","012 123 123","Thursday","14:00","15:30","Chor Chandara", "1");
+        schedules[2] = new Schedule("C++","CPP","Royal University Of Phnom Penh","201","012 123 123","Thursday","15:45","17:15","Thap Boung", "1");
+        schedules[3] = new Schedule("Thai Language","TH","Bangkok Thai School","201","012 123 123","Thursday","17:30","18:30","Keng", "1");
 
 
         Task[] tasks = new Task[3];
@@ -51,7 +51,8 @@ public class ThursdayViewFragment extends Fragment {
         tasks[1] = new Task("Lesson 3-8","English","Exam","12-02-2017","RUPP","Be On Time");
         tasks[2] = new Task("Memo","English","Exam","12-02-2017","CamAsean" ,"Be On Time");
 
-        dynamicAdapter = new DynamicAdapter(tasks,schedules);
+       dynamicAdapter = new DynamicAdapter(tasks,schedules);
+    //    dynamicAdapter = new DynamicAdapter(tasks, null);
         mRecyclerView.setAdapter(dynamicAdapter);
         return view;
     }

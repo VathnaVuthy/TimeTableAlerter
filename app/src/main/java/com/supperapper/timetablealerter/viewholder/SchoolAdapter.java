@@ -76,7 +76,7 @@ public class SchoolAdapter extends RecyclerView.Adapter<SchoolAdapter.SchoolView
 //           Log.d("ID: ", schedule.getmID());
             Intent intent = new Intent(context,SchoolDetailActivity.class);
 
-            intent.putExtra("id", schedule.getmDay());
+            intent.putExtra("id", schedule.getmID());
             intent.putExtra("subject",schedule.getmSubject());
             intent.putExtra("abb",schedule.getmAbbreviation());
             intent.putExtra("school",schedule.getmSchool());
@@ -84,9 +84,9 @@ public class SchoolAdapter extends RecyclerView.Adapter<SchoolAdapter.SchoolView
             intent.putExtra("teacher",schedule.getmTeacher());
             intent.putExtra("contact",schedule.getmContact());
          //   String time  = schedule.getmStartTime() + " - " + schedule.getmEndTime();
-
             intent.putExtra("timestart",schedule.getmStartTime());
             intent.putExtra("timeend", schedule.getmEndTime());
+            intent.putExtra("date", schedule.getmDay());
 
             context.startActivity(intent);
         }
