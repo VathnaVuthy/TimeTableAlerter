@@ -111,7 +111,7 @@ public class DbManager extends SQLiteAssetHelper {
 
         while (cursor.moveToNext()){
 
-            int id = cursor.getInt(0);
+            String id = cursor.getString(0);
             String Subject = cursor.getString(1);
             String Abbreviation = cursor.getString(2);
             String School = cursor.getString(3);
@@ -122,7 +122,7 @@ public class DbManager extends SQLiteAssetHelper {
             String End = (cursor.getString(8));
 
             //  Schedule schedule = new Schedule(Subject, Abbreviation, School, Room, Teacher, Contact, Start, End);
-            Schedule schedule = new Schedule(Subject, Abbreviation, School, Room, Contact, null, Start, End, Teacher);
+            Schedule schedule = new Schedule(id,Subject, Abbreviation, School, Room, Contact, null, Start, End, Teacher);
             schedules[index] = schedule;
             index++;
         }

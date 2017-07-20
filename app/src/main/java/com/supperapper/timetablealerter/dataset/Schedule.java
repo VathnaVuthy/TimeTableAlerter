@@ -7,10 +7,12 @@ import java.sql.Time;
  */
 
 public class Schedule {
-    private String mSubject,mAbbreviation,mSchool,mDay,mStartTime,mEndTime,mTeacher, mRoom, mContact,mID;
+    private String mID, mSubject,mAbbreviation,mSchool,mDay,mStartTime,mEndTime,mTeacher, mRoom, mContact;
 
 
     private final String mType = "Schedule";
+
+
 
     public Schedule( String mSubject, String mRoom, String mDay, String mStartTime, String mEndTime, Time start, Time end, String mTeacher) {
         this.mSubject = mSubject;
@@ -19,6 +21,19 @@ public class Schedule {
         this.mStartTime = mStartTime;
         this.mEndTime = mEndTime;
         this.mTeacher = mTeacher;
+    }
+
+    public Schedule(String mID, String mSubject, String mAbbreviation, String mSchool, String mDay, String mStartTime, String mEndTime, String mTeacher, String mRoom, String mContact) {
+        this.mID = mID;
+        this.mSubject = mSubject;
+        this.mAbbreviation = mAbbreviation;
+        this.mSchool = mSchool;
+        this.mDay = mDay;
+        this.mStartTime = mStartTime;
+        this.mEndTime = mEndTime;
+        this.mTeacher = mTeacher;
+        this.mRoom = mRoom;
+        this.mContact = mContact;
     }
 
     public Schedule(String mSubject, String mAbbreviation, String mSchool, String mRoom, String mContact, String mDay, String mStartTime, String mEndTime, String mTeacher) {
