@@ -210,4 +210,24 @@ public class DbManager extends SQLiteAssetHelper {
 
         return taskArrayList;
     }
+
+    public void updateSchedule(String TableName, String ColumnID, String[] ID, String Subject, String Abbreviation, String School, String Room, String Teacher, String Contact, String Start, String End){
+
+        SQLiteDatabase update = this.getWritableDatabase();
+        ContentValues row = new ContentValues();
+
+        row.put("subject", Subject);
+        row.put("abbrev", Abbreviation);
+        row.put("school", School);
+        row.put("room", Room);
+        row.put("teacher", Teacher);
+        row.put("contact", Contact);
+        row.put("start", Start);
+        row.put("end", End);
+
+
+
+        update.update(TableName, row, ColumnID, ID);
+    }
+
 }

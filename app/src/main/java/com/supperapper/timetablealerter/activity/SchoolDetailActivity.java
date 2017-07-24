@@ -67,6 +67,7 @@ public class SchoolDetailActivity extends AppCompatActivity  {
         tv_contact.setText(contact);
         tv_timeStart.setText(timestart);
         tv_timeEnd.setText(timeend);
+        Log.d("ID:", id);
     }
 
     @Override
