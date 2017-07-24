@@ -70,13 +70,14 @@
                         android:text="Start Time End Time "
                         android:layout_weight="0.6"/>
 
+
                     <TextView
-                        android:id="@+id/tv_school_date"
+                        android:visibility="invisible"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="0.4"
-                        android:text="Date"/>
-
+                        android:id="@+id/tv_id"                        android:gravity="center_vertical"
+                        android:text="ID" />
 
                 </LinearLayout>
 
@@ -95,12 +96,13 @@
                         android:text="Room" />
 
                     <TextView
-                        android:visibility="invisible"
+                        android:gravity="center_vertical"
+                        android:id="@+id/tv_school_date"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:layout_weight="3"
-                        android:id="@+id/tv_id"                        android:gravity="center_vertical"
-                        android:text="ID" />
+                        android:layout_weight="1.29"
+                        android:text="Date"/>
+
 
                 </LinearLayout>
             </LinearLayout>
