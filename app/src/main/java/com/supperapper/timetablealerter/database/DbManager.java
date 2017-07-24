@@ -99,6 +99,7 @@ public class DbManager extends SQLiteAssetHelper {
         row.put("start", Start);
         row.put("end", End);
 
+
         write.insert(TableName, null, row);
     }
 
@@ -121,7 +122,9 @@ public class DbManager extends SQLiteAssetHelper {
             String Start = (cursor.getString(7));
             String End = (cursor.getString(8));
 
-            Schedule schedule = new Schedule(id,Subject,Abbreviation,School,null,Start,End,Teacher,Room,Contact);
+            String Day = TableName.replace("tbl","").replace("schedule","").toUpperCase();
+
+            Schedule schedule = new Schedule(id,Subject,Abbreviation,School,Day,Start,End,Teacher,Room,Contact);
             schedules[index] = schedule;
             index++;
         }
@@ -225,9 +228,15 @@ public class DbManager extends SQLiteAssetHelper {
         row.put("start", Start);
         row.put("end", End);
 
-
-
         update.update(TableName, row, ColumnID, ID);
+    }
+
+    public void deleteSchedule(String TableName, String ColumnID, String[] ID){
+
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        db.delete(TableName, ColumnID, ID);
+
     }
 
 }

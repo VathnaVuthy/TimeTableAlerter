@@ -14,6 +14,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.TimePicker;
@@ -25,10 +26,10 @@ import com.supperapper.timetablealerter.fragment.school.MondayFragment;
 
 public class SchoolDetailActivity extends AppCompatActivity  {
 
-    TextView tv_subject, tv_abb, tv_school, tv_room, tv_teacher, tv_contact, tv_timeStart, tv_timeEnd;
+    EditText tv_subject, tv_abb, tv_school, tv_room, tv_teacher, tv_contact, tv_timeStart, tv_timeEnd;
     private int hour, min;
     MenuItem itemEdit, itemDelete;
-    String id, subject, abb, school, room, teacher, contact, timestart, timeend;
+    String id, subject, abb, school, room, teacher, contact, timestart, timeend, day;
     private int OnClick = 1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,14 +41,14 @@ public class SchoolDetailActivity extends AppCompatActivity  {
         setSupportActionBar(toolbar);
         getSupportActionBar().setElevation(0);
         // Reference to view
-         tv_subject = (TextView) findViewById(R.id.tv_subject_detail);
-         tv_abb = (TextView) findViewById(R.id.tv_abb_detail);
-         tv_school = (TextView) findViewById(R.id.tv_school_detail);
-         tv_room = (TextView) findViewById(R.id.tv_room_detail);
-         tv_teacher = (TextView) findViewById(R.id.tv_teacher_detail);
-         tv_contact = (TextView) findViewById(R.id.tv_contact_detail);
-         tv_timeStart = (TextView) findViewById(R.id.tv_time_start);
-         tv_timeEnd  = (TextView) findViewById(R.id.tv_time_end);
+         tv_subject = (EditText) findViewById(R.id.tv_subject_detail);
+         tv_abb = (EditText) findViewById(R.id.tv_abb_detail);
+         tv_school = (EditText) findViewById(R.id.tv_school_detail);
+         tv_room = (EditText) findViewById(R.id.tv_room_detail);
+         tv_teacher = (EditText) findViewById(R.id.tv_teacher_detail);
+         tv_contact = (EditText) findViewById(R.id.tv_contact_detail);
+         tv_timeStart = (EditText) findViewById(R.id.tv_time_start);
+         tv_timeEnd  = (EditText) findViewById(R.id.tv_time_end);
 
          id = getIntent().getStringExtra("id");
          subject = getIntent().getStringExtra("subject");
@@ -58,6 +59,7 @@ public class SchoolDetailActivity extends AppCompatActivity  {
          contact = getIntent().getStringExtra("contact");
          timestart = getIntent().getStringExtra("timestart");
          timeend = getIntent().getStringExtra("timeend");
+         day = getIntent().getStringExtra("date");
 
         tv_subject.setText(subject);
         tv_abb.setText(abb);
@@ -67,7 +69,7 @@ public class SchoolDetailActivity extends AppCompatActivity  {
         tv_contact.setText(contact);
         tv_timeStart.setText(timestart);
         tv_timeEnd.setText(timeend);
-        Log.d("ID:", id);
+    //    Log.d("ID:", id);
     }
 
     @Override
@@ -95,12 +97,13 @@ public class SchoolDetailActivity extends AppCompatActivity  {
                 itemEdit.setIcon(null);
                 itemDelete.setIcon(null);
                 Log.d("CLICK", String.valueOf(itemEdit));
-                EnableTextViewEdit(tv_subject);
-                EnableTextViewEdit(tv_abb);
-                EnableTextViewEdit(tv_school);
-                EnableTextViewEdit(tv_room);
-                EnableTextViewEdit(tv_teacher);
-                EnableTextViewEdit(tv_contact);
+//                tv_subject.requestFocus();
+//                EnableTextViewEdit(tv_subject);
+//                EnableTextViewEdit(tv_abb);
+//                EnableTextViewEdit(tv_school);
+//                EnableTextViewEdit(tv_room);
+//                EnableTextViewEdit(tv_teacher);
+//                EnableTextViewEdit(tv_contact);
 
                 tv_timeStart.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -159,16 +162,54 @@ public class SchoolDetailActivity extends AppCompatActivity  {
 
 //                DbManager dbManager = new DbManager(SchoolDetailActivity.this);
 //                dbManager.updateSchedule();
+                String Subject = tv_subject.getText().toString();
+                String Abb = tv_abb.getText().toString();
+                String School = tv_school.getText().toString();
+                String Room = tv_room.getText().toString();
+                String Teacher = tv_teacher.getText().toString();
+                String Contact = tv_contact.getText().toString();
+                String Timestart = tv_timeStart.getText().toString();
+                String Timeend = tv_timeEnd.getText().toString();
+
+                DbManager dbManager = DbManager.getInstance(SchoolDetailActivity.this);
+                if(day.equals("MONDAY")){
+
+                    dbManager.updateSchedule("tblmondayschedule", "idmonday = ?", new String[]{id}, Subject, Abb, School, Room, Teacher, Contact, Timestart, Timeend);
+
+                } else if(day.equals("TUESDAY")){
+
+                    dbManager.updateSchedule("tbltuesdayschedule", "idmonday = ?", new String[]{id}, Subject, Abb, School, Room, Teacher, Contact, Timestart, Timeend);
+
+                } else if(day.equals("WEDNESDAY")){
+
+                    dbManager.updateSchedule("tblwednesdayschedule", "idmonday = ?", new String[]{id}, Subject, Abb, School, Room, Teacher, Contact, Timestart, Timeend);
+
+                } else if (day.equals("THURSDAY")){
+
+                    dbManager.updateSchedule("tblthursdayschedule", "idmonday = ?", new String[]{id}, Subject, Abb, School, Room, Teacher, Contact, Timestart, Timeend);
+
+                } else if (day.equals("FRIDAY")){
+
+                    dbManager.updateSchedule("tblfridayschedule", "idmonday = ?", new String[]{id}, Subject, Abb, School, Room, Teacher, Contact, Timestart, Timeend);
+
+                } else if(day.equals("SATURDAY")){
+
+                    dbManager.updateSchedule("tblsaturdayschedule", "idmonday = ?", new String[]{id}, Subject, Abb, School, Room, Teacher, Contact, Timestart, Timeend);
+
+                } else {
+
+                    dbManager.updateSchedule("tblsundayschedule", "idmonday = ?", new String[]{id}, Subject, Abb, School, Room, Teacher, Contact, Timestart, Timeend);
+
+                }
+                dbManager.close();
                 itemEdit.setIcon(getResources().getDrawable(R.drawable.ic_edit));
                 itemDelete.setIcon(getResources().getDrawable(R.drawable.ic_delete));
-                DisableTextViewEdit(tv_subject);
-                DisableTextViewEdit(tv_abb);
-                DisableTextViewEdit(tv_school);
-                DisableTextViewEdit(tv_room);
-                DisableTextViewEdit(tv_teacher);
-                DisableTextViewEdit(tv_contact);
-
-                Log.d("CC", "ONCLICK");
+//                DisableTextViewEdit(tv_subject);
+//                DisableTextViewEdit(tv_abb);
+//                DisableTextViewEdit(tv_school);
+//                DisableTextViewEdit(tv_room);
+//                DisableTextViewEdit(tv_teacher);
+//                DisableTextViewEdit(tv_contact);
 
             }
             Toast.makeText(this, "Edit", Toast.LENGTH_SHORT).show();
@@ -176,21 +217,54 @@ public class SchoolDetailActivity extends AppCompatActivity  {
 
             if(itemDelete.getTitle().equals("Delete")) {
 
-                 Log.d("CC", "true");
+                String tablename;
+                DbManager dbManager = DbManager.getInstance(SchoolDetailActivity.this);
+                if(day.equals("MONDAY")){
+
+                    tablename = "tblmondayschedule";
+                } else if (day.equals("TUESDAY")){
+
+                    tablename = "tbltuesdayschedule";
+
+                } else if (day.equals("WEDNESDAY")){
+
+                    tablename = "tblwednesdayschedule";
+                } else if (day.equals("THURSDAY")){
+
+                    tablename = "tblthursdayschedule";
+
+                } else if (day.equals("FRIDAY")){
+
+                    tablename = "tblfridayschedule";
+
+                } else if (day.equals("SATURDAY")){
+
+                    tablename = "tblsaturdayschedule";
+
+                } else {
+
+                    tablename = "tblsundayschedule";
+
+                }
+
+                dbManager.deleteSchedule(tablename, "idmonday = ?", new String[]{id});
+                onBackPressed();
+                Log.d("CC", "true");
 
               } else {
-                tv_subject.setText(subject);
-                tv_abb.setText(abb);
-                tv_school.setText(school);
-                tv_room.setText(room);
-                tv_teacher.setText(teacher);
-                tv_contact.setText(contact);
-                tv_timeStart.setText(timestart);
-                tv_timeEnd.setText(timeend);
-                Log.d("ID: ", id);
-                itemEdit.setIcon(getResources().getDrawable(R.drawable.ic_edit));
-                itemDelete.setIcon(getResources().getDrawable(R.drawable.ic_delete));
-                Log.d("CC", "false");
+
+                        tv_subject.setText(subject);
+                        tv_abb.setText(abb);
+                        tv_school.setText(school);
+                        tv_room.setText(room);
+                        tv_teacher.setText(teacher);
+                        tv_contact.setText(contact);
+                        tv_timeStart.setText(timestart);
+                        tv_timeEnd.setText(timeend);
+                        Log.d("ID: ", id);
+                        itemEdit.setIcon(getResources().getDrawable(R.drawable.ic_edit));
+                        itemDelete.setIcon(getResources().getDrawable(R.drawable.ic_delete));
+                        Log.d("CC", "false");
             }
 
             Log.d("Edited", tv_subject.getText().toString());

@@ -76,8 +76,9 @@
             android:orientation="horizontal"
             android:layout_marginBottom="6dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="40dp">
             <TextView
+                android:gravity="center_vertical"
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:text="Subject"
@@ -86,35 +87,40 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text=":"/>
-            <TextView
 
+            <EditText
                 android:id="@+id/tv_subject_detail"
                 android:paddingLeft="16dp"
                 android:layout_width="0dp"
                 android:layout_weight="3"
-                android:text="Data Communication"
-                android:layout_height="match_parent" />
+                android:textSize="15sp"
+                android:hint="DataCom"
+                android:layout_height="match_parent" >
+            </EditText>
         </LinearLayout>
         <LinearLayout
             android:orientation="horizontal"
             android:layout_marginBottom="6dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="40dp">
             <TextView
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:text="Abbreviation"
+                android:gravity="center_vertical"
                 android:layout_height="match_parent" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text=":"/>
-            <TextView
+
+            <EditText
+                android:textSize="15sp"
                 android:id="@+id/tv_abb_detail"
                 android:paddingLeft="16dp"
                 android:layout_width="0dp"
                 android:layout_weight="3"
-                android:text="DC"
+                android:hint="DC"
                 android:layout_height="match_parent" />
         </LinearLayout>
         <LinearLayout
@@ -132,7 +138,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text=":"/>
-            <TextView
+            <EditText
                 android:id="@+id/tv_school_detail"
                 android:layout_width="0dp"
                 android:paddingLeft="16dp"
@@ -155,7 +161,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text=":"/>
-            <TextView
+            <EditText
                 android:id="@+id/tv_room_detail"
                 android:paddingLeft="16dp"
                 android:text="203"
@@ -178,7 +184,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text=":"/>
-            <TextView
+            <EditText
                 android:id="@+id/tv_teacher_detail"
                 android:paddingLeft="16dp"
                 android:text="Peng Kun"
@@ -201,7 +207,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text=":"/>
-            <TextView
+            <EditText
                 android:id="@+id/tv_contact_detail"
                 android:paddingLeft="16dp"
                 android:text="012 123 321"
@@ -231,7 +237,7 @@
                 android:orientation="horizontal"
                 android:layout_weight="3">
 
-                <TextView
+                <EditText
                     android:id="@+id/tv_time_start"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
@@ -244,7 +250,7 @@
                     android:layout_weight="0.3"
                     android:text="To"/>
 
-                <TextView
+                <EditText
                     android:id="@+id/tv_time_end"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
@@ -255,5 +261,6 @@
 
 
         </LinearLayout>
+
     </LinearLayout>
 </LinearLayout>
