@@ -42,6 +42,7 @@
             android:layout_marginRight="20dp"
             android:src="@drawable/ic_profile"/>
         <TextView
+            android:textColor="@color/colorBlack"
             android:layout_marginTop="16dp"
             android:layout_toRightOf="@id/img_color"
             android:layout_width="wrap_content"
@@ -52,6 +53,7 @@
             android:id="@+id/tv_header"
             android:fontFamily="sans-serif-smallcaps"/>
         <TextView
+            android:textColor="@color/colorBlack"
             android:layout_below="@+id/tv_header"
             android:textSize="16sp"
             android:layout_width="match_parent"
@@ -78,17 +80,21 @@
             android:layout_width="match_parent"
             android:layout_height="40dp">
             <TextView
+                android:textColor="@color/colorBlack"
                 android:gravity="center_vertical"
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:text="Subject"
                 android:layout_height="match_parent" />
             <TextView
+                android:textColor="@color/colorBlack"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text=":"/>
 
             <EditText
+                android:enabled="false"
+                android:textColor="@color/colorBlack"
                 android:id="@+id/tv_subject_detail"
                 android:paddingLeft="16dp"
                 android:layout_width="0dp"
@@ -104,6 +110,7 @@
             android:layout_width="match_parent"
             android:layout_height="40dp">
             <TextView
+                android:textColor="@color/colorBlack"
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:text="Abbreviation"
@@ -115,6 +122,8 @@
                 android:text=":"/>
 
             <EditText
+                android:textColor="@color/colorBlack"
+                android:enabled="false"
                 android:textSize="15sp"
                 android:id="@+id/tv_abb_detail"
                 android:paddingLeft="16dp"
@@ -124,47 +133,57 @@
                 android:layout_height="match_parent" />
         </LinearLayout>
         <LinearLayout
-
             android:orientation="horizontal"
             android:layout_marginBottom="6dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="40dp">
             <TextView
+                android:textColor="@color/colorBlack"
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:text="School"
+                android:gravity="center_vertical"
                 android:layout_height="match_parent" />
             <TextView
+                android:textColor="@color/colorBlack"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text=":"/>
             <EditText
+                android:enabled="false"
+                android:textColor="@color/colorBlack"
                 android:id="@+id/tv_school_detail"
                 android:layout_width="0dp"
                 android:paddingLeft="16dp"
-                android:text="Royal University of Phnom Penh"
+                android:textSize="15sp"
+                android:hint="Royal University of Phnom Penh"
                 android:layout_weight="3"
                 android:layout_height="match_parent" />
         </LinearLayout>
         <LinearLayout
-
             android:orientation="horizontal"
             android:layout_marginBottom="6dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="40dp">
             <TextView
+                android:textColor="@color/colorBlack"
                 android:layout_width="0dp"
                 android:layout_weight="1"
+                android:gravity="center_vertical"
                 android:text="Room"
                 android:layout_height="match_parent" />
             <TextView
+                android:textColor="@color/colorBlack"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text=":"/>
             <EditText
+                android:textColor="@color/colorBlack"
+                android:enabled="false"
                 android:id="@+id/tv_room_detail"
                 android:paddingLeft="16dp"
-                android:text="203"
+                android:hint="203"
+                android:textSize="15sp"
                 android:layout_width="0dp"
                 android:layout_weight="3"
                 android:layout_height="match_parent" />
@@ -174,20 +193,26 @@
             android:orientation="horizontal"
             android:layout_marginBottom="6dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="40dp">
             <TextView
+                android:textColor="@color/colorBlack"
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:text="Teacher"
+                android:gravity="center_vertical"
                 android:layout_height="match_parent" />
             <TextView
+                android:textColor="@color/colorBlack"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text=":"/>
             <EditText
+                android:textColor="@color/colorBlack"
+                android:enabled="false"
                 android:id="@+id/tv_teacher_detail"
                 android:paddingLeft="16dp"
-                android:text="Peng Kun"
+                android:textSize="15sp"
+                android:hint="Peng Kun"
                 android:layout_width="0dp"
                 android:layout_weight="3"
                 android:layout_height="match_parent" />
@@ -197,20 +222,26 @@
             android:orientation="horizontal"
             android:layout_marginBottom="6dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="40dp">
             <TextView
+                android:textColor="@color/colorBlack"
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:text="Contact"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"/>
             <TextView
+                android:textColor="@color/colorBlack"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text=":"/>
             <EditText
+                android:textColor="@color/colorBlack"
+                android:enabled="false"
                 android:id="@+id/tv_contact_detail"
                 android:paddingLeft="16dp"
-                android:text="012 123 321"
+                android:hint="012 123 321"
+                android:textSize="15sp"
                 android:layout_width="0dp"
                 android:layout_weight="3"
                 android:layout_height="match_parent" />
@@ -220,13 +251,16 @@
             android:orientation="horizontal"
             android:layout_marginBottom="6dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="40dp">
             <TextView
+                android:textColor="@color/colorBlack"
                 android:layout_width="0dp"
                 android:layout_weight="1"
+                android:gravity="center_vertical"
                 android:text="Time"
                 android:layout_height="match_parent" />
             <TextView
+                android:textColor="@color/colorBlack"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text=":"/>
@@ -238,24 +272,31 @@
                 android:layout_weight="3">
 
                 <EditText
+                    android:textColor="@color/colorBlack"
+                    android:enabled="false"
                     android:id="@+id/tv_time_start"
                     android:layout_width="0dp"
+                    android:textSize="15sp"
                     android:layout_height="match_parent"
                     android:paddingLeft="16dp"
                     android:layout_weight="1"
-                    android:text="14:00" />
+                    android:hint="14:00" />
                 <TextView
                     android:layout_width="0dp"
+                    android:gravity="center_vertical"
                     android:layout_height="match_parent"
                     android:layout_weight="0.3"
                     android:text="To"/>
 
                 <EditText
+                    android:textColor="@color/colorBlack"
+                    android:enabled="false"
                     android:id="@+id/tv_time_end"
+                    android:textSize="15sp"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="3"
-                    android:text="15:00"/>
+                    android:hint="15:00"/>
 
             </LinearLayout>
 
