@@ -82,7 +82,7 @@ public class NotificationChecker extends Service {
         Log.d("TTA","CheckForSchedule");
         dbManager = DbManager.getInstance(context);
         ArrayList<ScheduleNotify> schedules = dbManager.getListSchdule("tblmondayschedule");
-        schedules.addAll(dbManager.getListSchdule("tbltuedayschedule"));
+        schedules.addAll(dbManager.getListSchdule("tbltuesdayschedule"));
         schedules.addAll(dbManager.getListSchdule("tblwednesdayschedule"));
         schedules.addAll(dbManager.getListSchdule("tblthursdayschedule"));
         schedules.addAll(dbManager.getListSchdule("tblfridayschedule"));

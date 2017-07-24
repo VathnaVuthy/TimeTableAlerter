@@ -40,7 +40,7 @@ public class TuesdayFragment extends Fragment {
 
         DbManager dbManager = DbManager.getInstance(getContext());
 
-        Schedule[] schedules = dbManager.getAllSchdule("tbltuedayschedule");
+        Schedule[] schedules = dbManager.getAllSchdule("tbltuesdayschedule");
 
         schoolAdapter = new SchoolAdapter(schedules);
         mRecyclerView.setAdapter(schoolAdapter);
