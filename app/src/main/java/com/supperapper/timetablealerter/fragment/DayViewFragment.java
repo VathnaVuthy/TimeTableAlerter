@@ -49,8 +49,8 @@ public class DayViewFragment extends Fragment {
         schedules[2] = new Schedule("C++","CPP","Royal University Of Phnom Penh","201","012 123 123","Saturday","15:45","17:15","Thap Boung");
         schedules[3] = new Schedule("Thai Language","TH","Bangkok Thai School","201","012 123 123","Saturday","17:30","18:30","Keng");
 
-        DynamicAdapter dynamicAdapter = new DynamicAdapter(tasks,schedules);
-        mRecyclerView.setAdapter(dynamicAdapter);
+   //   //  DynamicAdapter dynamicAdapter = new DynamicAdapter(tasks,schedules);
+  //      mRecyclerView.setAdapter(dynamicAdapter);
         return view;
     }
 }
