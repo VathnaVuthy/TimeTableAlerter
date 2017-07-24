@@ -2,6 +2,7 @@ package com.supperapper.timetablealerter.viewholder;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,10 +19,11 @@ import java.util.List;
  */
 
 public class DynamicAdapter extends RecyclerView.Adapter<DynamicAdapter.DynamicViewHolder> {
-    Task[] tasks ;
+    Task []tasks;
     Schedule []schedules;
     Context context;
-    public DynamicAdapter(Task []tasks,Schedule [] schedules){
+
+    public DynamicAdapter(Schedule []schedules,Task []tasks){
         this.schedules = schedules;
         this.tasks = tasks;
     }
@@ -36,8 +38,9 @@ public class DynamicAdapter extends RecyclerView.Adapter<DynamicAdapter.DynamicV
 
     @Override
     public void onBindViewHolder(DynamicViewHolder holder, int position) {
+
         if(position<tasks.length){
-            Task task = tasks[position];
+            Task task = this.tasks[position];
             holder.topic.setText(task.getmTopic().toString());
             holder.type.setText(task.getmTaskType().toString());
             holder.note_or_st_et.setText(task.getmNote().toString());

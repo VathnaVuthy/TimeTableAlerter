@@ -25,6 +25,11 @@ public class TaskDetailActivity extends AppCompatActivity {
         date = (TextView) findViewById(R.id.tv_date_detail);
         note = (TextView) findViewById(R.id.et_note_detail);
 
+        topic.setText(getIntent().getStringExtra("topic"));
+        subject.setText(getIntent().getStringExtra("subject"));
+        taskType.setText(getIntent().getStringExtra("tasktype"));
+        date.setText(getIntent().getStringExtra("date"));
+        note.setText(getIntent().getStringExtra("note"));
 
 
     }

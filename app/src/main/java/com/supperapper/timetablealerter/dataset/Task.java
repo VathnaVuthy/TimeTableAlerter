@@ -28,6 +28,10 @@ public class Task {
      //   this.Lat = Lat;
     }
 
+    public Task() {
+
+    }
+
     public String getmTopic() {
         return mTopic;
     }

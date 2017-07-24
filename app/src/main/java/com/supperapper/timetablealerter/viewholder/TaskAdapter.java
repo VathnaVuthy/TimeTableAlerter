@@ -60,6 +60,7 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
             tv_note = (TextView)itemView.findViewById(R.id.tv_task_note);
             tv_date = (TextView)itemView.findViewById(R.id.tv_task_date);
             tv_location = (TextView)itemView.findViewById(R.id.tv_task_location);
+            itemView.setOnClickListener(this);
         }
 
         @Override

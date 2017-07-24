@@ -111,7 +111,6 @@ public class DbManager extends SQLiteAssetHelper {
         int index = 0;
 
         while (cursor.moveToNext()){
-
             String id = cursor.getString(0);
             String Subject = cursor.getString(1);
             String Abbreviation = cursor.getString(2);
