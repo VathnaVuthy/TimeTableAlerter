@@ -43,7 +43,6 @@ public class MondayViewFragment extends Fragment {
 
         DbManager dbManager = DbManager.getInstance(getContext());
         Schedule[] schedules = dbManager.getAllSchdule("tblmondayschedule");
-//
         Task[] tasks = dbManager.getTaskForDayview("monday");
         dynamicAdapter = new DynamicAdapter(tasks,schedules);
         mRecyclerView.setAdapter(dynamicAdapter);

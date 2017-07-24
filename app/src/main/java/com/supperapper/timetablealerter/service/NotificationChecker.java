@@ -126,9 +126,6 @@ public class NotificationChecker extends Service {
         Log.d("TTA",tasks.size() + "");
         SimpleDateFormat df = new SimpleDateFormat("EEEE-d-M-yyyy");
         Date currentDate = new Date();
-        Log.d("TTA",tasks.get(0).getmDate());
-        Log.d("TTA",tasks.get(1).getmDate());
-        Log.d("TTA",df.format(currentDate));
 
         for(final Task task : tasks){
             final String taskDate = task.getmDate();
