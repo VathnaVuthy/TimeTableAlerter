@@ -437,7 +437,7 @@ public class AddScheduleActivity extends AppCompatActivity{
                 if(tgl_btnTue.isChecked()){
 
                     Flag = 1;
-                    storeScheduletoDB(txtTueStart, txtTueEnd, "tbltuedayschedule");
+                    storeScheduletoDB(txtTueStart, txtTueEnd, "tbltuesdayschedule");
                     Log.d("Button Tuesday", "Checked");
                 }
 

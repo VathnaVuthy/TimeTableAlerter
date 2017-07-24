@@ -20,10 +20,10 @@ public class TaskDetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_task_detail);
 
         topic = (TextView) findViewById(R.id.tv_topic_detail);
-        topic = (TextView) findViewById(R.id.tv_topic_detail);
-        topic = (TextView) findViewById(R.id.tv_topic_detail);
-        topic = (TextView) findViewById(R.id.tv_topic_detail);
-        topic = (TextView) findViewById(R.id.tv_topic_detail);
+        subject = (TextView) findViewById(R.id.tv_subject_detail);
+        taskType = (TextView) findViewById(R.id.tv_tasktype_detail);
+        date = (TextView) findViewById(R.id.tv_date_detail);
+        note = (TextView) findViewById(R.id.et_note_detail);
 
 
 
