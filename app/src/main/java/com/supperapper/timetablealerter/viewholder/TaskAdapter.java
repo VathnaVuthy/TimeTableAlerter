@@ -1,6 +1,7 @@
 package com.supperapper.timetablealerter.viewholder;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.supperapper.timetablealerter.R;
+import com.supperapper.timetablealerter.activity.TaskDetailActivity;
 import com.supperapper.timetablealerter.dataset.Task;
 
 /**
@@ -47,7 +49,7 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
     }
 
 
-    public class TaskViewHolder extends RecyclerView.ViewHolder{
+    public class TaskViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         TextView tv_topic,tv_type,tv_note,tv_date,tv_location;
 
         public TaskViewHolder(View itemView) {
@@ -58,6 +60,21 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
             tv_note = (TextView)itemView.findViewById(R.id.tv_task_note);
             tv_date = (TextView)itemView.findViewById(R.id.tv_task_date);
             tv_location = (TextView)itemView.findViewById(R.id.tv_task_location);
+        }
+
+        @Override
+        public void onClick(View v) {
+            int position = getAdapterPosition();
+            Task task = tasks[position];
+            Intent intent = new Intent(context, TaskDetailActivity.class);
+            intent.putExtra("topic",task.getmTopic());
+            intent.putExtra("subject", task.getmSubject());
+            intent.putExtra("tasktype",task.getmTaskType());
+            intent.putExtra("date",task.getmDate());
+            intent.putExtra("note",task.getmNote());
+            context.startActivity(intent);
+
+
         }
     }
 

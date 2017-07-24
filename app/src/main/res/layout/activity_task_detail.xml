@@ -69,6 +69,7 @@
                 android:text=":" />
 
             <TextView
+                android:id="@+id/tv_topic_detail"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="3"
@@ -98,6 +99,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="3"
                 android:paddingLeft="16dp"
+                android:id="@+id/tv_subject_detail"
                 android:text="Writing Script For Database System" />
         </LinearLayout>
 
@@ -124,6 +126,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="3"
                 android:paddingLeft="16dp"
+                android:id="@+id/tv_tasktype_detail"
                 android:text="Meeting" />
         </LinearLayout>
 
@@ -150,6 +153,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="3"
                 android:paddingLeft="16dp"
+                android:id="@+id/tv_date_detail"
                 android:text="12-Aug-2017" />
         </LinearLayout>
 
@@ -170,6 +174,7 @@
 - Bring Doc in the drawer downstairs"
             android:layout_width="match_parent"
             android:textSize="16sp"
+            android:id="@+id/et_note_detail"
             android:layout_height="100dp"
             android:gravity="top" />
 
