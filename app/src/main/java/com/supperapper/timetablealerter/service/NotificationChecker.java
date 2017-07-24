@@ -1,6 +1,7 @@
 package com.supperapper.timetablealerter.service;
 
 import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
@@ -20,6 +21,7 @@ import android.util.Log;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.supperapper.timetablealerter.R;
+import com.supperapper.timetablealerter.activity.SchoolDetailActivity;
 import com.supperapper.timetablealerter.database.DbManager;
 import com.supperapper.timetablealerter.dataset.Schedule;
 import com.supperapper.timetablealerter.dataset.ScheduleNotify;
@@ -107,7 +109,7 @@ public class NotificationChecker extends Service {
                         public void run() {
                             String title = schedule.getmSubject() + " (" + schedule.getmAbbreviation()+ ")";
                             String detail = schedule.getmStartTime() + " - " + schedule.getmEndTime();
-                            showNotification(id,title,detail);
+                            showScheduleNotification(id,title,detail,schedule);
                             id++;
                         }
                     },duration);
@@ -121,13 +123,17 @@ public class NotificationChecker extends Service {
         tasks.addAll(dbManager.getListTask(new String[]{"OTHERS"}));
         tasks.addAll(dbManager.getListTask(new String[]{"R.ACTIVITY"}));
         tasks.addAll(dbManager.getListTask(new String[]{"WEDDING"}));
-
+        Log.d("TTA",tasks.size() + "");
         SimpleDateFormat df = new SimpleDateFormat("EEEE-d-M-yyyy");
         Date currentDate = new Date();
+        Log.d("TTA",tasks.get(0).getmDate());
+        Log.d("TTA",tasks.get(1).getmDate());
+        Log.d("TTA",df.format(currentDate));
 
         for(final Task task : tasks){
             final String taskDate = task.getmDate();
             if(taskDate.equals(df.format(currentDate))){
+                Log.d("TTA", "Notification Task Found");
                 eventCheckerHandler.post(new Runnable() {
                     @Override
                     public void run() {
@@ -141,9 +147,37 @@ public class NotificationChecker extends Service {
 
         }
 
+    }
 
 
+    private void showScheduleNotification(int id,String title,String detail,ScheduleNotify schedule){
+        NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this);
+        mBuilder.setContentTitle(title);
+        mBuilder.setSmallIcon(R.drawable.notifi);
+        mBuilder.setContentText(detail);
+        mBuilder.setVibrate(new long[]{1000,1000,1000,1000});
+        mBuilder.setLights(Color.RED,3000,3000);
 
+        Uri sound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+        mBuilder.setSound(sound);
+
+        Intent intent = new Intent(this,SchoolDetailActivity.class);
+        intent.putExtra("id", schedule.getId());
+        intent.putExtra("subject",schedule.getmSubject());
+        intent.putExtra("abb",schedule.getmAbbreviation());
+        intent.putExtra("school",schedule.getmSchool());
+        intent.putExtra("room",schedule.getmRoom());
+        intent.putExtra("teacher",schedule.getmTeacher());
+        intent.putExtra("contact",schedule.getmContact());
+        intent.putExtra("timestart",schedule.getmStartTime());
+        intent.putExtra("timeend", schedule.getmEndTime());
+        intent.putExtra("date", schedule.getmDay());
+
+        PendingIntent contentIntent = PendingIntent.getActivity(this,0,intent,PendingIntent.FLAG_UPDATE_CURRENT);
+        mBuilder.setContentIntent(contentIntent);
+
+        NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        notificationManager.notify(id,mBuilder.build());
     }
 
     private void showNotification(int id, String title, String detail){

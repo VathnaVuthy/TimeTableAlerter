@@ -111,6 +111,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 //            hasScheduleBtn = false;
 //        }
 
+        ViewPager viewPager = (ViewPager) findViewById(R.id.lyt_super);
+        DynamicPagerAdapter pagerAdapter = new DynamicPagerAdapter(getSupportFragmentManager(), MainActivity.this);
+        viewPager.setAdapter(pagerAdapter);
+
+        TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
+        tabLayout.setupWithViewPager(viewPager);
+
+        for(int i = 0; i < tabLayout.getTabCount(); i++){
+            TabLayout.Tab tab = tabLayout.getTabAt(i);
+            tab.setCustomView(getDynamicTabVIew(i));
+        }
+
 
     }
     public void onWeekViewClicked(){

@@ -42,9 +42,9 @@ public class DynamicAdapter extends RecyclerView.Adapter<DynamicAdapter.DynamicV
             holder.type.setText(task.getmTaskType().toString());
             holder.note_or_st_et.setText(task.getmNote().toString());
             holder.date.setText(task.getmDate().toString());
-            holder.location_or_room.setText(task.getmLocation().toString());
+//            holder.location_or_room.setText(task.getmLocation().toString());
         }else{
-            Schedule schedule = schedules[position - (schedules.length -1)];
+            Schedule schedule = schedules[(schedules.length -1)];
             holder.topic.setText(schedule.getmSubject().toString());
             holder.teacher.setText(schedule.getmTeacher().toString());
             holder.note_or_st_et.setText(schedule.getmStartTime() + "-" + schedule.getmEndTime());

@@ -13,16 +13,6 @@ public class Schedule {
     private final String mType = "Schedule";
 
 
-
-    public Schedule( String mSubject, String mRoom, String mDay, String mStartTime, String mEndTime, Time start, Time end, String mTeacher) {
-        this.mSubject = mSubject;
-        this.mRoom = mRoom;
-        this.mDay = mDay;
-        this.mStartTime = mStartTime;
-        this.mEndTime = mEndTime;
-        this.mTeacher = mTeacher;
-    }
-
     public Schedule(String mID, String mSubject, String mAbbreviation, String mSchool, String mDay, String mStartTime, String mEndTime, String mTeacher, String mRoom, String mContact) {
         this.mID = mID;
         this.mSubject = mSubject;

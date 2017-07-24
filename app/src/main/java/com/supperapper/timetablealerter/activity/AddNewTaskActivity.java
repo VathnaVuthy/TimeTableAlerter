@@ -142,19 +142,28 @@ public class AddNewTaskActivity extends AppCompatActivity{
     }
     private DatePickerDialog.OnDateSetListener
             datePickerListener = new DatePickerDialog.OnDateSetListener() {
+
         @Override
-        public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
+        public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+            SimpleDateFormat simpledateformat = new SimpleDateFormat("EEEE");
+            Date date = new Date(year, month, dayOfMonth-1);
+            String dayOfWeek = simpledateformat.format(date);
+            textView.setText(dayOfWeek + "-" + dayOfMonth + "-" + (month+1)+ "-" + year);
 
-            SimpleDateFormat dayFormat = new SimpleDateFormat("EEEE");
-            Date date = new Date();
-            String dayofWeek = dayFormat.format(date);
-
-            mDay = i2;
-            mMoth=i1+1;
-            mYear=i;
-            textView.setText(dayofWeek + "-" + mDay + "-" + mMoth + "-" + mYear);
         }
     };
+//    @Override
+//    public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
+//
+//        SimpleDateFormat dayFormat = new SimpleDateFormat("EEEE");
+//
+//        String dayofWeek = dayFormat.format(date);
+//
+//        mDay = i2;
+//        mMoth=i1+1;
+//        mYear=i;
+//        textView.setText(dayofWeek + "-" + mDay + "-" + mMoth + "-" + mYear);
+//    }
 }
 
 

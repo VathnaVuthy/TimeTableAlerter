@@ -121,14 +121,40 @@ public class DbManager extends SQLiteAssetHelper {
             String Start = (cursor.getString(7));
             String End = (cursor.getString(8));
 
-            //  Schedule schedule = new Schedule(Subject, Abbreviation, School, Room, Teacher, Contact, Start, End);
-            Schedule schedule = new Schedule(id,Subject, Abbreviation, School, Room, Contact, null, Start, End, Teacher);
+            Schedule schedule = new Schedule(id,Subject,Abbreviation,School,null,Start,End,Teacher,Room,Contact);
             schedules[index] = schedule;
             index++;
         }
 
         return schedules;
     }
+    public Task[] getTaskForDayview(String day){
+        SQLiteDatabase sqLiteDatabase = getReadableDatabase();
+        String query = "SELECT * FROM tblTask";
+        Cursor cursor = sqLiteDatabase.rawQuery(query,null);
+        Task[] tasks = new Task[cursor.getCount()];
+        int index = 0;
+
+        while(cursor.moveToNext()){
+            int id = cursor.getInt(0);
+            String topic = cursor.getString(1);
+            String subject = cursor.getString(2);
+            String type = cursor.getString(3);
+            String date = cursor.getString(4);
+//            String lat = cursor.getString(5);
+//            String lng = cursor.getString(6);
+            String note = cursor.getString(7);
+
+            String[] myDay = date.split("-");
+            if(myDay[0].toLowerCase().equals(day.toLowerCase())){
+                Task task = new Task(topic,subject,type,myDay[0],note);
+                tasks[index] = task;
+                index++;
+            }
+        }
+        return tasks;
+    }
+
 
     public ArrayList<ScheduleNotify> getListSchdule(String TableName){
 
@@ -157,7 +183,6 @@ public class DbManager extends SQLiteAssetHelper {
         }
         return schedules;
     }
-
 
 
     public ArrayList<Task> getListTask(String[] TaskType){

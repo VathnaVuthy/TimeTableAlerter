@@ -81,6 +81,7 @@ public class SchoolAdapter extends RecyclerView.Adapter<SchoolAdapter.SchoolView
             intent.putExtra("abb",schedule.getmAbbreviation());
             intent.putExtra("school",schedule.getmSchool());
             intent.putExtra("room",schedule.getmRoom());
+            Log.d("TTA","ROOM : " + schedule.getmRoom().toString());
             intent.putExtra("teacher",schedule.getmTeacher());
             intent.putExtra("contact",schedule.getmContact());
          //   String time  = schedule.getmStartTime() + " - " + schedule.getmEndTime();
