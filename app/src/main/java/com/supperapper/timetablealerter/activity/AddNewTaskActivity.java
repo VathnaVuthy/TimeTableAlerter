@@ -20,6 +20,7 @@ import android.widget.Toast;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.ui.PlacePicker;
+import com.google.android.gms.maps.model.LatLng;
 import com.supperapper.timetablealerter.R;
 import com.supperapper.timetablealerter.database.DbManager;
 
@@ -144,7 +145,6 @@ public class AddNewTaskActivity extends AppCompatActivity{
 
         String name = placeSelected.getName().toString();
         String address = placeSelected.getAddress().toString();
-
         Log.d("TTA","Name " + name);
         Log.d("TTA","LaLag " + placeSelected.getLatLng());
         Log.d("TTA","Phone " + placeSelected.getPhoneNumber());
