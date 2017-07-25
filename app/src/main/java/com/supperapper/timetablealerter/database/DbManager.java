@@ -69,7 +69,7 @@ public class DbManager extends SQLiteAssetHelper {
 
         while(cursor.moveToNext()){
 
-            int id = cursor.getInt(0);
+            String id = cursor.getString(0);
             String topic = cursor.getString(1);
             String subject = cursor.getString(2);
             String type = cursor.getString(3);
@@ -78,7 +78,7 @@ public class DbManager extends SQLiteAssetHelper {
 //            String lng = cursor.getString(6);
             String note = cursor.getString(7);
 
-            Task task = new Task(topic, subject, type, date, note);
+            Task task = new Task(topic, subject, type, date,null, note, id);
             tasks[index] = task;
             index++;
 
@@ -246,6 +246,27 @@ public class DbManager extends SQLiteAssetHelper {
         SQLiteDatabase db = this.getWritableDatabase();
 
         db.delete(TableName, ColumnID, ID);
+
+    }
+
+    public void updateTask(String Topic, String Subject, String Date, String Note, String[] id){
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues row = new ContentValues();
+
+        row.put("topic", Topic);
+        row.put("subject", Subject);
+        row.put("date", Date);
+        row.put("note", Note);
+
+        db.update("tblTask", row, "taskid = ?", id);
+    }
+
+    public void deleteTask(String[] ID){
+
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        db.delete("tblTask", "taskid = ?", ID);
 
     }
 

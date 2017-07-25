@@ -3,6 +3,7 @@ package com.supperapper.timetablealerter.viewholder;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -73,6 +74,8 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
             intent.putExtra("tasktype",task.getmTaskType());
             intent.putExtra("date",task.getmDate());
             intent.putExtra("note",task.getmNote());
+            intent.putExtra("id", task.getmID());
+            Log.d("ID:", task.getmID());
             context.startActivity(intent);
 
 

@@ -7,7 +7,7 @@ import android.text.method.DateTimeKeyListener;
  */
 
 public class Task {
-    String mTopic,mSubject,mTaskType,mDate,mLocation,mNote;
+    String mTopic,mSubject,mTaskType,mDate,mLocation,mNote,mID;
     Double Lat, Lng;
 
     public Task(String mTopic, String mSubject, String mTaskType, String mDate, String mLocation, String mNote) {
@@ -28,8 +28,26 @@ public class Task {
      //   this.Lat = Lat;
     }
 
+    public Task(String mTopic, String mSubject, String mTaskType, String mDate, String mLocation, String mNote, String mID) {
+        this.mTopic = mTopic;
+        this.mSubject = mSubject;
+        this.mTaskType = mTaskType;
+        this.mDate = mDate;
+        this.mLocation = mLocation;
+        this.mNote = mNote;
+        this.mID = mID;
+    }
+
     public Task() {
 
+    }
+
+    public String getmID() {
+        return mID;
+    }
+
+    public void setmID(String mID) {
+        this.mID = mID;
     }
 
     public String getmTopic() {

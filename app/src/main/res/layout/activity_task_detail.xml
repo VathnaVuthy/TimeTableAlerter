@@ -34,6 +34,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <TextView
+            android:textColor="@color/colorBlack"
             android:layout_centerInParent="true"
             android:layout_marginTop="16dp"
             android:layout_toRightOf="@id/img_color"
@@ -45,6 +46,7 @@
             android:id="@+id/tv_header"
             android:fontFamily="sans-serif-smallcaps"/>
         <TextView
+            android:textColor="@color/colorBlack"
             android:gravity="center_horizontal"
             android:layout_below="@+id/tv_header"
             android:textSize="16sp"
@@ -58,7 +60,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:padding="16dp">
+        android:padding="16dp"
+        android:weightSum="1">
 
         <View
             android:layout_width="match_parent"
@@ -68,108 +71,101 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="37dp"
             android:layout_marginBottom="6dp"
             android:orientation="horizontal">
 
             <TextView
+                android:textColor="@color/colorBlack"
+                android:gravity="center_vertical"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:text="Topic" />
 
             <TextView
+                android:textColor="@color/colorBlack"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text=":" />
 
-            <TextView
+            <EditText
                 android:id="@+id/tv_topic_detail"
                 android:layout_width="0dp"
+                android:textSize="15sp"
                 android:layout_height="match_parent"
                 android:layout_weight="3"
                 android:paddingLeft="16dp"
-                android:text="Restoring Database System" />
+                android:textColor="@color/colorBlack"
+                android:enabled="false"
+                android:hint="Restoring Database System" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="37dp"
             android:layout_marginBottom="6dp"
             android:orientation="horizontal">
 
             <TextView
+                android:textColor="@color/colorBlack"
+                android:gravity="center_vertical"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:text="Subject" />
 
             <TextView
+                android:textColor="@color/colorBlack"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text=":" />
 
-            <TextView
+            <EditText
+                android:enabled="false"
+                android:textSize="15sp"
+                android:textColor="@color/colorBlack"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="3"
                 android:paddingLeft="16dp"
                 android:id="@+id/tv_subject_detail"
-                android:text="Writing Script For Database System" />
+                android:hint="Writing Script For Database System" />
         </LinearLayout>
+
+
 
         <LinearLayout
 
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="37dp"
             android:layout_marginBottom="6dp"
             android:orientation="horizontal">
 
             <TextView
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:text="Task" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text=":" />
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="3"
-                android:paddingLeft="16dp"
-                android:id="@+id/tv_tasktype_detail"
-                android:text="Meeting" />
-        </LinearLayout>
-
-        <LinearLayout
-
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="6dp"
-            android:orientation="horizontal">
-
-            <TextView
+                android:textColor="@color/colorBlack"
+                android:gravity="center_vertical"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:text="Date" />
 
             <TextView
+                android:textColor="@color/colorBlack"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text=":" />
 
-            <TextView
+            <EditText
+                android:enabled="false"
+                android:textColor="@color/colorBlack"
+                android:textSize="15sp"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="3"
                 android:paddingLeft="16dp"
                 android:id="@+id/tv_date_detail"
-                android:text="12-Aug-2017" />
+                android:hint="12-Aug-2017" />
         </LinearLayout>
 
         <TextView
@@ -185,15 +181,19 @@
             android:background="@color/colorGray"></View>
 
         <EditText
-            android:text="- Call Ms Bopha before meeting
+            android:textColor="@color/colorBlack"
+            android:enabled="false"
+            android:hint="- Call Ms Bopha before meeting
 - Bring Doc in the drawer downstairs"
             android:layout_width="match_parent"
             android:textSize="16sp"
             android:id="@+id/et_note_detail"
-            android:layout_height="100dp"
-            android:gravity="top" />
+            android:layout_height="81dp"
+            android:gravity="top"
+            android:layout_weight="0.11" />
 
         <TextView
+            android:textColor="@color/colorBlack"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -207,7 +207,8 @@
 
         <ImageView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:src="@drawable/map"/>
+            android:layout_height="78dp"
+            android:src="@drawable/map"
+            android:layout_weight="0.12" />
     </LinearLayout>
 </LinearLayout>
