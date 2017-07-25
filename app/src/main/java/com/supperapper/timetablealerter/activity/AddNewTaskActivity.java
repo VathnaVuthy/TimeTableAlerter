@@ -140,12 +140,16 @@ public class AddNewTaskActivity extends AppCompatActivity{
         }
     }
     private void displaySelectedPlaceFromPlacePicker(Intent data) {
-        Place placeSelected = PlacePicker.getPlace(data, this);
+        Place placeSelected = PlacePicker.getPlace(this, data);
 
         String name = placeSelected.getName().toString();
         String address = placeSelected.getAddress().toString();
 
         Log.d("TTA","Name " + name);
+        Log.d("TTA","LaLag " + placeSelected.getLatLng());
+        Log.d("TTA","Phone " + placeSelected.getPhoneNumber());
+        Log.d("TTA","Add " + placeSelected.getAddress());
+        Log.d("TTA","Web " + placeSelected.getWebsiteUri());
     }
 
     @Override
@@ -165,7 +169,6 @@ public class AddNewTaskActivity extends AppCompatActivity{
         });
     }
 
-
     @Override
     protected Dialog onCreateDialog(int id) {
         if(id==DAILOG_ID)
@@ -184,18 +187,6 @@ public class AddNewTaskActivity extends AppCompatActivity{
 
         }
     };
-//    @Override
-//    public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
-//
-//        SimpleDateFormat dayFormat = new SimpleDateFormat("EEEE");
-//
-//        String dayofWeek = dayFormat.format(date);
-//
-//        mDay = i2;
-//        mMoth=i1+1;
-//        mYear=i;
-//        textView.setText(dayofWeek + "-" + mDay + "-" + mMoth + "-" + mYear);
-//    }
 }
 
 
