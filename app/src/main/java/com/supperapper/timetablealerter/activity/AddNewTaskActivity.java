@@ -17,6 +17,9 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.places.Place;
+import com.google.android.gms.location.places.ui.PlacePicker;
 import com.supperapper.timetablealerter.R;
 import com.supperapper.timetablealerter.database.DbManager;
 
@@ -35,6 +38,10 @@ public class AddNewTaskActivity extends AppCompatActivity{
     Button btn_discard, btn_done;
     EditText etxTopic, etxSubject, etxNote;
     Spinner spinner;
+    private GoogleApiClient mGoogleApiClient;
+
+
+    private final int REQUEST_CODE_PLACEPICKER = 1;
 
     MainActivity mainActivity;
     Context context;
@@ -117,12 +124,36 @@ public class AddNewTaskActivity extends AppCompatActivity{
             @Override
             public void onClick(View v) {
 
-                Intent intent = new Intent(AddNewTaskActivity.this, MapViewActivity.class);
-                startActivity(intent);
+                startPlacePickerActivity();
+
             }
         });
     }
 
+    private void startPlacePickerActivity(){
+        PlacePicker.IntentBuilder intentBuilder = new PlacePicker.IntentBuilder();
+        try{
+            Intent intent = intentBuilder.build(this);
+            startActivityForResult(intent,REQUEST_CODE_PLACEPICKER);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+    private void displaySelectedPlaceFromPlacePicker(Intent data) {
+        Place placeSelected = PlacePicker.getPlace(data, this);
+
+        String name = placeSelected.getName().toString();
+        String address = placeSelected.getAddress().toString();
+
+        Log.d("TTA","Name " + name);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == REQUEST_CODE_PLACEPICKER && resultCode == RESULT_OK) {
+            displaySelectedPlaceFromPlacePicker(data);
+        }
+    }
 
     private void buttonDiscardClicked(){
         btn_discard = (Button) findViewById(R.id.btn_discard);
