@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 import android.widget.TextView;
 
 import com.readystatesoftware.sqliteasset.SQLiteAssetHelper;
@@ -35,7 +36,7 @@ public class DbManager extends SQLiteAssetHelper {
     }
 
    // Task task;
-    private DbManager(Context context) {
+    public DbManager(Context context) {
         super(context, "TimeTable.db.sqlite", null, null, 1);
     }
 
@@ -134,10 +135,21 @@ public class DbManager extends SQLiteAssetHelper {
         SQLiteDatabase sqLiteDatabase = getReadableDatabase();
         String query = "SELECT * FROM tblTask";
         Cursor cursor = sqLiteDatabase.rawQuery(query,null);
-        Task[] tasks = new Task[cursor.getCount()];
-        int index = 0;
+        Cursor x;
+        x = cursor;
 
-        while(cursor.moveToNext()){
+        int index = 0;
+        int totalTask = 0;
+        while (x.moveToNext()){
+            String date = x.getString(4);
+            String[] myDay = date.split("-");
+            if(myDay[0].toLowerCase().equals(day.toLowerCase())){
+                totalTask++;
+            }
+        }
+        Task[] tasks = new Task[totalTask];
+
+        while(cursor.moveToPrevious()){
             int id = cursor.getInt(0);
             String topic = cursor.getString(1);
             String subject = cursor.getString(2);
@@ -146,7 +158,6 @@ public class DbManager extends SQLiteAssetHelper {
 //            String lat = cursor.getString(5);
 //            String lng = cursor.getString(6);
             String note = cursor.getString(7);
-
             String[] myDay = date.split("-");
             if(myDay[0].toLowerCase().equals(day.toLowerCase())){
                 Task task = new Task(topic,subject,type,myDay[0],note);

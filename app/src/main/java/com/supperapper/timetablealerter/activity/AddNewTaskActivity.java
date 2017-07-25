@@ -103,7 +103,7 @@ public class AddNewTaskActivity extends AppCompatActivity{
 //                Log.d("ckcc", task.getmTopic());
 
                    Manager.insertTask(Topic, Subject, TaskType, Date, Note);
-                   Manager.close();
+        //           Manager.close();
                    onBackPressed();
                }
 

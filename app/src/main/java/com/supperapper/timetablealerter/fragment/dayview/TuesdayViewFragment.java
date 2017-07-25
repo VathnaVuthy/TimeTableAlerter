@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,11 +41,13 @@ public class TuesdayViewFragment extends Fragment {
         mLayoutManager = new LinearLayoutManager(getActivity());
         mRecyclerView.setLayoutManager(mLayoutManager);
 
-        DbManager dbManager = DbManager.getInstance(getContext());
+        DbManager dbManager = new DbManager(getContext());
         Schedule[] schedules = dbManager.getAllSchdule("tbltuesdayschedule");
         Task[] tasks = dbManager.getTaskForDayview("tuesday");
 
+
         dynamicAdapter = new DynamicAdapter(schedules,tasks);
+
         mRecyclerView.setAdapter(dynamicAdapter);
         return view;
     }

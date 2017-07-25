@@ -12,6 +12,7 @@ import com.supperapper.timetablealerter.R;
 import com.supperapper.timetablealerter.dataset.Schedule;
 import com.supperapper.timetablealerter.dataset.Task;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -19,10 +20,9 @@ import java.util.List;
  */
 
 public class DynamicAdapter extends RecyclerView.Adapter<DynamicAdapter.DynamicViewHolder> {
-    Task []tasks;
-    Schedule []schedules;
-    Context context;
-
+    private Task []tasks;
+    private Schedule []schedules;
+    private Context context;
     public DynamicAdapter(Schedule []schedules,Task []tasks){
         this.schedules = schedules;
         this.tasks = tasks;
@@ -38,29 +38,28 @@ public class DynamicAdapter extends RecyclerView.Adapter<DynamicAdapter.DynamicV
 
     @Override
     public void onBindViewHolder(DynamicViewHolder holder, int position) {
-
         if(position<tasks.length){
             Task task = this.tasks[position];
-            holder.topic.setText(task.getmTopic().toString());
-            holder.type.setText(task.getmTaskType().toString());
-            holder.note_or_st_et.setText(task.getmNote().toString());
-            holder.date.setText(task.getmDate().toString());
+            holder.topic.setText(task.getmTopic());
+            holder.type.setText(task.getmTaskType());
+            holder.note_or_st_et.setText(task.getmNote());
+            holder.date.setText(task.getmDate());
 //            holder.location_or_room.setText(task.getmLocation().toString());
         }else{
             Schedule schedule = schedules[(schedules.length -1)];
-            holder.topic.setText(schedule.getmSubject().toString());
-            holder.teacher.setText(schedule.getmTeacher().toString());
+            holder.topic.setText(schedule.getmSubject());
+            holder.teacher.setText(schedule.getmTeacher());
             holder.note_or_st_et.setText(schedule.getmStartTime() + "-" + schedule.getmEndTime());
-            holder.type.setText(schedule.getmType().toString());
+            holder.type.setText(schedule.getmType());
         //    holder.date.setText(schedule.getmDay().toString());
-            holder.location_or_room.setText(schedule.getmRoom().toString());
+            holder.location_or_room.setText(schedule.getmRoom());
         }
     }
     @Override
     public int getItemCount() {
-        int leng;
-        leng = tasks.length + schedules.length;
-        return leng;
+        int length;
+        length = tasks.length + schedules.length;
+        return length;
     }
 
 

@@ -40,6 +40,8 @@ public class SchoolDetailActivity extends AppCompatActivity  {
         toolbar.setTitle("Schedule Detail");
         setSupportActionBar(toolbar);
         getSupportActionBar().setElevation(0);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
         // Reference to view
          tv_subject = (EditText) findViewById(R.id.tv_subject_detail);
          tv_abb = (EditText) findViewById(R.id.tv_abb_detail);
@@ -213,7 +215,7 @@ public class SchoolDetailActivity extends AppCompatActivity  {
 
             }
             Toast.makeText(this, "Edit", Toast.LENGTH_SHORT).show();
-        }else{
+        } else if(item.getItemId()==R.id.delete){
 
             if(itemDelete.getTitle().equals("Delete")) {
 
@@ -269,12 +271,14 @@ public class SchoolDetailActivity extends AppCompatActivity  {
 
             Log.d("Edited", tv_subject.getText().toString());
             Toast.makeText(this, "Delete", Toast.LENGTH_SHORT).show();
-            }
+            onBackPressed();
+            }else{
+            onBackPressed();
+        }
         return super.onOptionsItemSelected(item);
     }
 
     private void EnableTextViewEdit(TextView textView){
-
         textView.setFocusableInTouchMode(true);
         textView.setInputType(InputType.TYPE_CLASS_TEXT);
         textView.setFocusable(true);
@@ -289,4 +293,5 @@ public class SchoolDetailActivity extends AppCompatActivity  {
         textView.setClickable(false);
 
     }
+
 }

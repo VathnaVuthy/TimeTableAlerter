@@ -79,7 +79,6 @@ public class NotificationChecker extends Service {
 
 
     private void checkSchdeduleAlert(){
-        Log.d("TTA","CheckForSchedule");
         dbManager = DbManager.getInstance(context);
         ArrayList<ScheduleNotify> schedules = dbManager.getListSchdule("tblmondayschedule");
         schedules.addAll(dbManager.getListSchdule("tbltuesdayschedule"));
@@ -89,20 +88,16 @@ public class NotificationChecker extends Service {
         schedules.addAll(dbManager.getListSchdule("tblsaturdayschedule"));
         schedules.addAll(dbManager.getListSchdule("tblsundayschedule"));
 
-        Log.d("TTA","Schedule Checked");
         Calendar c = Calendar.getInstance();
         currentTime = c.get(Calendar.HOUR_OF_DAY);
         for(final ScheduleNotify schedule : schedules){
-            Log.d("TTA","Final: " + schedule.getmStartTime());
             final String[] time = schedule.getmStartTime().split(":");
             int scheduleTime = Integer.parseInt(time[0]);
             //if the schedule found
             if(scheduleTime>=currentTime && scheduleTime <=currentTime+1){
-                Log.d("TTA","Schedule Found");
                 long scheduleml = TimeUnit.MINUTES.toMillis(Long.parseLong(time[1])) + TimeUnit.MINUTES.toMillis(Long.parseLong(time[0]));
                 long currenttimeml = TimeUnit.MINUTES.toMillis(c.get(Calendar.HOUR_OF_DAY)) + TimeUnit.MINUTES.toMillis(c.get(Calendar.MINUTE));
                 long duration = scheduleml - currenttimeml  ;
-                Log.d("TTA","Schedule Found And Wait for " + duration);
                 if (duration > (-60000)){
                     eventCheckerHandler.postDelayed(new Runnable() {
                         @Override
@@ -117,20 +112,17 @@ public class NotificationChecker extends Service {
             }
         }
 
-        Log.d("TTA","TASK Checked");
         ArrayList<Task> tasks = dbManager.getListTask(new String[]{"EXAM"});
         tasks.addAll(dbManager.getListTask(new String[]{"MEETING"}));
         tasks.addAll(dbManager.getListTask(new String[]{"OTHERS"}));
         tasks.addAll(dbManager.getListTask(new String[]{"R.ACTIVITY"}));
         tasks.addAll(dbManager.getListTask(new String[]{"WEDDING"}));
-        Log.d("TTA",tasks.size() + "");
         SimpleDateFormat df = new SimpleDateFormat("EEEE-d-M-yyyy");
         Date currentDate = new Date();
 
         for(final Task task : tasks){
             final String taskDate = task.getmDate();
             if(taskDate.equals(df.format(currentDate))){
-                Log.d("TTA", "Notification Task Found");
                 eventCheckerHandler.post(new Runnable() {
                     @Override
                     public void run() {
