@@ -90,11 +90,6 @@ public class TaskDetailActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent mapIntent = new Intent(TaskDetailActivity.this,MapViewActivity.class);
-                String name = getIntent().getStringExtra("mapName");
-                String address = getIntent().getStringExtra("mapAddess");
-                String lat = getIntent().getStringExtra("mapLat");
-                String lang = getIntent().getStringExtra("mapLang");
-
                 mapIntent.putExtra("mapName",getIntent().getStringExtra("mapName"));
                 mapIntent.putExtra("mapAddress",getIntent().getStringExtra("mapAddress"));
                 mapIntent.putExtra("mapLat",getIntent().getStringExtra("mapLat"));
@@ -157,16 +152,17 @@ public class TaskDetailActivity extends AppCompatActivity {
                 itemDelete.setIcon(R.drawable.ic_delete);
 
                 disableEditText();
-
+                dbManager.close();
             }
 
 
-        } else {
+        } else if(item.getItemId()==R.id.delete) {
 
             if (itemDelete.getTitle().equals("Delete")){
 
                 DbManager dbManager = DbManager.getInstance(TaskDetailActivity.this);
                 dbManager.deleteTask(new String[]{id});
+                dbManager.close();
                 onBackPressed();
 
             } else {
@@ -182,6 +178,8 @@ public class TaskDetailActivity extends AppCompatActivity {
                 itemDelete.setIcon(R.drawable.ic_delete);
 
             }
+
+        }else{
 
         }
             return super.onOptionsItemSelected(item);

@@ -105,6 +105,7 @@ public class AddNewTaskActivity extends AppCompatActivity{
                        mapId = Manager.getLastMapId();
                        Log.d("Last Map ID", mapId);
                        hasSetMap = false;
+                       Manager.close();
                    }else{
                        mapId = null;
                    }
@@ -157,6 +158,7 @@ public class AddNewTaskActivity extends AppCompatActivity{
         dbManager.insertMap(name,address,phone,website,LL[0],LL[1]);
 
         txtLocation.setText(name);
+        dbManager.close();
     }
 
     @Override

@@ -293,11 +293,7 @@ public class DbManager extends SQLiteAssetHelper {
     public int getMapIdByTaskId(int taskId){
         int MapId=0;
         SQLiteDatabase sqLiteDatabase = getReadableDatabase();
-        //Cursor cursor = sqLiteDatabase.query("tblTask",null,"mapId = ?",taskId,null,null,null);
-        //Cursor cursor = sqLiteDatabase.rawQuery("SElECT * FROM tblMap",null);
         Log.d("TASK ID ",taskId + "");
-        //String query = "SELECT mapId FROM tblTask  ;";
-        //Cursor cursor = sqLiteDatabase.rawQuery(query,null);
         Cursor cursor = sqLiteDatabase.rawQuery("SELECT * FROM tblTask WHERE mapId = '"+taskId+"' ",null);
         Log.d("CURSOR SIZE",cursor.getCount()+"");
         while (cursor.moveToNext()){
