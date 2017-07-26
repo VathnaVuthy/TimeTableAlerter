@@ -104,11 +104,8 @@ public class AddNewTaskActivity extends AppCompatActivity{
                    String TaskType = spinner.getSelectedItem().toString();
                    String Date = textView.getText().toString();
                    String Note = etxNote.getText().toString();
-                   //      Double Lat = mapViewActivity.Lat;
 
                    Log.d("ckcc", String.valueOf(etxTopic.getText()));
-                   //     Log.d("", String.valueOf(Lat));
-//                Log.d("ckcc", task.getmTopic());
 
                    Manager.insertTask(Topic, Subject, TaskType, Date, Note);
         //           Manager.close();

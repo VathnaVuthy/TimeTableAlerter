@@ -26,4 +26,11 @@ public class StartupActivity extends AppCompatActivity {
         Intent intent = new Intent(this, LoginActivity.class);
         startActivity(intent);
     }
+
+    private void startMainActiviy(){
+
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+
+    }
 }

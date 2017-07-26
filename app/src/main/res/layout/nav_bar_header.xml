@@ -21,7 +21,8 @@
         android:gravity="center"
         android:layout_height="30dp"
         android:text="KH"/>
-    <ImageView
+    <com.android.volley.toolbox.NetworkImageView
+        android:id="@+id/header_profile_pic"
         android:layout_width="85dp"
         android:layout_height="85dp"
         android:paddingTop="16dp"

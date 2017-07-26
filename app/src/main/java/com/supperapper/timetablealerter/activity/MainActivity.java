@@ -2,6 +2,10 @@ package com.supperapper.timetablealerter.activity;
 
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.media.Image;
+import android.net.Uri;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
 
@@ -14,14 +18,26 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.ImageRequest;
+import com.android.volley.Response;
+import com.android.volley.toolbox.NetworkImageView;
+import com.facebook.AccessToken;
+import com.facebook.GraphRequest;
+import com.facebook.GraphResponse;
+import com.facebook.Profile;
 import com.supperapper.timetablealerter.R;
+import com.supperapper.timetablealerter.dataset.App;
 import com.supperapper.timetablealerter.dataset.DynamicPagerAdapter;
 import com.supperapper.timetablealerter.dataset.SchoolPagerAdapter;
 import com.supperapper.timetablealerter.dataset.TaskPagerAdapter;
@@ -29,6 +45,15 @@ import com.supperapper.timetablealerter.fragment.AboutUsFragment;
 import com.supperapper.timetablealerter.fragment.SettingFragment;
 import com.supperapper.timetablealerter.service.NotificationChecker;
 import com.supperapper.timetablealerter.viewholder.DynamicAdapter;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     DrawerLayout drawerLayout;
@@ -42,6 +67,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     Menu copyMenu;
     boolean hasAddBtn;
     boolean hasScheduleBtn;
+    TextView txtUsername;
+    TextView txtEmail;
+    ImageView imgProfile;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,6 +95,43 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         navigationView.setNavigationItemSelectedListener(this);
         navigationView.getMenu().getItem(0).getSubMenu().getItem(0).setChecked(true);
 
+        View headerView = navigationView.getHeaderView(0);
+        txtUsername = (TextView) headerView.findViewById(R.id.txt_name);
+        txtEmail = (TextView) headerView.findViewById(R.id.txt_email);
+
+      //  final CircleImageView imgProfile = (CircleImageView)findViewById(R.id.header_profile_pic);
+
+        NetworkImageView imgProfile = (NetworkImageView) findViewById(R.id.header_profile_pic);
+
+     //    imgProfile = (ImageView) findViewById(R.id.header_profile_pic);
+        if(App.getInstance(MainActivity.this).getLoginMethod() == App.LOGIN_METHOD_USERNAME_PASSWORD){
+
+            txtUsername.setText("Larry Page");
+
+        } else {
+
+            Profile profile = Profile.getCurrentProfile();
+//            txtUsername.setText(profile.getName());
+//            txtEmail.setText(profile.getId());
+
+            Log.d("Login", "via facebook");
+            loadProfileFromFacebook();
+
+      //      String profileImageUrl = profile.getProfilePictureUri(230,230).toString();
+
+
+//            ImageRequest imageRequest = new ImageRequest(profileImageUrl, new com.android.volley.Response.Listener<Bitmap>() {
+//                @Override
+//                public void onResponse(Bitmap response) {
+//
+//                    imgProfile.setImageBitmap(response);
+//                }
+//            }, 230, 230, ImageView.ScaleType.CENTER, Bitmap.Config.RGB_565, null);
+ //           imgProfile.setImageUrl(profileImageUrl, App.getInstance(MainActivity.this).getImageLoader());
+
+         //   App.getInstance(MainActivity.this).addRequest(imageRequest);
+
+        }
 
         ViewPager viewPager = (ViewPager) findViewById(R.id.lyt_super);
         dynamicPagerAdapter = new DynamicPagerAdapter(getSupportFragmentManager(), MainActivity.this);
@@ -93,6 +158,68 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 //        }
 
     }
+
+    private void loadProfileFromFacebook(){
+
+        AccessToken accessToken = AccessToken.getCurrentAccessToken();
+        final GraphRequest request = GraphRequest.newMeRequest(
+                accessToken,
+
+                new GraphRequest.GraphJSONObjectCallback() {
+                    @Override
+                    public void onCompleted(JSONObject object, GraphResponse response) {
+                        // Insert your code here
+                        JSONObject result = response.getJSONObject();
+
+                        try {
+                            String name = result.getString("name");
+                            String email = result.getString("email");
+
+                            Log.d("name:", "I am" + name);
+
+                            txtUsername.setText(name);
+                            txtEmail.setText(email);
+//                            String url = Profile.getCurrentProfile().getProfilePictureUri(150,150).toString();
+//                            displayProfileImageFromServer(url);
+//                            if(result.has("picture")){
+//                                String profilePicUrl = result.getJSONObject("picture").getJSONObject("data").getString("url");
+//                                Bitmap profilePic= BitmapFactory.decodeStream(profilePicUrl );
+//                                imgProfile.setImageBitmap(profilePic);
+//
+//                            }
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+
+                    }
+                });
+
+        Bundle parameters = new Bundle();
+        parameters.putString("fields", "id,name,email,picture.width(150).height(150)");
+        request.setParameters(parameters);
+        request.executeAsync();
+    }
+
+    private void displayProfileImageFromServer(String imageUrl) {
+        ImageRequest request = new ImageRequest(imageUrl, new Response.Listener<Bitmap>() {
+            @Override
+            public void onResponse(Bitmap response) {
+                if(response != null){
+                    imgProfile.setImageBitmap(response);
+                }
+                Log.d("on", "Response");
+            }
+        }, 512, 512, ImageView.ScaleType.FIT_CENTER, Bitmap.Config.RGB_565, new com.android.volley.Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(MainActivity.this, "Error while loading profile image.", Toast.LENGTH_LONG).show();
+            }
+        });
+        App.getInstance(MainActivity.this).addRequest(request);
+    }
+
 
     public void onDayViewClicked(){
 //        fragmentManager = getSupportFragmentManager();

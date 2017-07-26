@@ -77,19 +77,22 @@
         <Button
             android:id="@+id/btn_submit"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="2"
             android:text="Sign In" />
 
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1"
             android:gravity="center"
             android:text="OR" />
 
-        <Button
+        <com.facebook.login.widget.LoginButton
             android:id="@+id/btn_login_fb"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="2"
             android:text="facebook"/>
 
     </LinearLayout>
