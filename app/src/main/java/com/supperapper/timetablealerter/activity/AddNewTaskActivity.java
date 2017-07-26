@@ -39,6 +39,7 @@ public class AddNewTaskActivity extends AppCompatActivity{
     Button btn_discard, btn_done;
     EditText etxTopic, etxSubject, etxNote;
     Spinner spinner;
+    boolean hasSetMap = false;
     private GoogleApiClient mGoogleApiClient;
 
 
@@ -99,6 +100,14 @@ public class AddNewTaskActivity extends AppCompatActivity{
                    Toast.makeText(context,"Please Select One Task", Toast.LENGTH_LONG).show();
                }else{
                    DbManager Manager = DbManager.getInstance(AddNewTaskActivity.this);
+                   String mapId;
+                   if(hasSetMap==true){
+                       mapId = Manager.getLastMapId();
+                       Log.d("Last Map ID", mapId);
+                       hasSetMap = false;
+                   }else{
+                       mapId = null;
+                   }
                    String Topic = etxTopic.getText().toString();
                    String Subject = etxSubject.getText().toString();
                    String TaskType = spinner.getSelectedItem().toString();
@@ -107,8 +116,9 @@ public class AddNewTaskActivity extends AppCompatActivity{
 
                    Log.d("ckcc", String.valueOf(etxTopic.getText()));
 
-                   Manager.insertTask(Topic, Subject, TaskType, Date, Note);
-        //           Manager.close();
+                   Manager.insertTask(Topic, Subject, TaskType, Date, Note,mapId);
+                   Manager.close();
+                   Log.d("Add TO DB Successfully","Success!");
                    onBackPressed();
                }
 
@@ -137,19 +147,22 @@ public class AddNewTaskActivity extends AppCompatActivity{
     }
     private void displaySelectedPlaceFromPlacePicker(Intent data) {
         Place placeSelected = PlacePicker.getPlace(this, data);
-
         String name = placeSelected.getName().toString();
         String address = placeSelected.getAddress().toString();
-        Log.d("TTA","Name " + name);
-        Log.d("TTA","LaLag " + placeSelected.getLatLng());
-        Log.d("TTA","Phone " + placeSelected.getPhoneNumber());
-        Log.d("TTA","Add " + placeSelected.getAddress());
-        Log.d("TTA","Web " + placeSelected.getWebsiteUri());
+        String phone = placeSelected.getPhoneNumber().toString();
+        String website = placeSelected.getWebsiteUri().toString();
+        String latLang = placeSelected.getLatLng().toString().replace("(","").replace(")","").replace("lat/lng: ","");
+        String [] LL = latLang.split(",");
+        DbManager dbManager = DbManager.getInstance(this);
+        dbManager.insertMap(name,address,phone,website,LL[0],LL[1]);
+
+        txtLocation.setText(name);
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == REQUEST_CODE_PLACEPICKER && resultCode == RESULT_OK) {
+            hasSetMap = true;
             displaySelectedPlaceFromPlacePicker(data);
         }
     }

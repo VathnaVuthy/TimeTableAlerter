@@ -11,6 +11,8 @@ import android.widget.TextView;
 
 import com.supperapper.timetablealerter.R;
 import com.supperapper.timetablealerter.activity.TaskDetailActivity;
+import com.supperapper.timetablealerter.database.DbManager;
+import com.supperapper.timetablealerter.dataset.MapClass;
 import com.supperapper.timetablealerter.dataset.Task;
 
 /**
@@ -75,7 +77,18 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
             intent.putExtra("date",task.getmDate());
             intent.putExtra("note",task.getmNote());
             intent.putExtra("id", task.getmID());
-            Log.d("ID:", task.getmID());
+            String id = task.getmID();
+            DbManager dbManager = DbManager.getInstance(context);
+            int mapId = dbManager.getMapIdByTaskId(Integer.parseInt(id));
+            MapClass mapClass = dbManager.getMapFromDb(mapId);
+            intent.putExtra("mapId",mapClass.getId());
+            intent.putExtra("mapName",mapClass.getName());
+            intent.putExtra("mapAddress",mapClass.getAddress());
+            intent.putExtra("mapPhone",mapClass.getPhone());
+            intent.putExtra("mapWebsite",mapClass.getWebsite());
+            intent.putExtra("mapLat",mapClass.getLat());
+            intent.putExtra("mapLang",mapClass.getLang());
+            dbManager.close();
             context.startActivity(intent);
 
 

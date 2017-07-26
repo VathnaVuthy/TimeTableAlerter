@@ -10,6 +10,7 @@ import android.widget.TextView;
 import com.readystatesoftware.sqliteasset.SQLiteAssetHelper;
 import com.supperapper.timetablealerter.R;
 import com.supperapper.timetablealerter.activity.MapViewActivity;
+import com.supperapper.timetablealerter.dataset.MapClass;
 import com.supperapper.timetablealerter.dataset.Schedule;
 import com.supperapper.timetablealerter.dataset.ScheduleNotify;
 import com.supperapper.timetablealerter.dataset.Task;
@@ -41,7 +42,7 @@ public class DbManager extends SQLiteAssetHelper {
     }
 
 
-    public void insertTask(String Topic, String Subject, String TaskType, String Date, String Note){
+    public void insertTask(String Topic, String Subject, String TaskType, String Date, String Note,String mapId){
 
 
         SQLiteDatabase write = getWritableDatabase();
@@ -52,7 +53,7 @@ public class DbManager extends SQLiteAssetHelper {
         row.put("date", Date);
      //   row.put("lat", Lat);
         row.put("note", Note);
-
+        row.put("mapId",mapId);
 
         write.insert("tblTask", null, row);
 
@@ -244,7 +245,6 @@ public class DbManager extends SQLiteAssetHelper {
     public void deleteSchedule(String TableName, String ColumnID, String[] ID){
 
         SQLiteDatabase db = this.getWritableDatabase();
-
         db.delete(TableName, ColumnID, ID);
 
     }
@@ -269,5 +269,58 @@ public class DbManager extends SQLiteAssetHelper {
         db.delete("tblTask", "taskid = ?", ID);
 
     }
-
+    public void insertMap(String name,String address,String phone,String website,String lat ,String lang){
+        SQLiteDatabase write = getWritableDatabase();
+        ContentValues row = new ContentValues();
+        row.put("name",name);
+        row.put("address",address);
+        row.put("phone",phone);
+        row.put("website",website);
+        row.put("lat",lat);
+        row.put("lang",lang);
+        write.insert("tblMap",null,row);
+        Log.d("Insert Map","SUCCESS");
+    }
+    public String getLastMapId(){
+        String MapId ="";
+        SQLiteDatabase sqLiteDatabase = getReadableDatabase();
+        Cursor cursor = sqLiteDatabase.query("tblMap",null,null,null,null,null,null);
+        while (cursor.moveToNext()){
+            MapId = cursor.getString(0);
+        }
+        return MapId;
+    }
+    public int getMapIdByTaskId(int taskId){
+        int MapId=0;
+        SQLiteDatabase sqLiteDatabase = getReadableDatabase();
+        //Cursor cursor = sqLiteDatabase.query("tblTask",null,"mapId = ?",taskId,null,null,null);
+        //Cursor cursor = sqLiteDatabase.rawQuery("SElECT * FROM tblMap",null);
+        Log.d("TASK ID ",taskId + "");
+        //String query = "SELECT mapId FROM tblTask  ;";
+        //Cursor cursor = sqLiteDatabase.rawQuery(query,null);
+        Cursor cursor = sqLiteDatabase.rawQuery("SELECT * FROM tblTask WHERE mapId = '"+taskId+"' ",null);
+        Log.d("CURSOR SIZE",cursor.getCount()+"");
+        while (cursor.moveToNext()){
+            MapId = cursor.getInt(8);
+            Log.d("CURSOR SIZE",cursor.getCount()+"" + MapId);
+        }
+        return MapId;
+    }
+    public MapClass getMapFromDb(int mapId){
+        MapClass map = new MapClass() ;
+        SQLiteDatabase sqLiteDatabase = getReadableDatabase();
+        Cursor cursor = sqLiteDatabase.rawQuery("SELECT * FROM tblMap WHERE mapId = '"+mapId+"' ",null);
+        while (cursor.moveToNext()){
+            String id = cursor.getString(0);
+            String name = cursor.getString(1);
+            String address = cursor.getString(2);
+            String phone = cursor.getString(3);
+            String website = cursor.getString(4);
+            String lat = cursor.getString(5);
+            String lag = cursor.getString(6);
+            map = new MapClass(id,name,address,phone,website,lat,lag);
+            break;
+        }
+        return map;
+    }
 }

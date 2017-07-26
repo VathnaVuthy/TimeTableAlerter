@@ -2,6 +2,7 @@ package com.supperapper.timetablealerter.activity;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.content.Intent;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -13,6 +14,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.DatePicker;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.supperapper.timetablealerter.R;
@@ -30,6 +32,10 @@ public class TaskDetailActivity extends AppCompatActivity {
     private TextView subject;
     private TextView date;
     private TextView note;
+    private TextView mapName;
+    private TextView mapAddress;
+    private TextView mapPhone;
+    private ImageView imgMap;
 
     String id;
     private int mYear,mMoth,mDay;
@@ -71,20 +77,43 @@ public class TaskDetailActivity extends AppCompatActivity {
         mMoth = calendar.get(Calendar.MONTH);
         mDay = calendar.get(Calendar.DAY_OF_MONTH);
 
+        //Map Information
+        mapName = (TextView) findViewById(R.id.tv_place_name);
+        mapAddress = (TextView) findViewById(R.id.tv_address);
+        mapPhone = (TextView) findViewById(R.id.tv_phone);
+        imgMap = (ImageView) findViewById(R.id.img_map);
+        mapName.setText(getIntent().getStringExtra("mapName"));
+        mapAddress.setText(getIntent().getStringExtra("mapAddress"));
+        mapPhone.setText(getIntent().getStringExtra("mapPhone"));
+
+        imgMap.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent mapIntent = new Intent(TaskDetailActivity.this,MapViewActivity.class);
+                String name = getIntent().getStringExtra("mapName");
+                String address = getIntent().getStringExtra("mapAddess");
+                String lat = getIntent().getStringExtra("mapLat");
+                String lang = getIntent().getStringExtra("mapLang");
+
+                mapIntent.putExtra("mapName",getIntent().getStringExtra("mapName"));
+                mapIntent.putExtra("mapAddress",getIntent().getStringExtra("mapAddress"));
+                mapIntent.putExtra("mapLat",getIntent().getStringExtra("mapLat"));
+                mapIntent.putExtra("mapLang",getIntent().getStringExtra("mapLang"));
+                Log.d("LAT lang",getIntent().getStringExtra("mapLat") + "-" + getIntent().getStringExtra("mapLang") );
+                startActivity(mapIntent);
+            }
+        });
+
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.toolbar_delete_edit, menu);
-
         itemEdit = menu.getItem(0);
         itemDelete = menu.getItem(1);
-
         itemEdit.setTitle("Save");
         itemDelete.setTitle("Delete");
-
         return true;
     }
 

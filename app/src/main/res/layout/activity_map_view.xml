@@ -5,42 +5,11 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="com.supperapper.timetablealerter.activity.MapViewActivity">
-    <LinearLayout
-        android:id="@+id/buttonLayout"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:layout_alignParentBottom="true"
-        android:background="@color/colorGray"
-        android:divider="?android:dividerVertical"
-        android:dividerPadding="8dp"
-        android:orientation="horizontal"
-        android:showDividers="middle">
-
-        <Button
-            android:id="@+id/btn_discard"
-            style="?android:buttonBarButtonStyle"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="DISCARD"
-            android:textColor="@color/colorWhite" />
-
-        <Button
-            android:id="@+id/btn_done"
-            style="?android:buttonBarButtonStyle"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="DONE"
-            android:textColor="@color/colorWhite" />
-
-    </LinearLayout>
     <com.google.android.gms.maps.MapView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/map_view"
-        ></com.google.android.gms.maps.MapView>
+        android:id="@+id/map_view">
+    </com.google.android.gms.maps.MapView>
 
 
 </LinearLayout>

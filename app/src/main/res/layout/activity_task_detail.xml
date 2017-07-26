@@ -14,201 +14,222 @@
         android:elevation="10dp"
         android:subtitleTextAppearance="@color/colorWhite"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
-        <!--<RelativeLayout-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="match_parent">-->
-            <!--<TextView-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="match_parent"-->
-                <!--android:textAllCaps="true"-->
-                <!--android:gravity="center"-->
-                <!--android:textSize="16sp"-->
-                <!--android:textColor="@color/colorWhite"-->
-                <!--android:textStyle="bold"-->
-                <!--android:layout_alignParentTop="true"-->
-                <!--android:layout_alignParentLeft="true"-->
-                <!--android:layout_alignParentStart="true" />-->
-        <!--</RelativeLayout>-->
-    </android.support.v7.widget.Toolbar>
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <TextView
-            android:textColor="@color/colorBlack"
-            android:layout_centerInParent="true"
-            android:layout_marginTop="16dp"
-            android:layout_toRightOf="@id/img_color"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Meeting detail"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            android:id="@+id/tv_header"
-            android:fontFamily="sans-serif-smallcaps"/>
-        <TextView
-            android:textColor="@color/colorBlack"
-            android:gravity="center_horizontal"
-            android:layout_below="@+id/tv_header"
-            android:textSize="16sp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="This is the detail"
-            android:fontFamily="sans-serif-smallcaps" />
-    </RelativeLayout>
 
+    </android.support.v7.widget.Toolbar>
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
         android:orientation="vertical"
-        android:padding="16dp"
-        android:weightSum="1">
-
-        <View
+        android:layout_weight="3">
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginBottom="16dp"
-            android:background="@color/colorGray"></View>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="37dp"
-            android:layout_marginBottom="6dp"
-            android:orientation="horizontal">
-
+            android:layout_height="wrap_content">
             <TextView
                 android:textColor="@color/colorBlack"
-                android:gravity="center_vertical"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:text="Topic" />
-
-            <TextView
-                android:textColor="@color/colorBlack"
+                android:layout_centerInParent="true"
+                android:layout_marginTop="16dp"
+                android:layout_toRightOf="@id/img_color"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text=":" />
-
-            <EditText
-                android:id="@+id/tv_topic_detail"
-                android:layout_width="0dp"
-                android:textSize="15sp"
-                android:layout_height="match_parent"
-                android:layout_weight="3"
-                android:paddingLeft="16dp"
+                android:text="Meeting detail"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:id="@+id/tv_header"
+                android:fontFamily="sans-serif-smallcaps"/>
+            <TextView
                 android:textColor="@color/colorBlack"
-                android:enabled="false"
-                android:hint="Restoring Database System" />
-        </LinearLayout>
-
+                android:gravity="center_horizontal"
+                android:layout_below="@+id/tv_header"
+                android:textSize="16sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="This is the detail"
+                android:fontFamily="sans-serif-smallcaps" />
+        </RelativeLayout>
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="37dp"
-            android:layout_marginBottom="6dp"
-            android:orientation="horizontal">
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="16dp"
+            android:weightSum="1">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginBottom="16dp"
+                android:background="@color/colorGray"></View>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="37dp"
+                android:layout_marginBottom="6dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:textColor="@color/colorBlack"
+                    android:gravity="center_vertical"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="Topic" />
+
+                <TextView
+                    android:textColor="@color/colorBlack"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=":" />
+
+                <EditText
+                    android:id="@+id/tv_topic_detail"
+                    android:layout_width="0dp"
+                    android:textSize="15sp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="3"
+                    android:paddingLeft="16dp"
+                    android:textColor="@color/colorBlack"
+                    android:enabled="false"
+                    android:hint="Restoring Database System" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="37dp"
+                android:layout_marginBottom="6dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:textColor="@color/colorBlack"
+                    android:gravity="center_vertical"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="Subject" />
+
+                <TextView
+                    android:textColor="@color/colorBlack"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=":" />
+
+                <EditText
+                    android:enabled="false"
+                    android:textSize="15sp"
+                    android:textColor="@color/colorBlack"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="3"
+                    android:paddingLeft="16dp"
+                    android:id="@+id/tv_subject_detail"
+                    android:hint="Writing Script For Database System" />
+            </LinearLayout>
+
+
+
+            <LinearLayout
+
+                android:layout_width="match_parent"
+                android:layout_height="37dp"
+                android:layout_marginBottom="6dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:textColor="@color/colorBlack"
+                    android:gravity="center_vertical"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="Date" />
+
+                <TextView
+                    android:textColor="@color/colorBlack"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=":" />
+
+                <EditText
+                    android:enabled="false"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="15sp"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="3"
+                    android:paddingLeft="16dp"
+                    android:id="@+id/tv_date_detail"
+                    android:hint="12-Aug-2017" />
+            </LinearLayout>
 
             <TextView
-                android:textColor="@color/colorBlack"
-                android:gravity="center_vertical"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:text="Subject" />
-
-            <TextView
-                android:textColor="@color/colorBlack"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text=":" />
+                android:layout_marginTop="8dp"
+                android:text="NOTE" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginBottom="8dp"
+                android:background="@color/colorGray"></View>
 
             <EditText
+                android:id="@+id/et_note_detail"
+                android:layout_width="match_parent"
+                android:layout_height="81dp"
+                android:layout_weight="0.11"
                 android:enabled="false"
-                android:textSize="15sp"
-                android:textColor="@color/colorBlack"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="3"
-                android:paddingLeft="16dp"
-                android:id="@+id/tv_subject_detail"
-                android:hint="Writing Script For Database System" />
-        </LinearLayout>
-
-
-
-        <LinearLayout
-
-            android:layout_width="match_parent"
-            android:layout_height="37dp"
-            android:layout_marginBottom="6dp"
-            android:orientation="horizontal">
-
-            <TextView
-                android:textColor="@color/colorBlack"
-                android:gravity="center_vertical"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:text="Date" />
-
-            <TextView
-                android:textColor="@color/colorBlack"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text=":" />
-
-            <EditText
-                android:enabled="false"
-                android:textColor="@color/colorBlack"
-                android:textSize="15sp"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="3"
-                android:paddingLeft="16dp"
-                android:id="@+id/tv_date_detail"
-                android:hint="12-Aug-2017" />
-        </LinearLayout>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="NOTE" />
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginBottom="8dp"
-            android:background="@color/colorGray"></View>
-
-        <EditText
-            android:textColor="@color/colorBlack"
-            android:enabled="false"
-            android:hint="- Call Ms Bopha before meeting
+                android:gravity="top"
+                android:hint="- Call Ms Bopha before meeting
 - Bring Doc in the drawer downstairs"
-            android:layout_width="match_parent"
-            android:textSize="16sp"
-            android:id="@+id/et_note_detail"
-            android:layout_height="81dp"
-            android:gravity="top"
-            android:layout_weight="0.11" />
+                android:textColor="@color/colorBlack"
+                android:textSize="16sp" />
 
+            <TextView
+                android:textColor="@color/colorBlack"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="LOCATION" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginBottom="4dp"
+                android:background="@color/colorGray"></View>
+
+
+        </LinearLayout>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        android:layout_weight="1">
         <TextView
-            android:textColor="@color/colorBlack"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="CKCC"
+            android:layout_marginBottom="2px"
+            android:id="@+id/tv_place_name"/>
+        <TextView
+            android:gravity="center"
+            android:text="Address"
+            android:layout_marginBottom="2px"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_address"/>
+        <TextView
+            android:gravity="center"
+            android:text="Phone"
+            android:layout_marginBottom="8px"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_phone"/>
+        <ImageView
+            android:layout_marginBottom="2px"
+            android:layout_gravity="center"
+            android:id="@+id/img_map"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="LOCATION" />
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginBottom="8dp"
-            android:background="@color/colorGray"></View>
-
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="78dp"
-            android:src="@drawable/map"
-            android:layout_weight="0.12" />
+            android:src="@drawable/map"/>
     </LinearLayout>
 </LinearLayout>
