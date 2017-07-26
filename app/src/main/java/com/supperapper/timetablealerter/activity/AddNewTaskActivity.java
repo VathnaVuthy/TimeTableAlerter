@@ -121,9 +121,7 @@ public class AddNewTaskActivity extends AppCompatActivity{
         txtLocation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 startPlacePickerActivity();
-
             }
         });
     }
@@ -174,14 +172,12 @@ public class AddNewTaskActivity extends AppCompatActivity{
     }
     private DatePickerDialog.OnDateSetListener
             datePickerListener = new DatePickerDialog.OnDateSetListener() {
-
         @Override
         public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
             SimpleDateFormat simpledateformat = new SimpleDateFormat("EEEE");
             Date date = new Date(year, month, dayOfMonth-1);
             String dayOfWeek = simpledateformat.format(date);
             textView.setText(dayOfWeek + "-" + dayOfMonth + "-" + (month+1)+ "-" + year);
-
         }
     };
 }
