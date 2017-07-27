@@ -9,6 +9,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.supperapper.timetablealerter.R;
+import com.supperapper.timetablealerter.database.DbManager;
+import com.supperapper.timetablealerter.dataset.MapClass;
 import com.supperapper.timetablealerter.dataset.Schedule;
 import com.supperapper.timetablealerter.dataset.Task;
 
@@ -44,14 +46,18 @@ public class DynamicAdapter extends RecyclerView.Adapter<DynamicAdapter.DynamicV
             holder.type.setText(task.getmTaskType());
             holder.note_or_st_et.setText(task.getmNote());
             holder.date.setText(task.getmDate());
-//            holder.location_or_room.setText(task.getmLocation().toString());
+            DbManager dbManager = DbManager.getInstance(context);
+            int mapId = dbManager.getMapIdByTaskId(Integer.parseInt(task.getmID()));
+            MapClass map = dbManager.getMapFromDb(mapId);
+            holder.location_or_room.setText(map.getName());
+            dbManager.close();
         }else{
             Schedule schedule = schedules[(schedules.length -1)];
             holder.topic.setText(schedule.getmSubject());
             holder.teacher.setText(schedule.getmTeacher());
             holder.note_or_st_et.setText(schedule.getmStartTime() + "-" + schedule.getmEndTime());
             holder.type.setText(schedule.getmType());
-        //    holder.date.setText(schedule.getmDay().toString());
+            holder.date.setText(schedule.getmDay().toString());
             holder.location_or_room.setText(schedule.getmRoom());
         }
     }
