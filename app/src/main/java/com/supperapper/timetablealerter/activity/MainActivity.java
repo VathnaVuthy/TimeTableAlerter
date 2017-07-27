@@ -77,6 +77,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     View headerView;
     SharedPreferences sharedPreferences;
     boolean preferences = false;
+    User user;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -204,7 +205,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                             editor.putString("email", email);
                             editor.commit();
 
-                            User user = new User(id, name, email);
+                            user = new User(id, name, email);
 
                             txtUsername.setText(user.getName());
                             txtEmail.setText(user.getEmail());
@@ -380,7 +381,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         intent.putExtra("name", txtUsername.getText());
         intent.putExtra("email", txtEmail.getText());
 
-        Log.d("name:" ,"i am" + txtUsername.getText());
+        Log.d("name:" ,"i am" + user.getName());
 
         startActivity(intent);
     }
