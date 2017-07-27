@@ -161,7 +161,7 @@ public class DbManager extends SQLiteAssetHelper {
             String note = cursor.getString(7);
             String[] myDay = date.split("-");
             if(myDay[0].toLowerCase().equals(day.toLowerCase())){
-                Task task = new Task(topic,subject,type,myDay[0],note);
+                Task task = new Task(topic,subject,type,myDay[0],null,note,String.valueOf(id));
                 tasks[index] = task;
                 index++;
             }

@@ -43,7 +43,10 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
         holder.tv_type.setText(task.getmTaskType().toString());
         holder.tv_note.setText(task.getmNote().toString());
         holder.tv_date.setText(task.getmDate().toString());
-   //     holder.tv_location.setText(task.getmLocation().toString());
+        DbManager dbManager = DbManager.getInstance(context);
+        int mapId = dbManager.getMapIdByTaskId(Integer.parseInt(task.getmID()));
+        MapClass map = dbManager.getMapFromDb(mapId);
+        holder.tv_location.setText(map.getName());
     }
 
     @Override
