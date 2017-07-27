@@ -113,28 +113,32 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         String name = sharedPreferences.getString("name", null);
         String email = sharedPreferences.getString("email", null);
 
+        txtUsername.setText("Your name");
+        txtEmail.setText("example@gmail.com");
+        circleImageProfile.setImageResource(R.drawable.profile_larrypage);
 
+      if(App.getInstance(MainActivity.this).getLogin() == App.IS_LOGIN){
 
-        if(App.getInstance(MainActivity.this).getLoginMethod() == App.LOGIN_METHOD_USERNAME_PASSWORD){
+          if(App.getInstance(MainActivity.this).getLoginMethod() == App.LOGIN_METHOD_USERNAME_PASSWORD){
 
-            txtUsername.setText("Larry Page");
-            txtEmail.setText("larrypage@gmail.com");
-            circleImageProfile.setImageResource(R.drawable.profile_larrypage);
+              txtUsername.setText("Larry Page");
+              txtEmail.setText("larrypage@gmail.com");
+              circleImageProfile.setImageResource(R.drawable.profile_larrypage);
 
-        } else {
+          } else if (App.getInstance(MainActivity.this).getLoginMethod() == App.LOGIN_METHOD_FACEBOOK){
 
-            Profile profile = Profile.getCurrentProfile();
+              Profile profile = Profile.getCurrentProfile();
 
-            Log.d("Login", "via facebook");
-            if(name != null){
+              Log.d("Login", "via facebook");
+              if(name != null){
 
-                txtUsername.setText(name);
-                txtEmail.setText(email);
+                  txtUsername.setText(name);
+                  txtEmail.setText(email);
 
-            } else if(name == null){
+              } else if(name == null){
 
-                loadProfileFromFacebook();
-            }
+                  loadProfileFromFacebook();
+              }
 
             String profileImageUrl = profile.getProfilePictureUri(230,230).toString();
 
@@ -148,7 +152,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             App.getInstance(this).addRequest(imageRequest);
 
-        }
+          }
+
+      } else if (App.getInstance(MainActivity.this).getLogin() == App.NOT_LOGIN){
+
+
+          txtUsername.setText("Your name");
+          txtEmail.setText("example@gmail.com");
+          circleImageProfile.setImageResource(R.drawable.profile_larrypage);
+
+      }
+
+
 
         ViewPager viewPager = (ViewPager) findViewById(R.id.lyt_super);
         dynamicPagerAdapter = new DynamicPagerAdapter(getSupportFragmentManager(), MainActivity.this);
@@ -381,7 +396,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         intent.putExtra("name", txtUsername.getText());
         intent.putExtra("email", txtEmail.getText());
 
-        Log.d("name:" ,"i am" + user.getName());
 
         startActivity(intent);
     }

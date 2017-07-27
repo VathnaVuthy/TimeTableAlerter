@@ -16,9 +16,10 @@ public class App {
 
     public static final int LOGIN_METHOD_USERNAME_PASSWORD = 0;
     public static final int LOGIN_METHOD_FACEBOOK = 1;
-
+    public static final int IS_LOGIN = 2;
+    public static final int NOT_LOGIN = 3;
     private static App instance;
-
+    private int login;
     private int loginMethod;
 
     private RequestQueue requestQueue;
@@ -65,5 +66,14 @@ public class App {
 
     public void setLoginMethod(int loginMethod) {
         this.loginMethod = loginMethod;
+    }
+    public void setLogin(int login){
+
+        this.login = login;
+    }
+
+    public int getLogin(){
+
+        return  login;
     }
 }

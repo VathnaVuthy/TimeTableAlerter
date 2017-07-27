@@ -12,6 +12,13 @@
         <item>OTHERS</item>
     </string-array>
 
+    <string-array name="time">
+        <item>10mn</item>
+        <item>20mn</item>
+        <item>30mn</item>
+        <item>60mn</item>
+    </string-array>
+
     <string name="gooleApiKey">AIzaSyA-bNdfTN_oy7co-egopFuXzcWZC8YnY7U</string>
     <string name="googlePlaceAPIKey">AIzaSyAFzWwirlvwykih2ejCsauNKfjBtHmQJBA</string>
     <string name="facebook_api_key">498359747179671</string>

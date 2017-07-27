@@ -16,7 +16,7 @@ public class StartupActivity extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                startLoginActivity();
+                startMainActiviy();
                 finish();
             }
         }, 2000);
