@@ -31,6 +31,8 @@ import com.supperapper.timetablealerter.dataset.App;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 /**
  * Created by USER on 5/16/2017.
  */
@@ -49,25 +51,55 @@ public class SettingActivity extends AppCompatActivity  {
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Setting");
 
+        String name = getIntent().getStringExtra("name");
+        String email = getIntent().getStringExtra("email");
+
+        Log.d("name:", "i am" + name);
         etxUsername = (EditText) findViewById(R.id.etx_username);
         etxEmail = (EditText) findViewById(R.id.etx_email);
-        imgProfile = (NetworkImageView) findViewById(R.id.img_profile_picture);
+
+        etxUsername.setText(name);
+        etxEmail.setText(email);
+
+        final CircleImageView circleImageView = (CircleImageView) findViewById(R.id.img_profile_picture);
+
 
         btnLogin = (Button) findViewById(R.id.btn_login);
         btnLogout = (Button) findViewById(R.id.btn_logout);
 
+        if(App.getInstance(SettingActivity.this).getLoginMethod() == App.LOGIN_METHOD_USERNAME_PASSWORD){
 
-        btnLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+            circleImageView.setImageResource(R.drawable.profile_larrypage);
+        } else {
 
-                Intent intent = new Intent(SettingActivity.this, LoginActivity.class);
-                startActivity(intent);
-                finish();
+            String profilePicUrl = Profile.getCurrentProfile().getProfilePictureUri(230,230).toString();
 
-            }
-        });
+            ImageRequest imageRequest = new ImageRequest(profilePicUrl, new Response.Listener<Bitmap>() {
+                @Override
+                public void onResponse(Bitmap response) {
+                    circleImageView.setImageBitmap(response);
+                }
+            }, 230, 230, ImageView.ScaleType.FIT_CENTER, Bitmap.Config.RGB_565, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
 
+                    Log.d("Image", "null");
+                }
+            });
+            App.getInstance(this).addRequest(imageRequest);
+
+            btnLogin.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    Intent intent = new Intent(SettingActivity.this, LoginActivity.class);
+                    startActivity(intent);
+                    finish();
+
+                }
+            });
+
+        }
 
         btnLogout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -88,38 +120,7 @@ public class SettingActivity extends AppCompatActivity  {
         });
     }
 
-//    private void loadProfileFromFacebook(){
-//
-//        AccessToken accessToken = AccessToken.getCurrentAccessToken();
-//        final GraphRequest request = GraphRequest.newMeRequest(accessToken,
-//                "/me/",
-//                new GraphRequest.Callback(){
-//
-//                    @Override
-//                    public void onCompleted(GraphResponse response) {
-//
-//                        JSONObject result = response.getJSONObject();
-//
-//                        try {
-//                            String name = result.getString("name");
-//                            String email = result.getString("email");
-//
-//                            etxUsername.setText(name);
-//                            etxEmail.setText(email);
-//
-//                            String imgUrl = Profile.getCurrentProfile().getProfilePictureUri(230,230).toString();
-//                            disPlayFacebookProfilePicture(imgUrl);
-//                        } catch (JSONException e) {
-//                            e.printStackTrace();
-//                        }
-//                    }
-//                });
-//
-//        Bundle parameters = new Bundle();
-//        parameters.putString("field", "id,name,email");
-//        request.setParameters(parameters);
-//        request.executeAsync();
-//    }
+
 
      private void loadProfileFromFacebook() {
         Log.d("ckcc", "loadProfileFromFacebook");

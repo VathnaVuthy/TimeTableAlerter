@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:background="@drawable/nav_header_pic"
@@ -21,7 +22,9 @@
         android:gravity="center"
         android:layout_height="30dp"
         android:text="KH"/>
-    <com.android.volley.toolbox.NetworkImageView
+    <de.hdodenhof.circleimageview.CircleImageView
+        app:civ_border_color="@color/colorWhite"
+        app:civ_border_width="2dp"
         android:id="@+id/header_profile_pic"
         android:layout_width="85dp"
         android:layout_height="85dp"

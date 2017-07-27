@@ -1,7 +1,9 @@
 package com.supperapper.timetablealerter.activity;
 
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.media.Image;
@@ -18,6 +20,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -29,6 +32,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.ImageRequest;
 import com.android.volley.Response;
 import com.android.volley.toolbox.NetworkImageView;
@@ -41,6 +45,7 @@ import com.supperapper.timetablealerter.dataset.App;
 import com.supperapper.timetablealerter.dataset.DynamicPagerAdapter;
 import com.supperapper.timetablealerter.dataset.SchoolPagerAdapter;
 import com.supperapper.timetablealerter.dataset.TaskPagerAdapter;
+import com.supperapper.timetablealerter.dataset.User;
 import com.supperapper.timetablealerter.fragment.AboutUsFragment;
 import com.supperapper.timetablealerter.fragment.SettingFragment;
 import com.supperapper.timetablealerter.service.NotificationChecker;
@@ -49,9 +54,8 @@ import com.supperapper.timetablealerter.viewholder.DynamicAdapter;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
+
+import java.io.ByteArrayOutputStream;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -70,6 +74,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     TextView txtUsername;
     TextView txtEmail;
     ImageView imgProfile;
+    View headerView;
+    SharedPreferences sharedPreferences;
+    boolean preferences = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -95,41 +102,50 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         navigationView.setNavigationItemSelectedListener(this);
         navigationView.getMenu().getItem(0).getSubMenu().getItem(0).setChecked(true);
 
-        View headerView = navigationView.getHeaderView(0);
+        headerView = navigationView.getHeaderView(0);
         txtUsername = (TextView) headerView.findViewById(R.id.txt_name);
         txtEmail = (TextView) headerView.findViewById(R.id.txt_email);
 
-      //  final CircleImageView imgProfile = (CircleImageView)findViewById(R.id.header_profile_pic);
+         final CircleImageView circleImageProfile = (CircleImageView) headerView.findViewById(R.id.header_profile_pic);
+         sharedPreferences = MainActivity.this.getPreferences(Context.MODE_PRIVATE);
 
-        NetworkImageView imgProfile = (NetworkImageView) findViewById(R.id.header_profile_pic);
+        String name = sharedPreferences.getString("name", null);
+        String email = sharedPreferences.getString("email", null);
 
-     //    imgProfile = (ImageView) findViewById(R.id.header_profile_pic);
+
+
         if(App.getInstance(MainActivity.this).getLoginMethod() == App.LOGIN_METHOD_USERNAME_PASSWORD){
 
             txtUsername.setText("Larry Page");
+            txtEmail.setText("larrypage@gmail.com");
+            circleImageProfile.setImageResource(R.drawable.profile_larrypage);
 
         } else {
 
             Profile profile = Profile.getCurrentProfile();
-//            txtUsername.setText(profile.getName());
-//            txtEmail.setText(profile.getId());
 
             Log.d("Login", "via facebook");
-            loadProfileFromFacebook();
+            if(name != null){
 
-      //      String profileImageUrl = profile.getProfilePictureUri(230,230).toString();
+                txtUsername.setText(name);
+                txtEmail.setText(email);
 
+            } else if(name == null){
 
-//            ImageRequest imageRequest = new ImageRequest(profileImageUrl, new com.android.volley.Response.Listener<Bitmap>() {
-//                @Override
-//                public void onResponse(Bitmap response) {
-//
-//                    imgProfile.setImageBitmap(response);
-//                }
-//            }, 230, 230, ImageView.ScaleType.CENTER, Bitmap.Config.RGB_565, null);
- //           imgProfile.setImageUrl(profileImageUrl, App.getInstance(MainActivity.this).getImageLoader());
+                loadProfileFromFacebook();
+            }
 
-         //   App.getInstance(MainActivity.this).addRequest(imageRequest);
+            String profileImageUrl = profile.getProfilePictureUri(230,230).toString();
+
+            ImageRequest imageRequest = new ImageRequest(profileImageUrl, new Response.Listener<Bitmap>() {
+                @Override
+                public void onResponse(Bitmap response) {
+
+                    circleImageProfile.setImageBitmap(response);
+                }
+            }, 230, 230, ImageView.ScaleType.FIT_XY, Bitmap.Config.RGB_565, null);
+
+            App.getInstance(this).addRequest(imageRequest);
 
         }
 
@@ -159,57 +175,67 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     }
 
-    private void loadProfileFromFacebook(){
-
+    private void loadProfileFromFacebook() {
+        Log.d("ckcc", "loadProfileFromFacebook");
         AccessToken accessToken = AccessToken.getCurrentAccessToken();
-        final GraphRequest request = GraphRequest.newMeRequest(
+        final GraphRequest request = GraphRequest.newGraphPathRequest(
                 accessToken,
-
-                new GraphRequest.GraphJSONObjectCallback() {
+                "/me/",
+                new GraphRequest.Callback() {
                     @Override
-                    public void onCompleted(JSONObject object, GraphResponse response) {
-                        // Insert your code here
+                    public void onCompleted(GraphResponse response) {
+                        preferences = true;
+                        Log.d("ckcc", "loadProfileFromFacebook completed");
                         JSONObject result = response.getJSONObject();
 
                         try {
+                            String id = result.getString("id");
                             String name = result.getString("name");
                             String email = result.getString("email");
 
-                            Log.d("name:", "I am" + name);
 
-                            txtUsername.setText(name);
-                            txtEmail.setText(email);
-//                            String url = Profile.getCurrentProfile().getProfilePictureUri(150,150).toString();
-//                            displayProfileImageFromServer(url);
-//                            if(result.has("picture")){
-//                                String profilePicUrl = result.getJSONObject("picture").getJSONObject("data").getString("url");
-//                                Bitmap profilePic= BitmapFactory.decodeStream(profilePicUrl );
-//                                imgProfile.setImageBitmap(profilePic);
-//
-//                            }
+                       //     Uri image = com.facebook.internal.ImageRequest.getProfilePictureUri(result.optString("id"), 230, 230);
 
+                       //     Log.d("Profile",image.toString());
+
+                            SharedPreferences.Editor editor = sharedPreferences.edit();
+                            editor.putString("id", id);
+                            editor.putString("name", name);
+                            editor.putString("email", email);
+                            editor.commit();
+
+                            User user = new User(id, name, email);
+
+                            txtUsername.setText(user.getName());
+                            txtEmail.setText(user.getEmail());
+                       //     circleImageProfile.setImageURI(image);
+                       //     circleImageProfile.setImageURI(image);
+                      //      imgProfile.setImageURI(image);
+
+//                            String imageUrl = Profile.getCurrentProfile().getProfilePictureUri(230, 230).toString();
+//                            displayProfileImageFromServer(imageUrl);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
-
 
                     }
                 });
 
         Bundle parameters = new Bundle();
-        parameters.putString("fields", "id,name,email,picture.width(150).height(150)");
+        parameters.putString("fields", "id,name,email");
         request.setParameters(parameters);
         request.executeAsync();
+
     }
+
 
     private void displayProfileImageFromServer(String imageUrl) {
         ImageRequest request = new ImageRequest(imageUrl, new Response.Listener<Bitmap>() {
             @Override
             public void onResponse(Bitmap response) {
-                if(response != null){
                     imgProfile.setImageBitmap(response);
-                }
-                Log.d("on", "Response");
+                    Log.d("Respone while null:", String.valueOf(response));
+                    Log.d("TTA", String.valueOf(imgProfile));
             }
         }, 512, 512, ImageView.ScaleType.FIT_CENTER, Bitmap.Config.RGB_565, new com.android.volley.Response.ErrorListener() {
             @Override
@@ -348,22 +374,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     }
     public void onSettingClicked(){
-//        toolbar.setTitle("Setting");
-//        fragmentManager = getSupportFragmentManager();
-//        fragmentTransaction = fragmentManager.beginTransaction();
-//        SettingFragment settingFragment = new SettingFragment();
-//        fragmentTransaction.replace(R.id.lyt_super,settingFragment);
-//        fragmentTransaction.commit();
-//
-//        if(hasAddBtn==true){
-//            copyMenu.removeItem(R.id.add_new_task);
-//            hasAddBtn = false;
-//        }
-//        if(hasScheduleBtn==true){
-//            copyMenu.removeItem(R.id.add_schedule);
-//            hasScheduleBtn = false;
-//        }
+
         Intent intent = new Intent(this,SettingActivity.class);
+
+        intent.putExtra("name", txtUsername.getText());
+        intent.putExtra("email", txtEmail.getText());
+
+        Log.d("name:" ,"i am" + txtUsername.getText());
+
         startActivity(intent);
     }
     public void onAboutUsClicked(){
