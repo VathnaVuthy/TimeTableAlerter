@@ -39,4 +39,13 @@ public class OtherFragment extends Fragment {
         mRecyclerView.setAdapter(mTaskAdapter);
         return view;
     }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        DbManager dbManager = DbManager.getInstance(getContext());
+        Task[] tasks = dbManager.getAlltasks(new String[]{"OTHERS"});
+        mTaskAdapter = new TaskAdapter(tasks);
+        mRecyclerView.setAdapter(mTaskAdapter);
+    }
 }

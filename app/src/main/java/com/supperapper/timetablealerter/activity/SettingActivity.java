@@ -185,10 +185,9 @@ public class SettingActivity extends AppCompatActivity  {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
-                if (position == 1){
+               String pos = parent.getItemAtPosition(position).toString();
 
-                    Log.d("Positon:", "1");
-                }
+                    Log.d("Positon:", pos);
             }
 
             @Override

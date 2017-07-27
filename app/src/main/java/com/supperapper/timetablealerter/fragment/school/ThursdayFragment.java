@@ -46,4 +46,13 @@ public class ThursdayFragment extends Fragment {
         mRecyclerView.setAdapter(schoolAdapter);
         return view;
     }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        DbManager dbManager = DbManager.getInstance(getContext());
+        Schedule[] schedules = dbManager.getAllSchdule("tblthursdayschedule");
+        schoolAdapter = new SchoolAdapter(schedules);
+        mRecyclerView.setAdapter(schoolAdapter);
+    }
 }
