@@ -2,6 +2,7 @@ package com.supperapper.timetablealerter.activity;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
@@ -160,15 +161,28 @@ public class TaskDetailActivity extends AppCompatActivity {
 
             if (itemDelete.getTitle().equals("Delete")){
 
-                DbManager dbManager = DbManager.getInstance(TaskDetailActivity.this);
-                dbManager.deleteTask(new String[]{id});
-                dbManager.close();
-                onBackPressed();
+                AlertDialog.Builder builder = new AlertDialog.Builder(TaskDetailActivity.this);
+                builder.setTitle("CONFIRMATION");
+                builder.setMessage("Are you sure want to delete this task?");
+
+                builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        DbManager dbManager = DbManager.getInstance(TaskDetailActivity.this);
+                        dbManager.deleteTask(new String[]{id});
+                        dbManager.close();
+                        onBackPressed();
+                    }
+                });
+                builder.setNegativeButton("No", null);
+                builder.show();
+
+
 
             } else {
 
                 edit = true;
-
+                disableEditText();
                 topic.setText(getIntent().getStringExtra("topic"));
                 subject.setText(getIntent().getStringExtra("subject"));
                 date.setText(getIntent().getStringExtra("date"));

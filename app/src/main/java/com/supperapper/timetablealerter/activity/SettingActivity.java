@@ -53,6 +53,7 @@ public class SettingActivity extends AppCompatActivity  {
     Spinner spinner;
     SharedPreferences sharedPreferences;
     Switch allowNotification;
+   public static String isLogin = "ISLOGIN";
     @Override
     protected void onCreate( Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -76,7 +77,8 @@ public class SettingActivity extends AppCompatActivity  {
 
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
 
-        Log.d("name:", "i am" + name);
+        final String lastlogin = LoginActivity.getDefaults(LoginActivity.LAST_LOGIN_METHOD, this);
+        Log.d("Setting", "lastlogin" + lastlogin);
         etxUsername = (EditText) findViewById(R.id.etx_username);
         etxEmail = (EditText) findViewById(R.id.etx_email);
 
@@ -90,19 +92,12 @@ public class SettingActivity extends AppCompatActivity  {
         btnLogout = (Button) findViewById(R.id.btn_logout);
         allowNotification = (Switch) findViewById(R.id.switch_allow_notification);
 
+        String loginButton = getDefaults(isLogin, this);
 
-        if(App.getInstance(SettingActivity.this).getLogin() == App.IS_LOGIN){
+        if (lastlogin != null){
 
-
-            btnLogin.setVisibility(View.INVISIBLE);
-            btnLogout.setVisibility(View.VISIBLE);
-
-            if(App.getInstance(SettingActivity.this).getLoginMethod() == App.LOGIN_METHOD_USERNAME_PASSWORD){
-
-
-                circleImageView.setImageResource(R.drawable.profile_larrypage);
-            } else if (App.getInstance(SettingActivity.this).getLoginMethod() == App.LOGIN_METHOD_FACEBOOK){
-
+            if (lastlogin.equals("facebook")){
+                Log.d("Setting login", "via facebook");
 
                 String profilePicUrl = Profile.getCurrentProfile().getProfilePictureUri(230,230).toString();
 
@@ -119,9 +114,30 @@ public class SettingActivity extends AppCompatActivity  {
                 });
                 App.getInstance(this).addRequest(imageRequest);
 
+            } else {
+                Log.d("Setting login", "via Username");
+
+                circleImageView.setImageResource(R.drawable.profile_larrypage);
+
+
 
             }
+        }
 
+
+        if (loginButton != null){
+
+            if (loginButton.equals("login")){
+
+                btnLogin.setVisibility(View.INVISIBLE);
+                btnLogout.setVisibility(View.VISIBLE);
+
+
+            } else {
+
+                btnLogin.setVisibility(View.VISIBLE);
+                btnLogout.setVisibility(View.INVISIBLE);
+            }
 
         } else {
 
@@ -130,12 +146,20 @@ public class SettingActivity extends AppCompatActivity  {
 
         }
 
+
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
 
-                App.getInstance(SettingActivity.this).setLogin(App.IS_LOGIN);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.remove(isLogin);
+                editor.commit();
+
+                setDefaults(isLogin, "login", SettingActivity.this);
+
+                Log.d("button", "login" + getDefaults(isLogin, SettingActivity.this));
+             //   App.getInstance(SettingActivity.this).setLogin(App.IS_LOGIN);
                 Intent intent = new Intent(SettingActivity.this, LoginActivity.class);
                 startActivity(intent);
                 finish();
@@ -146,14 +170,26 @@ public class SettingActivity extends AppCompatActivity  {
         btnLogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                App.getInstance(SettingActivity.this).setLogin(App.NOT_LOGIN);
+           //     App.getInstance(SettingActivity.this).setLogin(App.NOT_LOGIN);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.remove(isLogin);
+                editor.remove(LoginActivity.LAST_LOGIN_METHOD);
+                editor.commit();
 
-                if(App.getInstance(SettingActivity.this).getLoginMethod() == App.LOGIN_METHOD_USERNAME_PASSWORD){
-
-
-                } else {
+                Log.d("button", "logout" + getDefaults(isLogin, SettingActivity.this));
+//                if(App.getInstance(SettingActivity.this).getLoginMethod() == App.LOGIN_METHOD_USERNAME_PASSWORD){
+//
+//
+//                } else {
+//
+//                    LoginManager.getInstance().logOut();
+//                }
+                if (lastlogin == "facebook"){
 
                     LoginManager.getInstance().logOut();
+                } else {
+
+                    Log.d("Logout", "from username");
                 }
 
                 Intent intent = new Intent(SettingActivity.this, MainActivity.class);
@@ -162,24 +198,7 @@ public class SettingActivity extends AppCompatActivity  {
             }
         });
 
-//        spinner.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                boolean allow;
-//                String time = spinner.getSelectedItem().toString().replace("mn","");
-//                int setTime = Integer.parseInt(time);
-//                if (allowNotification.isChecked()){
-//
-//                    allow = true;
-//                } else {
-//
-//                    allow =false;
-//                }
-//                SharedPreferences.Editor editor = sharedPreferences.edit();
-//                editor.putBoolean("allowNotification", allow);
-//                editor.putInt("setTime", setTime);
-//            }
-//        });
+
 
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -199,7 +218,17 @@ public class SettingActivity extends AppCompatActivity  {
 
     }
 
+    public static void setDefaults(String key, String value, Context context) {
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString(key, value);
+        editor.commit();
+    }
 
+    public static String getDefaults(String key, Context context) {
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
+        return preferences.getString(key, null);
+    }
 
 
      private void loadProfileFromFacebook() {
