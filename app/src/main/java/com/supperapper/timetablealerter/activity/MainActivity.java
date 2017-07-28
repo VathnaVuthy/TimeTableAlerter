@@ -28,6 +28,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.ShareActionProvider;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -40,6 +41,7 @@ import com.facebook.AccessToken;
 import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
 import com.facebook.Profile;
+import com.facebook.share.model.ShareLinkContent;
 import com.supperapper.timetablealerter.R;
 import com.supperapper.timetablealerter.dataset.App;
 import com.supperapper.timetablealerter.dataset.DynamicPagerAdapter;
@@ -78,6 +80,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     SharedPreferences sharedPreferences;
     boolean preferences = false;
     String lastlogin;
+    private ShareActionProvider shareActionProvider;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -476,6 +479,20 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         startActivity(intent);
     }
+
+    public void onShareClick(){
+
+
+        Intent sendIntent = new Intent();
+        sendIntent.setAction(Intent.ACTION_SEND);
+        sendIntent.putExtra(Intent.EXTRA_TEXT, "https://play.google.com/store/apps/details?id=com.instagram.android");
+        sendIntent.setType("text/plain");
+        startActivity(sendIntent);
+
+
+    }
+
+
     public void onAboutUsClicked(){
         toolbar.setTitle("About Us");
         fragmentManager = getSupportFragmentManager();
@@ -483,14 +500,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         AboutUsFragment aboutUsFragment = new AboutUsFragment();
         fragmentTransaction.replace(R.id.lyt_super,aboutUsFragment);
         fragmentTransaction.commit();
-        if(hasAddBtn==true){
-            copyMenu.removeItem(R.id.add_new_task);
-            hasAddBtn = false;
-        }
-        if(hasScheduleBtn==true){
-            copyMenu.removeItem(R.id.add_schedule);
-            hasScheduleBtn = false;
-        }
+
     }
 
     @Override
@@ -534,6 +544,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 break;
             case R.id.nav_about_us:
                 onAboutUsClicked();
+                break;
+            case R.id.nav_share:
+                onShareClick();
                 break;
         }
         DrawerLayout drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
