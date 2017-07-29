@@ -39,4 +39,13 @@ public class RegularActivityFragment extends Fragment {
         mRecyclerView.setAdapter(mTaskAdapter);
         return view;
     }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        DbManager dbManager = DbManager.getInstance(getContext());
+        Task[] tasks = dbManager.getAlltasks(new String[]{"R.ACTIVITY"});
+        mTaskAdapter = new TaskAdapter(tasks);
+        mRecyclerView.setAdapter(mTaskAdapter);
+    }
 }

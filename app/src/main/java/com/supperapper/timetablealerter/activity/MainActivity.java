@@ -28,6 +28,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.ShareActionProvider;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -40,6 +41,7 @@ import com.facebook.AccessToken;
 import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
 import com.facebook.Profile;
+import com.facebook.share.model.ShareLinkContent;
 import com.supperapper.timetablealerter.R;
 import com.supperapper.timetablealerter.dataset.App;
 import com.supperapper.timetablealerter.dataset.DynamicPagerAdapter;
@@ -77,7 +79,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     View headerView;
     SharedPreferences sharedPreferences;
     boolean preferences = false;
-    User user;
+    String lastlogin;
+    private ShareActionProvider shareActionProvider;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -93,6 +96,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setElevation(0);
+
+        lastlogin = LoginActivity.getDefaults(LoginActivity.LAST_LOGIN_METHOD, this);
+
+        Log.d("MainActivity last login", "=" + lastlogin);
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -110,59 +117,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
          final CircleImageView circleImageProfile = (CircleImageView) headerView.findViewById(R.id.header_profile_pic);
          sharedPreferences = MainActivity.this.getPreferences(Context.MODE_PRIVATE);
 
+
         String name = sharedPreferences.getString("name", null);
         String email = sharedPreferences.getString("email", null);
 
-        txtUsername.setText("Your name");
-        txtEmail.setText("example@gmail.com");
-        circleImageProfile.setImageResource(R.drawable.profile_larrypage);
 
-      if(App.getInstance(MainActivity.this).getLogin() == App.IS_LOGIN){
+        String login =   SettingActivity.getDefaults(SettingActivity.isLogin, MainActivity.this);
 
-          if(App.getInstance(MainActivity.this).getLoginMethod() == App.LOGIN_METHOD_USERNAME_PASSWORD){
-
-              txtUsername.setText("Larry Page");
-              txtEmail.setText("larrypage@gmail.com");
-              circleImageProfile.setImageResource(R.drawable.profile_larrypage);
-
-          } else if (App.getInstance(MainActivity.this).getLoginMethod() == App.LOGIN_METHOD_FACEBOOK){
-
-              Profile profile = Profile.getCurrentProfile();
-
-              Log.d("Login", "via facebook");
-              if(name != null){
-
-                  txtUsername.setText(name);
-                  txtEmail.setText(email);
-
-              } else if(name == null){
-
-                  loadProfileFromFacebook();
-              }
-
-            String profileImageUrl = profile.getProfilePictureUri(230,230).toString();
-
-            ImageRequest imageRequest = new ImageRequest(profileImageUrl, new Response.Listener<Bitmap>() {
-                @Override
-                public void onResponse(Bitmap response) {
-
-                    circleImageProfile.setImageBitmap(response);
-                }
-            }, 230, 230, ImageView.ScaleType.FIT_XY, Bitmap.Config.RGB_565, null);
-
-            App.getInstance(this).addRequest(imageRequest);
-
-          }
-
-      } else if (App.getInstance(MainActivity.this).getLogin() == App.NOT_LOGIN){
-
-
-          txtUsername.setText("Your name");
-          txtEmail.setText("example@gmail.com");
-          circleImageProfile.setImageResource(R.drawable.profile_larrypage);
-
-      }
-
+        Log.d("MainActivity", "value is" + login);
 
 
         ViewPager viewPager = (ViewPager) findViewById(R.id.lyt_super);
@@ -176,6 +138,125 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             TabLayout.Tab tab = tabLayout.getTabAt(i);
             tab.setCustomView(getDynamicTabVIew(i));
         }
+
+
+        if (login != null){
+
+           if (login.equals("login")){
+
+                Log.d("login", "true");
+               // if(App.getInstance(MainActivity.this).getLoginMethod() == App.LOGIN_METHOD_USERNAME_PASSWORD){
+                if (lastlogin != null){
+//
+                    Log.d("Log to", "share preferences");
+//
+                    if (lastlogin.equals("facebook")){
+
+
+                        Log.d("MainActivity", "Last login via" + lastlogin);
+
+                        Profile profile = Profile.getCurrentProfile();
+
+                        String profileImageUrl = profile.getProfilePictureUri(230,230).toString();
+
+                        ImageRequest imageRequest = new ImageRequest(profileImageUrl, new Response.Listener<Bitmap>() {
+                            @Override
+                            public void onResponse(Bitmap response) {
+
+                                circleImageProfile.setImageBitmap(response);
+                            }
+                        }, 230, 230, ImageView.ScaleType.FIT_XY, Bitmap.Config.RGB_565, null);
+
+                        App.getInstance(this).addRequest(imageRequest);
+
+                        Log.d("Login", "via facebook");
+
+                        if(name != null){
+
+                            txtUsername.setText(name);
+                            txtEmail.setText(email);
+
+                        } else {
+
+                            loadProfileFromFacebook();
+                        }
+
+
+                    } else {
+
+
+                        Log.d("Login", "via" + lastlogin);
+
+                        txtUsername.setText("Larry Page");
+                        txtEmail.setText("larrypage@gmail.com");
+                        circleImageProfile.setImageResource(R.drawable.profile_larrypage);
+
+                    }
+                } else {
+
+                    Log.d("no", "login");
+                }
+
+
+            } else {
+
+                Log.d("logout", "true");
+            }
+
+
+       // }
+
+
+ //     if(App.getInstance(MainActivity.this).getLogin() == App.IS_LOGIN){
+
+//          if(App.getInstance(MainActivity.this).getLoginMethod() == App.LOGIN_METHOD_USERNAME_PASSWORD){
+//
+////              txtUsername.setText("Larry Page");
+////              txtEmail.setText("larrypage@gmail.com");
+//              txtUsername.setText("Your name");
+//              txtEmail.setText("example@gmail.com");
+//              circleImageProfile.setImageResource(R.drawable.profile_larrypage);
+//
+//          } else {
+//
+//              Profile profile = Profile.getCurrentProfile();
+//
+//              Log.d("Login", "via facebook");
+//              if(name != null){
+//
+//                  txtUsername.setText(name);
+//                  txtEmail.setText(email);
+//
+//              } else if(name == null){
+//
+//                  loadProfileFromFacebook();
+//              }
+//
+//            String profileImageUrl = profile.getProfilePictureUri(230,230).toString();
+//
+//            ImageRequest imageRequest = new ImageRequest(profileImageUrl, new Response.Listener<Bitmap>() {
+//                @Override
+//                public void onResponse(Bitmap response) {
+//
+//                    circleImageProfile.setImageBitmap(response);
+//                }
+//            }, 230, 230, ImageView.ScaleType.FIT_XY, Bitmap.Config.RGB_565, null);
+//
+//            App.getInstance(this).addRequest(imageRequest);
+//
+//          }
+
+     } else {
+
+          txtUsername.setText("Your name");
+          txtEmail.setText("example@gmail.com");
+          circleImageProfile.setImageResource(R.drawable.profile_larrypage);
+
+     }
+
+
+
+
 
 //        ViewPager viewPager = (ViewPager) findViewById(R.id.lyt_super);
 //        PagerAdapter pagerAdapter = new PagerAdapter(getSupportFragmentManager(), MainActivity.this);
@@ -220,10 +301,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                             editor.putString("email", email);
                             editor.commit();
 
-                            user = new User(id, name, email);
 
-                            txtUsername.setText(user.getName());
-                            txtEmail.setText(user.getEmail());
+                            txtUsername.setText(name);
+                            txtEmail.setText(email);
                        //     circleImageProfile.setImageURI(image);
                        //     circleImageProfile.setImageURI(image);
                       //      imgProfile.setImageURI(image);
@@ -399,6 +479,20 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         startActivity(intent);
     }
+
+    public void onShareClick(){
+
+
+        Intent sendIntent = new Intent();
+        sendIntent.setAction(Intent.ACTION_SEND);
+        sendIntent.putExtra(Intent.EXTRA_TEXT, "https://play.google.com/store/apps/details?id=com.instagram.android");
+        sendIntent.setType("text/plain");
+        startActivity(sendIntent);
+
+
+    }
+
+
     public void onAboutUsClicked(){
         toolbar.setTitle("About Us");
         fragmentManager = getSupportFragmentManager();
@@ -406,14 +500,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         AboutUsFragment aboutUsFragment = new AboutUsFragment();
         fragmentTransaction.replace(R.id.lyt_super,aboutUsFragment);
         fragmentTransaction.commit();
-        if(hasAddBtn==true){
-            copyMenu.removeItem(R.id.add_new_task);
-            hasAddBtn = false;
-        }
-        if(hasScheduleBtn==true){
-            copyMenu.removeItem(R.id.add_schedule);
-            hasScheduleBtn = false;
-        }
+
     }
 
     @Override
@@ -457,6 +544,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 break;
             case R.id.nav_about_us:
                 onAboutUsClicked();
+                break;
+            case R.id.nav_share:
+                onShareClick();
                 break;
         }
         DrawerLayout drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);

@@ -10,7 +10,10 @@ import android.view.ViewGroup;
 
 import com.supperapper.timetablealerter.R;
 import com.supperapper.timetablealerter.database.DbManager;
+import com.supperapper.timetablealerter.dataset.Schedule;
 import com.supperapper.timetablealerter.dataset.Task;
+import com.supperapper.timetablealerter.dataset.TaskPagerAdapter;
+import com.supperapper.timetablealerter.viewholder.SchoolAdapter;
 import com.supperapper.timetablealerter.viewholder.TaskAdapter;
 
 /**
@@ -41,5 +44,14 @@ public class ExamFragment extends Fragment {
         mTaskAdapter = new TaskAdapter(tasks);
         mRecyclerView.setAdapter(mTaskAdapter);
         return view;
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        DbManager dbManager = DbManager.getInstance(getContext());
+        Task[] tasks = dbManager.getAlltasks(new String[]{"EXAM"});
+        mTaskAdapter = new TaskAdapter(tasks);
+        mRecyclerView.setAdapter(mTaskAdapter);
     }
 }

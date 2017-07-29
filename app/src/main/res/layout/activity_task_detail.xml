@@ -157,7 +157,8 @@
                     android:layout_height="wrap_content"
                     android:text=":" />
 
-                <EditText
+                <TextView
+                    android:gravity="center_vertical"
                     android:enabled="false"
                     android:textColor="@color/colorBlack"
                     android:textSize="15sp"

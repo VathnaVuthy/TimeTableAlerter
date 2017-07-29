@@ -1,8 +1,10 @@
 package com.supperapper.timetablealerter.activity;
 
 import android.app.TimePickerDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.provider.CalendarContract;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -26,11 +28,12 @@ import com.supperapper.timetablealerter.fragment.school.MondayFragment;
 
 public class SchoolDetailActivity extends AppCompatActivity  {
 
-    EditText tv_subject, tv_abb, tv_school, tv_room, tv_teacher, tv_contact, tv_timeStart, tv_timeEnd;
+    EditText tv_subject, tv_abb, tv_school, tv_room, tv_teacher, tv_contact;
+    TextView tv_timeStart, tv_timeEnd;
     private int hour, min;
     MenuItem itemEdit, itemDelete;
     String id, subject, abb, school, room, teacher, contact, timestart, timeend, day;
-    private int OnClick = 1;
+    private int OnClick = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,8 +52,8 @@ public class SchoolDetailActivity extends AppCompatActivity  {
          tv_room = (EditText) findViewById(R.id.tv_room_detail);
          tv_teacher = (EditText) findViewById(R.id.tv_teacher_detail);
          tv_contact = (EditText) findViewById(R.id.tv_contact_detail);
-         tv_timeStart = (EditText) findViewById(R.id.tv_time_start);
-         tv_timeEnd  = (EditText) findViewById(R.id.tv_time_end);
+         tv_timeStart = (TextView) findViewById(R.id.tv_time_start);
+         tv_timeEnd  = (TextView) findViewById(R.id.tv_time_end);
 
          id = getIntent().getStringExtra("id");
          subject = getIntent().getStringExtra("subject");
@@ -71,7 +74,6 @@ public class SchoolDetailActivity extends AppCompatActivity  {
         tv_contact.setText(contact);
         tv_timeStart.setText(timestart);
         tv_timeEnd.setText(timeend);
-    //    Log.d("ID:", id);
     }
 
     @Override
@@ -82,8 +84,7 @@ public class SchoolDetailActivity extends AppCompatActivity  {
          itemDelete = menu.getItem(1);
          itemEdit.setTitle("Save");
          itemDelete.setTitle("Delete");
-       // menuItem.setIcon(getResources().getDrawable(R.drawable.ic_delete));
-      //  menuItem.setVisible(false);
+
 
         return true;
     }
@@ -91,21 +92,14 @@ public class SchoolDetailActivity extends AppCompatActivity  {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if(item.getItemId()==R.id.edit){
-          //  button.setText("Done");
-           // item.setTitle("Done");
-            if(OnClick == 1){
-                OnClick = 2;
+
+            if(OnClick == 0){
+                OnClick = 1;
                 itemDelete.setTitle("Cancel");
                 itemEdit.setIcon(null);
                 itemDelete.setIcon(null);
-                Log.d("CLICK", String.valueOf(itemEdit));
-//                tv_subject.requestFocus();
-//                EnableTextViewEdit(tv_subject);
-//                EnableTextViewEdit(tv_abb);
-//                EnableTextViewEdit(tv_school);
-//                EnableTextViewEdit(tv_room);
-//                EnableTextViewEdit(tv_teacher);
-//                EnableTextViewEdit(tv_contact);
+
+                EnableEdit();
 
                 tv_timeStart.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -118,14 +112,22 @@ public class SchoolDetailActivity extends AppCompatActivity  {
                                 hour = hourOfDay;
                                 min = minute;
 
-                                if(min == 00){
+                                if (hour < 10 && min < 10){
+                                    tv_timeEnd.setText( "0" + hour + ":0"+ min);
 
-                                    Log.d("Minute", "00");
-                                    tv_timeStart.setText(hour + ":" + min + "0");
-                                    return;
+                                } else if (min < 10){
+
+                                    tv_timeEnd.setText(hour + ":" + "0"+ min );
+
+                                } else if (hour < 10){
+
+                                    tv_timeEnd.setText("0" + hour + ":" + min );
+
+                                } else {
+
+                                    tv_timeEnd.setText(hour + ":" + min);
+
                                 }
-
-                                tv_timeStart.setText(hour  + ":" + min);
                             }
                         }, hour, min, false);
 
@@ -144,14 +146,23 @@ public class SchoolDetailActivity extends AppCompatActivity  {
                                 hour =hourOfDay;
                                 min = minute;
 
-                                if(min == 0){
+                                if (hour < 10 && min < 10){
+                                    tv_timeEnd.setText( "0" + hour + ":0"+ min);
 
-                                    tv_timeEnd.setText(hour + ":" + min + "0");
-                                    return;
+                                } else if (min < 10){
+
+                                    tv_timeEnd.setText(hour + ":" + "0"+ min );
+
+                                } else if (hour < 10){
+
+                                    tv_timeEnd.setText("0" + hour + ":" + min );
+
+                                } else {
+
+                                    tv_timeEnd.setText(hour + ":" + min);
 
                                 }
 
-                                tv_timeEnd.setText(hour + ":" + min);
                             }
                         }, hour, min, false);
 
@@ -159,11 +170,10 @@ public class SchoolDetailActivity extends AppCompatActivity  {
                     }
                 });
 
-            } else if(OnClick == 2){
-                OnClick = 1;
 
-//                DbManager dbManager = new DbManager(SchoolDetailActivity.this);
-//                dbManager.updateSchedule();
+            } else if(OnClick == 1){
+                OnClick = 0;
+
                 String Subject = tv_subject.getText().toString();
                 String Abb = tv_abb.getText().toString();
                 String School = tv_school.getText().toString();
@@ -206,12 +216,7 @@ public class SchoolDetailActivity extends AppCompatActivity  {
                 dbManager.close();
                 itemEdit.setIcon(getResources().getDrawable(R.drawable.ic_edit));
                 itemDelete.setIcon(getResources().getDrawable(R.drawable.ic_delete));
-//                DisableTextViewEdit(tv_subject);
-//                DisableTextViewEdit(tv_abb);
-//                DisableTextViewEdit(tv_school);
-//                DisableTextViewEdit(tv_room);
-//                DisableTextViewEdit(tv_teacher);
-//                DisableTextViewEdit(tv_contact);
+                DisableEdit();
 
             }
             Toast.makeText(this, "Edit", Toast.LENGTH_SHORT).show();
@@ -219,8 +224,8 @@ public class SchoolDetailActivity extends AppCompatActivity  {
 
             if(itemDelete.getTitle().equals("Delete")) {
 
-                String tablename;
-                DbManager dbManager = DbManager.getInstance(SchoolDetailActivity.this);
+                final String tablename;
+                final DbManager dbManager = DbManager.getInstance(SchoolDetailActivity.this);
                 if(day.equals("MONDAY")){
 
                     tablename = "tblmondayschedule";
@@ -249,12 +254,31 @@ public class SchoolDetailActivity extends AppCompatActivity  {
 
                 }
 
-                dbManager.deleteSchedule(tablename, "idmonday = ?", new String[]{id});
-                onBackPressed();
+                AlertDialog.Builder builder = new AlertDialog.Builder(SchoolDetailActivity.this);
+
+                builder.setTitle("CONFIRMATION");
+
+                builder.setMessage("Are you want to delete this schedule?");
+
+                builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        dbManager.deleteSchedule(tablename, "idmonday = ?", new String[]{id});
+                        onBackPressed();
+                    }
+                });
+
+                builder.setNegativeButton("No", null);
+                builder.show();
+
                 Log.d("CC", "true");
 
-              } else {
+              } else if (itemDelete.getTitle().equals("Cancel")){
 
+                        OnClick = 0;
+
+                        DisableEdit();
                         tv_subject.setText(subject);
                         tv_abb.setText(abb);
                         tv_school.setText(school);
@@ -271,26 +295,36 @@ public class SchoolDetailActivity extends AppCompatActivity  {
 
             Log.d("Edited", tv_subject.getText().toString());
             Toast.makeText(this, "Delete", Toast.LENGTH_SHORT).show();
-            onBackPressed();
-            }else{
+
+            } else{
             onBackPressed();
         }
         return super.onOptionsItemSelected(item);
     }
 
-    private void EnableTextViewEdit(TextView textView){
-        textView.setFocusableInTouchMode(true);
-        textView.setInputType(InputType.TYPE_CLASS_TEXT);
-        textView.setFocusable(true);
-        textView.setClickable(true);
+
+    private void EnableEdit(){
+        tv_subject.setEnabled(true);
+        tv_abb.setEnabled(true);
+        tv_school.setEnabled(true);
+        tv_room.setEnabled(true);
+        tv_teacher.setEnabled(true);
+        tv_contact.setEnabled(true);
+        tv_timeStart.setEnabled(true);
+        tv_timeEnd.setEnabled(true);
 
     }
 
-    private void DisableTextViewEdit(TextView textView){
+    private void DisableEdit(){
 
-        textView.setFocusable(false);
-        textView.setFocusable(false);
-        textView.setClickable(false);
+        tv_subject.setEnabled(false);
+        tv_abb.setEnabled(false);
+        tv_school.setEnabled(false);
+        tv_room.setEnabled(false);
+        tv_teacher.setEnabled(false);
+        tv_contact.setEnabled(false);
+        tv_timeStart.setEnabled(false);
+        tv_timeEnd.setEnabled(false);
 
     }
 

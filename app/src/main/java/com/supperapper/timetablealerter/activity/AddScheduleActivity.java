@@ -92,14 +92,22 @@ public class AddScheduleActivity extends AppCompatActivity{
 
                         Hour = hourOfDay;
                         Min = minute;
-                        if(Min == 00){
+                        if (Hour < 10 && Min < 10){
+                            txtMonStart.setText( "0" + Hour + ":0"+ Min);
 
-                            Log.d("Minute", "00");
-                            txtMonStart.setText(Hour + ":" + Min + "0");
-                            return;
+                        } else if (Min < 10){
+
+                            txtMonStart.setText(Hour + ":" + "0"+ Min );
+
+                        } else if (Hour < 10){
+
+                            txtMonStart.setText("0" + Hour + ":" + Min );
+
+                        } else {
+
+                            txtMonStart.setText(Hour + ":" + Min);
+
                         }
-
-                        txtMonStart.setText(Hour + ":" + Min);
                     }
                 }, Hour, Min, false);
 
@@ -118,13 +126,22 @@ public class AddScheduleActivity extends AppCompatActivity{
 
                         Hour = hourOfDay;
                         Min = minute;
-                        if(Min == 00){
+                        if (Hour < 10 && Min < 10){
+                            txtMonEnd.setText( "0" + Hour + ":0"+ Min);
 
-                            Log.d("Minute", "00");
-                            txtMonEnd.setText(Hour + ":" + Min + "0");
-                            return;
+                        } else if (Min < 10){
+
+                            txtMonEnd.setText(Hour + ":" + "0"+ Min );
+
+                        } else if (Hour < 10){
+
+                            txtMonEnd.setText("0" + Hour + ":" + Min );
+
+                        } else {
+
+                            txtMonEnd.setText(Hour + ":" + Min);
+
                         }
-                        txtMonEnd.setText(Hour + ":" + Min);
                     }
                 }, Hour, Min, false);
 
@@ -143,13 +160,22 @@ public class AddScheduleActivity extends AppCompatActivity{
 
                         Hour = hourOfDay;
                         Min = minute;
-                        if(Min == 00){
+                        if (Hour < 10 && Min < 10){
+                            txtTueStart.setText( "0" + Hour + ":0"+ Min);
 
-                            Log.d("Minute", "00");
-                            txtTueStart.setText(Hour + ":" + Min + "0");
-                            return;
-                        }
-                        txtTueStart.setText(Hour + ":" + Min);                    }
+                        } else if (Min < 10){
+
+                            txtTueStart.setText(Hour + ":" + "0"+ Min );
+
+                        } else if (Hour < 10){
+
+                            txtTueStart.setText("0" + Hour + ":" + Min );
+
+                        } else {
+
+                            txtTueStart.setText(Hour + ":" + Min);
+
+                        }                     }
                 }, Hour, Min, false);
 
                 timePickerDialog.show();
@@ -166,13 +192,22 @@ public class AddScheduleActivity extends AppCompatActivity{
 
                         Hour = hourOfDay;
                         Min = minute;
-                        if(Min == 00){
+                        if (Hour < 10 && Min < 10){
+                            txtTueEnd.setText( "0" + Hour + ":0"+ Min);
 
-                            Log.d("Minute", "00");
-                            txtTueEnd.setText(Hour + ":" + Min + "0");
-                            return;
-                        }
-                        txtTueEnd.setText(Hour + ":" + Min);                    }
+                        } else if (Min < 10){
+
+                            txtTueEnd.setText(Hour + ":" + "0"+ Min );
+
+                        } else if (Hour < 10){
+
+                            txtTueEnd.setText("0" + Hour + ":" + Min );
+
+                        } else {
+
+                            txtTueEnd.setText(Hour + ":" + Min);
+
+                        }                     }
                 }, Hour, Min, false);
 
                 timePickerDialog.show();
@@ -190,13 +225,22 @@ public class AddScheduleActivity extends AppCompatActivity{
 
                         Hour = hourOfDay;
                         Min = minute;
-                        if(Min == 00){
+                        if (Hour < 10 && Min < 10){
+                            txtWedStart.setText( "0" + Hour + ":0"+ Min);
 
-                            Log.d("Minute", "00");
-                            txtWedStart.setText(Hour + ":" + Min + "0");
-                            return;
-                        }
-                        txtWedStart.setText(Hour + ":" + Min);            }
+                        } else if (Min < 10){
+
+                            txtWedStart.setText(Hour + ":" + "0"+ Min );
+
+                        } else if (Hour < 10){
+
+                            txtWedStart.setText("0" + Hour + ":" + Min );
+
+                        } else {
+
+                            txtWedStart.setText(Hour + ":" + Min);
+
+                        }            }
                 }, Hour, Min, false);
 
                 timePickerDialog.show();
@@ -215,13 +259,22 @@ public class AddScheduleActivity extends AppCompatActivity{
 
                         Hour = hourOfDay;
                         Min = minute;
-                        if(Min == 00){
+                        if (Hour < 10 && Min < 10){
+                            txtWedEnd.setText( "0" + Hour + ":0"+ Min);
 
-                            Log.d("Minute", "00");
-                            txtWedEnd.setText(Hour + ":" + Min + "0");
-                            return;
-                        }
-                        txtWedEnd.setText(Hour + ":" + Min);                  }
+                        } else if (Min < 10){
+
+                            txtWedEnd.setText(Hour + ":" + "0"+ Min );
+
+                        } else if (Hour < 10){
+
+                            txtWedEnd.setText("0" + Hour + ":" + Min );
+
+                        } else {
+
+                            txtWedEnd.setText(Hour + ":" + Min);
+
+                        }                   }
                 }, Hour, Min, false);
 
                 timePickerDialog.show();
@@ -239,13 +292,22 @@ public class AddScheduleActivity extends AppCompatActivity{
 
                         Hour = hourOfDay;
                         Min = minute;
-                        if(Min == 00){
+                        if (Hour < 10 && Min < 10){
+                            txtThuStart.setText( "0" + Hour + ":0"+ Min);
 
-                            Log.d("Minute", "00");
-                            txtThuStart.setText(Hour + ":" + Min + "0");
-                            return;
-                        }
-                        txtThuStart.setText(Hour + ":" + Min);          }
+                        } else if (Min < 10){
+
+                            txtThuStart.setText(Hour + ":" + "0"+ Min );
+
+                        } else if (Hour < 10){
+
+                            txtThuStart.setText("0" + Hour + ":" + Min );
+
+                        } else {
+
+                            txtThuStart.setText(Hour + ":" + Min);
+
+                        }          }
 
                 }, Hour, Min, false);
 
@@ -263,13 +325,22 @@ public class AddScheduleActivity extends AppCompatActivity{
 
                         Hour = hourOfDay;
                         Min = minute;
-                        if(Min == 00){
+                        if (Hour < 10 && Min < 10){
+                            txtThuEnd.setText( "0" + Hour + ":0"+ Min);
 
-                            Log.d("Minute", "00");
-                            txtThuEnd.setText(Hour + ":" + Min + "0");
-                            return;
-                        }
-                        txtThuEnd.setText(Hour + ":" + Min);         }
+                        } else if (Min < 10){
+
+                            txtThuEnd.setText(Hour + ":" + "0"+ Min );
+
+                        } else if (Hour < 10){
+
+                            txtThuEnd.setText("0" + Hour + ":" + Min );
+
+                        } else {
+
+                            txtThuEnd.setText(Hour + ":" + Min);
+
+                        }         }
                 }, Hour, Min, false);
 
                 timePickerDialog.show();
@@ -287,13 +358,22 @@ public class AddScheduleActivity extends AppCompatActivity{
                         Hour = hourOfDay;
                         Min = minute;
 
-                        if(Min == 00){
+                        if (Hour < 10 && Min < 10){
+                            txtFriStart.setText( "0" + Hour + ":0"+ Min);
 
-                            Log.d("Minute", "00");
-                            txtFriStart.setText(Hour + ":" + Min + "0");
-                            return;
-                        }
-                        txtFriStart.setText(Hour + ":" + Min);       }
+                        } else if (Min < 10){
+
+                            txtFriStart.setText(Hour + ":" + "0"+ Min );
+
+                        } else if (Hour < 10){
+
+                            txtFriStart.setText("0" + Hour + ":" + Min );
+
+                        } else {
+
+                            txtFriStart.setText(Hour + ":" + Min);
+
+                        }        }
                 }, Hour, Min, false);
 
                 timePickerDialog.show();
@@ -310,14 +390,22 @@ public class AddScheduleActivity extends AppCompatActivity{
 
                         Hour = hourOfDay;
                         Min = minute;
-                        if(Min == 00){
+                        if (Hour < 10 && Min < 10){
+                            txtFriEnd.setText( "0" + Hour + ":0"+ Min);
 
-                            Log.d("Minute", "00");
-                            txtFriEnd.setText(Hour + ":" + Min + "0");
-                            return;
+                        } else if (Min < 10){
+
+                            txtFriEnd.setText(Hour + ":" + "0"+ Min );
+
+                        } else if (Hour < 10){
+
+                            txtFriEnd.setText("0" + Hour + ":" + Min );
+
+                        } else {
+
+                            txtFriEnd.setText(Hour + ":" + Min);
+
                         }
-
-                        txtFriEnd.setText(Hour + ":" + Min);
                     }
                 }, Hour, Min, false);
 
@@ -336,13 +424,22 @@ public class AddScheduleActivity extends AppCompatActivity{
 
                         Hour = hourOfDay;
                         Min = minute;
-                        if(Min == 00){
+                        if (Hour < 10 && Min < 10){
+                            txtSatStart.setText( "0" + Hour + ":0"+ Min);
 
-                            Log.d("Minute", "00");
-                            txtSatStart.setText(Hour + ":" + Min + "0");
-                            return;
+                        } else if (Min < 10){
+
+                            txtSatStart.setText(Hour + ":" + "0"+ Min );
+
+                        } else if (Hour < 10){
+
+                            txtSatStart.setText("0" + Hour + ":" + Min );
+
+                        } else {
+
+                            txtSatStart.setText(Hour + ":" + Min);
+
                         }
-                        txtSatStart.setText(Hour + ":" + Min);
                     }
                 }, Hour, Min, false);
 
@@ -362,14 +459,23 @@ public class AddScheduleActivity extends AppCompatActivity{
                         Hour = hourOfDay;
                         Min = minute;
 
-                        if(Min == 00){
+                        if (Hour < 10 && Min < 10){
+                            txtSatEnd.setText( "0" + Hour + ":0"+ Min);
 
-                            Log.d("Minute", "00");
-                            txtSatEnd.setText(Hour + ":" + Min + "0");
-                            return;
+                        } else if (Min < 10){
+
+                            txtSatEnd.setText(Hour + ":" + "0"+ Min );
+
+                        } else if (Hour < 10){
+
+                            txtSatEnd.setText("0" + Hour + ":" + Min );
+
+                        } else {
+
+                            txtSatEnd.setText(Hour + ":" + Min);
+
                         }
-
-                        txtSatEnd.setText(Hour + ":" + Min);    }
+                    }
                 }, Hour, Min, false);
 
                 timePickerDialog.show();
@@ -386,13 +492,22 @@ public class AddScheduleActivity extends AppCompatActivity{
 
                         Hour = hourOfDay;
                         Min = minute;
-                        if(Min == 00){
+                        if (Hour < 10 && Min < 10){
+                            txtSunStart.setText( "0" + Hour + ":0"+ Min);
 
-                            Log.d("Minute", "00");
-                            txtSatStart.setText(Hour + ":" + Min + "0");
-                            return;
-                        }
-                        txtSunStart.setText(Hour + ":" + Min);          }
+                        } else if (Min < 10){
+
+                            txtSunStart.setText(Hour + ":" + "0"+ Min );
+
+                        } else if (Hour < 10){
+
+                            txtSunStart.setText("0" + Hour + ":" + Min );
+
+                        } else {
+
+                            txtSunStart.setText(Hour + ":" + Min);
+
+                        }         }
                 }, Hour, Min, false);
 
                 timePickerDialog.show();
@@ -409,14 +524,23 @@ public class AddScheduleActivity extends AppCompatActivity{
 
                         Hour = hourOfDay;
                         Min = minute;
-                        if(Min == 00){
+                        if (Hour < 10 && Min < 10){
+                            txtSunEnd.setText( "0" + Hour + ":0"+ Min);
 
-                            Log.d("Minute", "00");
-                            txtSunEnd.setText(Hour + ":" + Min + "0");
-                            return;
+                        } else if (Min < 10){
+
+                            txtSunEnd.setText(Hour + ":" + "0"+ Min );
+
+                        } else if (Hour < 10){
+
+                            txtSunEnd.setText("0" + Hour + ":" + Min );
+
+                        } else {
+
+                            txtSunEnd.setText(Hour + ":" + Min);
+
                         }
-
-                        txtSunEnd.setText(Hour + ":" + Min);    }
+                    }
                 }, Hour, Min, false);
 
                 timePickerDialog.show();

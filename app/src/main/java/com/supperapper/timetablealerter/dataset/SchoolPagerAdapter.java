@@ -4,12 +4,15 @@ import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v4.view.PagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.util.Log;
 
 import com.supperapper.timetablealerter.fragment.DayViewFragment;
 import com.supperapper.timetablealerter.fragment.school.FridayFragment;
 import com.supperapper.timetablealerter.fragment.school.MondayFragment;
 import com.supperapper.timetablealerter.fragment.school.SaturdayFragment;
+import com.supperapper.timetablealerter.fragment.school.ScheduleFragment;
 import com.supperapper.timetablealerter.fragment.school.SchoolFragment;
 import com.supperapper.timetablealerter.fragment.school.SundayFragment;
 import com.supperapper.timetablealerter.fragment.school.ThursdayFragment;
@@ -28,6 +31,7 @@ public class SchoolPagerAdapter extends FragmentStatePagerAdapter {
         public SchoolPagerAdapter(android.support.v4.app.FragmentManager fm, Context context) {
             super(fm);
             this.context = context;
+
         }
         @Override
         public int getCount() {
@@ -35,7 +39,13 @@ public class SchoolPagerAdapter extends FragmentStatePagerAdapter {
         }
 
         public Fragment getItem(int position){
-            switch (position) {
+
+//            scheduleFragment.setDay(position);
+//            ScheduleFragment scheduleFragment = new ScheduleFragment();
+//            scheduleFragment.setDay(position);
+//            return scheduleFragment;
+//
+        switch (position) {
                 case 0:
                     return new MondayFragment();
                 case 1:
@@ -52,8 +62,8 @@ public class SchoolPagerAdapter extends FragmentStatePagerAdapter {
                     return new SundayFragment();
             }
 
-            return null;
-            //    return null; Default Return
+                return null;
+            //Default Return
         }
 
         @Override
