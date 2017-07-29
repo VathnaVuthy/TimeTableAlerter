@@ -2,7 +2,9 @@ package com.supperapper.timetablealerter.activity;
 
 import android.app.TimePickerDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -635,9 +637,14 @@ public class AddScheduleActivity extends AppCompatActivity{
         String End = txtEnd.getText().toString();
 
         Manager.insertSchedule(TableName, Subject, Abbreviation, School, Room, Teacher, Contact, Start, End);
-        Intent startservice = new Intent(this, NotificationChecker.class);
-        stopService(startservice);
-        startService(startservice);
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        boolean allowNotify = preferences.getBoolean("allowNotify",false);
+        if (allowNotify){
+            Intent startservice = new Intent(this, NotificationChecker.class);
+            stopService(startservice);
+            startService(startservice);
+        }
+
     }
 
 
