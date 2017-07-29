@@ -59,6 +59,9 @@ public class TaskDetailActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
+        ImageView img = (ImageView) findViewById(R.id.img_task_type);
+        img.setImageResource(getImageUri(getIntent().getStringExtra("tasktype")));
+
         topic = (TextView) findViewById(R.id.tv_topic_detail);
         subject = (TextView) findViewById(R.id.tv_subject_detail);
         date = (TextView) findViewById(R.id.tv_date_detail);
@@ -99,6 +102,8 @@ public class TaskDetailActivity extends AppCompatActivity {
             }
         });
 
+
+
     }
 
     @Override
@@ -130,9 +135,7 @@ public class TaskDetailActivity extends AppCompatActivity {
                 date.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-
                         showDialog(DAILOG_ID);
-
                     }
                 });
 
@@ -178,9 +181,7 @@ public class TaskDetailActivity extends AppCompatActivity {
                 itemDelete.setIcon(R.drawable.ic_delete);
 
             }
-
         }else{
-
         }
             return super.onOptionsItemSelected(item);
     }
@@ -231,5 +232,21 @@ public class TaskDetailActivity extends AppCompatActivity {
         date.setEnabled(false);
         note.setEnabled(false);
         date.setOnClickListener(null);
+    }
+
+    private int getImageUri(String taskType){
+        int imgUri=0;
+        if(taskType.toLowerCase().equals("exam")){
+            imgUri = R.drawable.exam;
+        }else if(taskType.toLowerCase().equals("meeting")){
+            imgUri = R.drawable.meeting;
+        }else if(taskType.toLowerCase().equals("wedding")){
+            imgUri = R.drawable.wedding;
+        }else if(taskType.toLowerCase().equals("r.activity")){
+            imgUri = R.drawable.regular;
+        }else{
+            imgUri = R.drawable.other;
+        }
+        return imgUri;
     }
 }

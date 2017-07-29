@@ -40,7 +40,7 @@
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:layout_marginRight="20dp"
-            android:src="@drawable/ic_profile"/>
+            android:src="@drawable/school"/>
         <TextView
             android:textColor="@color/colorBlack"
             android:layout_marginTop="16dp"

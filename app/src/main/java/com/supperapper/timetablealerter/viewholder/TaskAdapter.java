@@ -92,6 +92,7 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
             intent.putExtra("mapLat",mapClass.getLat());
             intent.putExtra("mapLang",mapClass.getLang());
             dbManager.close();
+
             context.startActivity(intent);
 
 

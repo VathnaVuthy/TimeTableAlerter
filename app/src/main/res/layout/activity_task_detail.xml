@@ -21,31 +21,42 @@
         android:layout_height="0dp"
         android:orientation="vertical"
         android:layout_weight="3">
+
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:padding="16dp">
+
+            <ImageView
+                android:id="@+id/img_task_type"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_marginRight="20dp"
+                android:src="@drawable/school"/>
             <TextView
                 android:textColor="@color/colorBlack"
-                android:layout_centerInParent="true"
                 android:layout_marginTop="16dp"
-                android:layout_toRightOf="@id/img_color"
+                android:layout_toRightOf="@id/img_task_type"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Meeting detail"
+                android:text="Task"
+                android:layout_marginLeft="40px"
                 android:textSize="20sp"
                 android:textStyle="bold"
                 android:id="@+id/tv_header"
                 android:fontFamily="sans-serif-smallcaps"/>
             <TextView
                 android:textColor="@color/colorBlack"
-                android:gravity="center_horizontal"
                 android:layout_below="@+id/tv_header"
+                android:layout_marginLeft="40px"
                 android:textSize="16sp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="This is the detail"
+                android:layout_toRightOf="@+id/img_task_type"
                 android:fontFamily="sans-serif-smallcaps" />
         </RelativeLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
