@@ -7,6 +7,7 @@ import java.sql.Time;
  */
 
 public class Schedule {
+    public Schedule(){};
     private String mID, mSubject,mAbbreviation,mSchool,mDay,mStartTime,mEndTime,mTeacher, mRoom, mContact;
 
 

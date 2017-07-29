@@ -29,7 +29,10 @@ public class DynamicAdapter extends RecyclerView.Adapter<DynamicAdapter.DynamicV
         this.schedules = schedules;
         this.tasks = tasks;
     }
-
+    private int flag=0;
+    private int val;
+    private int flag1 =0;
+    private int val1;
     @Override
     public DynamicViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         context = parent.getContext();
@@ -52,7 +55,23 @@ public class DynamicAdapter extends RecyclerView.Adapter<DynamicAdapter.DynamicV
             holder.location_or_room.setText(map.getName());
             dbManager.close();
         }else{
-            Schedule schedule = schedules[(schedules.length -1)];
+            Schedule schedule = new Schedule();
+            if(tasks.length==0){
+                schedule = schedules[position];
+                holder.topic.setText(schedule.getmSubject());
+                holder.teacher.setText(schedule.getmTeacher());
+                holder.note_or_st_et.setText(schedule.getmStartTime() + "-" + schedule.getmEndTime());
+                holder.type.setText(schedule.getmType());
+                holder.date.setText(schedule.getmDay().toString());
+                holder.location_or_room.setText(schedule.getmRoom());
+                return;
+            }
+            if(flag==0){
+                val=position+schedules.length -1;
+                flag=1;
+            }
+            schedule = schedules[val-position];
+
             holder.topic.setText(schedule.getmSubject());
             holder.teacher.setText(schedule.getmTeacher());
             holder.note_or_st_et.setText(schedule.getmStartTime() + "-" + schedule.getmEndTime());

@@ -33,6 +33,7 @@ import com.facebook.login.LoginManager;
 import com.google.gson.JsonObject;
 import com.supperapper.timetablealerter.R;
 import com.supperapper.timetablealerter.dataset.App;
+import com.supperapper.timetablealerter.service.NotificationChecker;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -54,15 +55,19 @@ public class SettingActivity extends AppCompatActivity  {
     SharedPreferences sharedPreferences;
     Switch allowNotification;
    public static String isLogin = "ISLOGIN";
+
     @Override
     protected void onCreate( Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setting);
 
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+
         Toolbar toolbar = (Toolbar)findViewById(R.id.setting_toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Setting");
 
+        allowNotification = (Switch) findViewById(R.id.switch_allow_notification);
         spinner = (Spinner) findViewById(R.id.set_time);
         // Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
@@ -72,10 +77,41 @@ public class SettingActivity extends AppCompatActivity  {
         // Apply the adapter to the spinner
         spinner.setAdapter(adapter);
 
+        //SetDefault Setting to Spinner and Switch
+         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);;
+         SharedPreferences.Editor editor = preferences.edit();
+
+        final boolean allowNotify = preferences.getBoolean("allowNotify",true);
+        allowNotification.setChecked(allowNotify);
+        int alertTime = preferences.getInt("alertTime",10);
+        int position=0;
+        if(alertTime==10)
+            position=0;
+        else if(alertTime==20)
+            position=1;
+        else if(alertTime==30)
+            position=2;
+        else if(alertTime==60)
+            position=3;
+        spinner.setSelection(position);
+
+        allowNotification.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(SettingActivity.this);;
+                SharedPreferences.Editor editor = preferences.edit();
+                editor.putBoolean("allowNotify",allowNotification.isChecked());
+                editor.commit();
+                if (!allowNotification.isChecked()){
+                    Intent service = new Intent(SettingActivity.this, NotificationChecker.class);
+                    stopService(service);
+                    Log.d("Service State","STOP");
+                }
+            }
+        });
+
         String name = getIntent().getStringExtra("name");
         String email = getIntent().getStringExtra("email");
-
-        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
 
         final String lastlogin = LoginActivity.getDefaults(LoginActivity.LAST_LOGIN_METHOD, this);
         Log.d("Setting", "lastlogin" + lastlogin);
@@ -90,7 +126,7 @@ public class SettingActivity extends AppCompatActivity  {
 
         btnLogin = (Button) findViewById(R.id.btn_login);
         btnLogout = (Button) findViewById(R.id.btn_logout);
-        allowNotification = (Switch) findViewById(R.id.switch_allow_notification);
+
 
         String loginButton = getDefaults(isLogin, this);
 
@@ -140,10 +176,8 @@ public class SettingActivity extends AppCompatActivity  {
             }
 
         } else {
-
             btnLogin.setVisibility(View.VISIBLE);
             btnLogout.setVisibility(View.INVISIBLE);
-
         }
 
 
@@ -205,8 +239,11 @@ public class SettingActivity extends AppCompatActivity  {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
                String pos = parent.getItemAtPosition(position).toString();
-
-                    Log.d("Positon:", pos);
+                int val = Integer.parseInt(pos.replace("mn",""));
+                SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(SettingActivity.this);;
+                SharedPreferences.Editor editor = preferences.edit();
+                editor.putInt("alertTime",val);
+                    editor.commit();
             }
 
             @Override

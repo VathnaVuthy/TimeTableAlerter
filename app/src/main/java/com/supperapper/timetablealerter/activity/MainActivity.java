@@ -86,9 +86,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-//        Start Service
-        Intent startservice = new Intent(this, NotificationChecker.class);
-        startService(startservice);
 
         hasAddBtn = false;
         hasScheduleBtn = false;
@@ -527,9 +524,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.nav_dayView:
                 onDayViewClicked();
                 break;
-            case R.id.nav_weekView:
-                onWeekViewClicked();
-                break;
+//            case R.id.nav_weekView:
+//                onWeekViewClicked();
+//                break;
             case R.id.nav_schedule:
                 onSchoolViewClicked();
                 break;

@@ -22,7 +22,9 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.supperapper.timetablealerter.R;
 import com.supperapper.timetablealerter.activity.SchoolDetailActivity;
+import com.supperapper.timetablealerter.activity.TaskDetailActivity;
 import com.supperapper.timetablealerter.database.DbManager;
+import com.supperapper.timetablealerter.dataset.MapClass;
 import com.supperapper.timetablealerter.dataset.Schedule;
 import com.supperapper.timetablealerter.dataset.ScheduleNotify;
 import com.supperapper.timetablealerter.dataset.Task;
@@ -46,12 +48,16 @@ public class NotificationChecker extends Service {
     private EventCheckerRunnable eventCheckerRunnable;
     private Context context;
     int id =0;
-    int currentTime;
     DbManager dbManager ;
-
+    SharedPreferences preferences;
+    long alertBefore;
     @Override
     public void onCreate() {
         super.onCreate();
+        preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        alertBefore =(long) preferences.getInt("alertTime",10);
+
+        Log.d("GET TIME: ","TIME: IS " + alertBefore);
         context = this;
         eventCheckerHandler = new Handler();
         eventCheckerRunnable = new EventCheckerRunnable();
@@ -89,16 +95,39 @@ public class NotificationChecker extends Service {
         schedules.addAll(dbManager.getListSchdule("tblsundayschedule"));
 
         Calendar c = Calendar.getInstance();
-        currentTime = c.get(Calendar.HOUR_OF_DAY);
+        int currentTime;
+        Log.d("Schedule size",schedules.size()+"");
         for(final ScheduleNotify schedule : schedules){
             final String[] time = schedule.getmStartTime().split(":");
             int scheduleTime = Integer.parseInt(time[0]);
+            currentTime =  c.get(Calendar.HOUR_OF_DAY);
             //if the schedule found
+            Log.d("RUN RUN","RUN RUN");
             if(scheduleTime>=currentTime && scheduleTime <=currentTime+1){
-                long scheduleml = TimeUnit.MINUTES.toMillis(Long.parseLong(time[1])) + TimeUnit.MINUTES.toMillis(Long.parseLong(time[0]));
-                long currenttimeml = TimeUnit.MINUTES.toMillis(c.get(Calendar.HOUR_OF_DAY)) + TimeUnit.MINUTES.toMillis(c.get(Calendar.MINUTE));
-                long duration = scheduleml - currenttimeml  ;
-                if (duration > (-60000)){
+                long scheduleml = TimeUnit.MINUTES.toMillis(Long.parseLong(time[1])) + TimeUnit.HOURS.toMillis(Long.parseLong(time[0]));
+                long currenttimeml = TimeUnit.HOURS.toMillis(c.get(Calendar.HOUR_OF_DAY)) + TimeUnit.MINUTES.toMillis(c.get(Calendar.MINUTE));
+                Log.d("schedule",time[0] + " - "+time[1]);
+                Log.d("current",c.get(Calendar.HOUR_OF_DAY) + " - "+c.get(Calendar.MINUTE));
+                Log.d("SCHEDULE TIME: ",scheduleml+"");
+                Log.d("Current TIME: ",currenttimeml+"");
+                if(scheduleml<currenttimeml){
+                    Log.d("Meet Return : ", "RETURN");
+                    return;
+                }
+                long scheduleTimeToRun =(scheduleml - currenttimeml);
+                long timeToAlertBeforeSchedule = ((alertBefore*360000)/6);
+                long duration = scheduleTimeToRun - timeToAlertBeforeSchedule;
+                if (scheduleTimeToRun<timeToAlertBeforeSchedule){
+                    eventCheckerHandler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            String title = schedule.getmSubject() + " (" + schedule.getmAbbreviation()+ ")";
+                            String detail = schedule.getmStartTime() + " - " + schedule.getmEndTime();
+                            showScheduleNotification(id,title,detail,schedule);
+                            id++;
+                        }
+                    });
+                }else{
                     eventCheckerHandler.postDelayed(new Runnable() {
                         @Override
                         public void run() {
@@ -128,14 +157,13 @@ public class NotificationChecker extends Service {
                     public void run() {
                         String title = task.getmTaskType();
                         String detail = task.getmTopic() + " - " + task.getmDate();
-                        showNotification(id,title,detail);
+                        showTaskNotification(id,title,detail,task);
+
                         id++;
                     }
                 });
             }
-
         }
-
     }
 
 
@@ -145,13 +173,13 @@ public class NotificationChecker extends Service {
         mBuilder.setSmallIcon(R.drawable.notifi);
         mBuilder.setContentText(detail);
         mBuilder.setVibrate(new long[]{1000,1000,1000,1000});
-        mBuilder.setLights(Color.RED,3000,3000);
+        mBuilder.setLights(Color.BLUE,3000,3000);
 
         Uri sound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
         mBuilder.setSound(sound);
 
         Intent intent = new Intent(this,SchoolDetailActivity.class);
-        intent.putExtra("id", schedule.getId());
+        intent.putExtra("id",String.valueOf(schedule.getId()));
         intent.putExtra("subject",schedule.getmSubject());
         intent.putExtra("abb",schedule.getmAbbreviation());
         intent.putExtra("school",schedule.getmSchool());
@@ -169,21 +197,41 @@ public class NotificationChecker extends Service {
         notificationManager.notify(id,mBuilder.build());
     }
 
-    private void showNotification(int id, String title, String detail){
+    private void showTaskNotification(int id, String title, String detail, Task task){
         NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this);
         mBuilder.setContentTitle(title);
         mBuilder.setSmallIcon(R.drawable.notifi);
         mBuilder.setContentText(detail);
         mBuilder.setVibrate(new long[]{1000,1000,1000,1000});
-        mBuilder.setLights(Color.RED,3000,3000);
+        mBuilder.setLights(Color.BLUE,3000,3000);
 
         Uri sound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
         mBuilder.setSound(sound);
 
-//        Intent noficationIntent = new Intent(this,LoginActivity.class);
-//        PendingIntent contentIntent = PendingIntent.getActivity(this,0,noficationIntent,PendingIntent.FLAG_UPDATE_CURRENT);
-//
-//        mBuilder.setContentIntent(contentIntent);
+        Intent intent = new Intent(context, TaskDetailActivity.class);
+        intent.putExtra("topic",task.getmTopic());
+        intent.putExtra("subject", task.getmSubject());
+        intent.putExtra("tasktype",task.getmTaskType());
+        intent.putExtra("date",task.getmDate());
+        intent.putExtra("note",task.getmNote());
+        intent.putExtra("id", task.getmID());
+        Log.d("TTA",task.getmID() + "");
+        String ID = task.getmID();
+        DbManager dbManager = DbManager.getInstance(context);
+        int mapId = dbManager.getMapIdByTaskId(Integer.parseInt(ID));
+        MapClass mapClass = dbManager.getMapFromDb(mapId);
+        intent.putExtra("mapId",mapClass.getId());
+        intent.putExtra("mapName",mapClass.getName());
+        intent.putExtra("mapAddress",mapClass.getAddress());
+        intent.putExtra("mapPhone",mapClass.getPhone());
+        intent.putExtra("mapWebsite",mapClass.getWebsite());
+        intent.putExtra("mapLat",mapClass.getLat());
+        intent.putExtra("mapLang",mapClass.getLang());
+        dbManager.close();
+
+
+        PendingIntent contentIntent = PendingIntent.getActivity(this,0,intent,PendingIntent.FLAG_UPDATE_CURRENT);
+        mBuilder.setContentIntent(contentIntent);
         NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
         notificationManager.notify(id,mBuilder.build());
 

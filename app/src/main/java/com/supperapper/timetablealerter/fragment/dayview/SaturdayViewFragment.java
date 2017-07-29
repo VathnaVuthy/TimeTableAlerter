@@ -45,6 +45,8 @@ public class SaturdayViewFragment extends Fragment {
         Schedule[] schedules = dbManager.getAllSchdule("tblsaturdayschedule");
         Task[] tasks = dbManager.getTaskForDayview("saturday");
         Log.d("saturday", "Schedule" + schedules.length + "Task" + tasks.length );
+        //Log.d("saturday", "Schedule" + schedules[0].getmID() + " " + schedules[1].getmID() );
+
         dynamicAdapter = new DynamicAdapter(schedules,tasks);
         mRecyclerView.setAdapter(dynamicAdapter);
         return view;

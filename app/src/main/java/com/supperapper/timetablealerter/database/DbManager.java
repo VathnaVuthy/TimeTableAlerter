@@ -218,7 +218,7 @@ public class DbManager extends SQLiteAssetHelper {
 //            String lng = cursor.getString(6);
             String note = cursor.getString(7);
 
-            Task task = new Task(topic, subject, type, date, note);
+            Task task = new Task(topic, subject, type, date, null,note,String.valueOf(id));
             taskArrayList.add(task);
         }
 

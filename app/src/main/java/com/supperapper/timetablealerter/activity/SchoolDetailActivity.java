@@ -55,7 +55,7 @@ public class SchoolDetailActivity extends AppCompatActivity  {
          tv_timeStart = (TextView) findViewById(R.id.tv_time_start);
          tv_timeEnd  = (TextView) findViewById(R.id.tv_time_end);
 
-         id = getIntent().getStringExtra("id");
+         id =(String) getIntent().getStringExtra("id");
          subject = getIntent().getStringExtra("subject");
          abb = getIntent().getStringExtra("abb");
          school = getIntent().getStringExtra("school");
