@@ -236,6 +236,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/tv_phone"/>
+        <TextView
+            android:gravity="center"
+            android:text="Phone"
+            android:layout_marginBottom="8px"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_website"/>
         <ImageView
             android:layout_marginBottom="2px"
             android:layout_gravity="center"
@@ -243,5 +250,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/map"/>
+
     </LinearLayout>
 </LinearLayout>

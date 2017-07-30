@@ -37,6 +37,7 @@ public class TaskDetailActivity extends AppCompatActivity {
     private TextView mapAddress;
     private TextView mapPhone;
     private ImageView imgMap;
+    private TextView mapWebsite;
 
     String id;
     private int mYear,mMoth,mDay;
@@ -86,9 +87,12 @@ public class TaskDetailActivity extends AppCompatActivity {
         mapAddress = (TextView) findViewById(R.id.tv_address);
         mapPhone = (TextView) findViewById(R.id.tv_phone);
         imgMap = (ImageView) findViewById(R.id.img_map);
+        mapWebsite = (TextView) findViewById(R.id.tv_website);
         mapName.setText(getIntent().getStringExtra("mapName"));
         mapAddress.setText(getIntent().getStringExtra("mapAddress"));
         mapPhone.setText(getIntent().getStringExtra("mapPhone"));
+        mapWebsite.setText(getIntent().getStringExtra("mapWebsite"));
+
 
         imgMap.setOnClickListener(new View.OnClickListener() {
             @Override

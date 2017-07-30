@@ -148,12 +148,37 @@ public class AddNewTaskActivity extends AppCompatActivity{
     }
     private void displaySelectedPlaceFromPlacePicker(Intent data) {
         Place placeSelected = PlacePicker.getPlace(this, data);
-        String name = placeSelected.getName().toString();
-        String address = placeSelected.getAddress().toString();
-        String phone = placeSelected.getPhoneNumber().toString();
-        String website = placeSelected.getWebsiteUri().toString();
+        String name;
+        String address;
+        String phone;
+        String website;
+        if(placeSelected.getName().equals("")){
+            name = "No Name";
+        }else{
+            name = placeSelected.getName().toString();
+        }
+
+        if(placeSelected.getAddress().equals("")){
+            address = "No Address";
+        }else{
+            address = placeSelected.getAddress().toString();
+        }
+
+        if(placeSelected.getPhoneNumber().equals("")){
+            phone = "No Phone Number";
+        }else{
+            phone = placeSelected.getPhoneNumber().toString();
+        }
+        if(placeSelected.getWebsiteUri() == null){
+            website = "No Website";
+        }else{
+            website = placeSelected.getWebsiteUri().toString();
+        }
+
+
         String latLang = placeSelected.getLatLng().toString().replace("(","").replace(")","").replace("lat/lng: ","");
         String [] LL = latLang.split(",");
+
         DbManager dbManager = DbManager.getInstance(this);
         dbManager.insertMap(name,address,phone,website,LL[0],LL[1]);
 

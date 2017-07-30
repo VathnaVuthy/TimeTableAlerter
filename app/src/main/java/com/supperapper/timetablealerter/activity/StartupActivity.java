@@ -1,5 +1,6 @@
 package com.supperapper.timetablealerter.activity;
 
+import android.app.ActivityManager;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Handler;
@@ -33,11 +34,14 @@ public class StartupActivity extends AppCompatActivity {
 
         boolean allowNotification = sharedPreferences.getBoolean("allowNotify",true);
         if(allowNotification==true){
-            //Start Service
-            Intent startservice = new Intent(this, NotificationChecker.class);
-            startService(startservice);
+            //Check if the service is running
+            if(!isMyServiceRunning()){
+                //Start Service
+                Intent startservice = new Intent(this, NotificationChecker.class);
+                startService(startservice);
+            }
         }
-
+        isMyServiceRunning();
 
         new Handler().postDelayed(new Runnable() {
             @Override
@@ -58,5 +62,14 @@ public class StartupActivity extends AppCompatActivity {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
 
+    }
+    private boolean isMyServiceRunning() {
+        ActivityManager manager = (ActivityManager) getSystemService(ACTIVITY_SERVICE);
+        for (ActivityManager.RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
+            if (NotificationChecker.class.getName().equals(service.service.getClassName())) {
+                return true;
+            }
+        }
+        return false;
     }
 }
