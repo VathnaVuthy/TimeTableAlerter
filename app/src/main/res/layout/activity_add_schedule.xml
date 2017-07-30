@@ -110,6 +110,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
                     <TextView
+                        android:enabled="false"
                         android:id="@+id/txt_mon_start"
                         android:gravity="center"
                         android:layout_width="0dp"
@@ -117,6 +118,7 @@
                         android:layout_weight="1"
                         android:layout_height="match_parent" />
                     <TextView
+                        android:enabled="false"
                         android:id="@+id/txt_mon_end"
                         android:gravity="center"
                         android:text="END TIME"
@@ -136,6 +138,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
                     <TextView
+                        android:enabled="false"
                         android:id="@+id/txt_tue_start"
                         android:gravity="center"
                         android:layout_width="0dp"
@@ -143,6 +146,7 @@
                         android:layout_weight="1"
                         android:layout_height="match_parent" />
                     <TextView
+                        android:enabled="false"
                         android:id="@+id/txt_tue_end"
                         android:gravity="center"
                         android:text="END TIME"
@@ -161,6 +165,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
                     <TextView
+                        android:enabled="false"
                         android:id="@+id/txt_wed_start"
                         android:gravity="center"
                         android:layout_width="0dp"
@@ -168,6 +173,7 @@
                         android:layout_weight="1"
                         android:layout_height="match_parent" />
                     <TextView
+                        android:enabled="false"
                         android:id="@+id/txt_wed_end"
                         android:gravity="center"
                         android:text="END TIME"
@@ -186,6 +192,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
                     <TextView
+                        android:enabled="false"
                         android:id="@+id/txt_thu_start"
                         android:gravity="center"
                         android:layout_width="0dp"
@@ -193,6 +200,7 @@
                         android:layout_weight="1"
                         android:layout_height="match_parent" />
                     <TextView
+                        android:enabled="false"
                         android:id="@+id/txt_thu_end"
                         android:gravity="center"
                         android:text="END TIME"
@@ -211,6 +219,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
                     <TextView
+                        android:enabled="false"
                         android:id="@+id/txt_fri_start"
                         android:gravity="center"
                         android:layout_width="0dp"
@@ -218,6 +227,7 @@
                         android:layout_weight="1"
                         android:layout_height="match_parent" />
                     <TextView
+                        android:enabled="false"
                         android:id="@+id/txt_fri_end"
                         android:gravity="center"
                         android:text="END TIME"
@@ -236,6 +246,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
                     <TextView
+                        android:enabled="false"
                         android:id="@+id/txt_sat_start"
                         android:gravity="center"
                         android:layout_width="0dp"
@@ -243,6 +254,7 @@
                         android:layout_weight="1"
                         android:layout_height="match_parent" />
                     <TextView
+                        android:enabled="false"
                         android:id="@+id/txt_sat_end"
                         android:gravity="center"
                         android:text="END TIME"
@@ -261,6 +273,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
                     <TextView
+                        android:enabled="false"
                         android:id="@+id/txt_sun_start"
                         android:gravity="center"
                         android:layout_width="0dp"
@@ -268,6 +281,7 @@
                         android:layout_weight="1"
                         android:layout_height="match_parent" />
                     <TextView
+                        android:enabled="false"
                         android:id="@+id/txt_sun_end"
                         android:gravity="center"
                         android:text="END TIME"

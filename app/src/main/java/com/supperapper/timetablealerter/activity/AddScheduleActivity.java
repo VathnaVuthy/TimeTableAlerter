@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.TimePicker;
@@ -83,6 +84,127 @@ public class AddScheduleActivity extends AppCompatActivity{
         final Calendar calendar = Calendar.getInstance();
         Hour = calendar.get(Calendar.HOUR_OF_DAY);
         Min = calendar.get(Calendar.MINUTE);
+
+        tgl_btnMon.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+
+                if (tgl_btnMon.isChecked()){
+
+                    txtMonStart.setEnabled(true);
+                    txtMonEnd.setEnabled(true);
+
+                } else {
+
+                    txtMonStart.setEnabled(false);
+                    txtMonEnd.setEnabled(false);
+                }
+
+            }
+        });
+
+        tgl_btnTue.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+
+                if (tgl_btnTue.isChecked()){
+
+                    txtTueStart.setEnabled(true);
+                    txtTueEnd.setEnabled(true);
+
+                } else {
+
+                    txtTueStart.setEnabled(false);
+                    txtTueEnd.setEnabled(false);
+                }
+            }
+        });
+
+        tgl_btnWed.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+
+                if (tgl_btnWed.isChecked()){
+
+                    txtWedStart.setEnabled(true);
+                    txtWedEnd.setEnabled(true);
+
+                } else {
+
+                    txtWedStart.setEnabled(false);
+                    txtWedEnd.setEnabled(false);
+                }
+            }
+        });
+
+        tgl_btnThu.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+
+                if (tgl_btnThu.isChecked()){
+
+                    txtThuStart.setEnabled(true);
+                    txtThuEnd.setEnabled(true);
+
+                } else {
+
+                    txtThuStart.setEnabled(false);
+                    txtThuEnd.setEnabled(false);
+                }
+            }
+        });
+
+        tgl_btnFri.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+
+                if (tgl_btnFri.isChecked()){
+
+                    txtFriStart.setEnabled(true);
+                    txtFriEnd.setEnabled(true);
+
+                } else {
+
+                    txtFriStart.setEnabled(false);
+                    txtFriEnd.setEnabled(false);
+                }
+            }
+        });
+
+        tgl_btnSat.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+
+                if (tgl_btnSat.isChecked()){
+
+                    txtSatStart.setEnabled(true);
+                    txtSatEnd.setEnabled(true);
+
+                } else {
+
+                    txtSatStart.setEnabled(false);
+                    txtSatEnd.setEnabled(false);
+                }
+            }
+        });
+
+        tgl_btnSun.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+
+                if (tgl_btnSun.isChecked()){
+
+                    txtSunStart.setEnabled(true);
+                    txtSunEnd.setEnabled(true);
+
+                } else {
+
+                    txtSunStart.setEnabled(false);
+                    txtSunEnd.setEnabled(false);
+                }
+            }
+        });
+
 
         txtMonStart.setOnClickListener(new View.OnClickListener() {
             @Override

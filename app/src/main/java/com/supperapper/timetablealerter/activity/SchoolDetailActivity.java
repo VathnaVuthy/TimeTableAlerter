@@ -113,19 +113,19 @@ public class SchoolDetailActivity extends AppCompatActivity  {
                                 min = minute;
 
                                 if (hour < 10 && min < 10){
-                                    tv_timeEnd.setText( "0" + hour + ":0"+ min);
+                                    tv_timeStart.setText( "0" + hour + ":0"+ min);
 
                                 } else if (min < 10){
 
-                                    tv_timeEnd.setText(hour + ":" + "0"+ min );
+                                    tv_timeStart.setText(hour + ":" + "0"+ min );
 
                                 } else if (hour < 10){
 
-                                    tv_timeEnd.setText("0" + hour + ":" + min );
+                                    tv_timeStart.setText("0" + hour + ":" + min );
 
                                 } else {
 
-                                    tv_timeEnd.setText(hour + ":" + min);
+                                    tv_timeStart.setText(hour + ":" + min);
 
                                 }
                             }
@@ -219,7 +219,6 @@ public class SchoolDetailActivity extends AppCompatActivity  {
                 DisableEdit();
 
             }
-            Toast.makeText(this, "Edit", Toast.LENGTH_SHORT).show();
         } else if(item.getItemId()==R.id.delete){
 
             if(itemDelete.getTitle().equals("Delete")) {
@@ -292,9 +291,6 @@ public class SchoolDetailActivity extends AppCompatActivity  {
                         itemDelete.setIcon(getResources().getDrawable(R.drawable.ic_delete));
                         Log.d("CC", "false");
             }
-
-            Log.d("Edited", tv_subject.getText().toString());
-            Toast.makeText(this, "Delete", Toast.LENGTH_SHORT).show();
 
             } else{
             onBackPressed();
