@@ -4,7 +4,9 @@ import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -23,6 +25,7 @@ import com.google.android.gms.location.places.ui.PlacePicker;
 import com.google.android.gms.maps.model.LatLng;
 import com.supperapper.timetablealerter.R;
 import com.supperapper.timetablealerter.database.DbManager;
+import com.supperapper.timetablealerter.service.NotificationChecker;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -120,13 +123,22 @@ public class AddNewTaskActivity extends AppCompatActivity{
                    Manager.insertTask(Topic, Subject, TaskType, Date, Note,mapId);
                    Manager.close();
                    Log.d("Add TO DB Successfully","Success!");
+                   refreshService();
                    onBackPressed();
                }
 
             }
         });
     }
-
+    private void refreshService(){
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        boolean allowNotify = preferences.getBoolean("allowNotify",false);
+        if (allowNotify){
+            Intent startservice = new Intent(this, NotificationChecker.class);
+            stopService(startservice);
+            startService(startservice);
+        }
+    }
     private void onSetLocationClick(){
 
         txtLocation.setOnClickListener(new View.OnClickListener() {
