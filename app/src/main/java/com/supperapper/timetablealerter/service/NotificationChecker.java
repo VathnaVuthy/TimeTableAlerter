@@ -249,7 +249,6 @@ public class NotificationChecker extends Service {
         intent.putExtra("mapLang", mapClass.getLang());
         dbManager.close();
 
-
         PendingIntent contentIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
         mBuilder.setContentIntent(contentIntent);
         NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);

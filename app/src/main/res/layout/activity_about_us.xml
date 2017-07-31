@@ -31,10 +31,12 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_width="130dp"
                 android:layout_height="130dp"
+                android:layout_marginBottom="16dp"
                 android:src="@drawable/ckcc_logo"/>
             <TextView
                 android:padding="16dp"
                 android:layout_width="wrap_content"
+                android:gravity="center"
                 android:layout_height="wrap_content"
                 android:text="TimeTable Alerter has been developed by Cambodia-Korea Cooperation Center Mobile Application Development Term 5 and 6 students"
                 android:textColor="@color/colorBlack"
