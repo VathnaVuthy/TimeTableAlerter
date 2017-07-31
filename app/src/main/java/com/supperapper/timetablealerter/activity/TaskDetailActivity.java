@@ -147,7 +147,7 @@ public class TaskDetailActivity extends AppCompatActivity {
             } else {
 
                 edit = true;
-
+                itemDelete.setTitle("Delete");
                 String Topic = topic.getText().toString();
                 String Subject = subject.getText().toString();
                 String Date = date.getText().toString();
@@ -188,6 +188,7 @@ public class TaskDetailActivity extends AppCompatActivity {
 
             } else {
 
+                itemDelete.setTitle("Delete");
                 edit = true;
                 disableEditText();
                 topic.setText(getIntent().getStringExtra("topic"));

@@ -33,7 +33,7 @@ public class SchoolDetailActivity extends AppCompatActivity  {
     private int hour, min;
     MenuItem itemEdit, itemDelete;
     String id, subject, abb, school, room, teacher, contact, timestart, timeend, day;
-    private int OnClick = 0;
+    private boolean edit = true;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -93,8 +93,8 @@ public class SchoolDetailActivity extends AppCompatActivity  {
     public boolean onOptionsItemSelected(MenuItem item) {
         if(item.getItemId()==R.id.edit){
 
-            if(OnClick == 0){
-                OnClick = 1;
+            if(edit == true){
+                edit = false;
                 itemDelete.setTitle("Cancel");
                 itemEdit.setIcon(null);
                 itemDelete.setIcon(null);
@@ -171,9 +171,10 @@ public class SchoolDetailActivity extends AppCompatActivity  {
                 });
 
 
-            } else if(OnClick == 1){
-                OnClick = 0;
+            } else {
+                edit = true;
 
+                itemDelete.setTitle("Delete");
                 String Subject = tv_subject.getText().toString();
                 String Abb = tv_abb.getText().toString();
                 String School = tv_school.getText().toString();
@@ -273,10 +274,10 @@ public class SchoolDetailActivity extends AppCompatActivity  {
 
                 Log.d("CC", "true");
 
-              } else if (itemDelete.getTitle().equals("Cancel")){
+              } else {
 
-                        OnClick = 0;
-
+                        edit = true;
+                        itemDelete.setTitle("Delete");
                         DisableEdit();
                         tv_subject.setText(subject);
                         tv_abb.setText(abb);
