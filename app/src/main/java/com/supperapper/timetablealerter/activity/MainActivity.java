@@ -491,12 +491,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
     public void onAboutUsClicked(){
-        toolbar.setTitle("About Us");
-        fragmentManager = getSupportFragmentManager();
-        fragmentTransaction = fragmentManager.beginTransaction();
-        AboutUsFragment aboutUsFragment = new AboutUsFragment();
-        fragmentTransaction.replace(R.id.lyt_super,aboutUsFragment);
-        fragmentTransaction.commit();
+        //toolbar.setTitle("About Us");
+//        fragmentManager = getSupportFragmentManager();
+//        fragmentTransaction = fragmentManager.beginTransaction();
+//        AboutUsFragment aboutUsFragment = new AboutUsFragment();
+//        fragmentTransaction.replace(R.id.lyt_super,aboutUsFragment);
+//        fragmentTransaction.commit();
+
+        Intent intent = new Intent(this, AboutUsActivity.class);
+        startActivity(intent);
+
 
     }
 
