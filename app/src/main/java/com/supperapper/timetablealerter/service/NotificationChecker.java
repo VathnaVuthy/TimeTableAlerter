@@ -192,6 +192,7 @@ public class NotificationChecker extends Service {
         mBuilder.setContentText(detail);
         mBuilder.setVibrate(new long[]{1000, 1000, 1000, 1000});
         mBuilder.setLights(Color.BLUE, 3000, 3000);
+        mBuilder.setAutoCancel(true);
 
         Uri sound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
         mBuilder.setSound(sound);
