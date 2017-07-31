@@ -108,7 +108,6 @@ public class AddNewTaskActivity extends AppCompatActivity{
                        mapId = Manager.getLastMapId();
                        Log.d("Last Map ID", mapId);
                        hasSetMap = false;
-                       Manager.close();
                    }else{
                        mapId = null;
                    }
@@ -121,7 +120,6 @@ public class AddNewTaskActivity extends AppCompatActivity{
                    Log.d("ckcc", String.valueOf(etxTopic.getText()));
 
                    Manager.insertTask(Topic, Subject, TaskType, Date, Note,mapId);
-                   Manager.close();
                    Log.d("Add TO DB Successfully","Success!");
                    refreshService();
                    onBackPressed();
@@ -195,7 +193,7 @@ public class AddNewTaskActivity extends AppCompatActivity{
         dbManager.insertMap(name,address,phone,website,LL[0],LL[1]);
 
         txtLocation.setText(name);
-        dbManager.close();
+        //dbManager.close();
     }
 
     @Override
