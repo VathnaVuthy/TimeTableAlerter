@@ -43,7 +43,7 @@
                         android:gravity="center_vertical"
                         android:layout_width="0dp"
                         android:layout_weight="2"
-                        android:text="Techer"
+                        android:text=""
                         android:layout_height="match_parent"/>
                 </LinearLayout>
                 <LinearLayout
